@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Education App',
+      title: 'LOLLY HUB',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Poppins',
