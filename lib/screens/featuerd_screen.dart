@@ -1,13 +1,17 @@
 import 'package:education_app/constants/color.dart';
 //import 'package:education_app/constants/size.dart';
 import 'package:education_app/models/category.dart';
-import 'package:education_app/screens/course_screen.dart';
+import 'package:education_app/routes/route_helper.dart';
+//import 'package:education_app/screens/course_screen.dart';
+// import 'package:education_app/screens/studentlist_screen.dart';
+// import 'package:education_app/screens/teacherlist_screen.dart';
 //import 'package:education_app/screens/details_screen.dart';
 import 'package:education_app/widgets/circle_button.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../widgets/search_testfield.dart';
+import 'package:get/get.dart';
 
 class FeaturedScreen extends StatefulWidget {
   const FeaturedScreen({Key? key}) : super(key: key);
@@ -46,19 +50,19 @@ class Body extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Explore Categories",
+                "Categories",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  "See All",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: kPrimaryColor),
-                ),
-              )
+              // TextButton(
+              //   onPressed: () {},
+              //   child: Text(
+              //     "See All",
+              //     style: Theme.of(context)
+              //         .textTheme
+              //         .bodyMedium
+              //         ?.copyWith(color: kPrimaryColor),
+              //   ),
+              // )
             ],
           ),
         ),
@@ -73,7 +77,7 @@ class Body extends StatelessWidget {
             childAspectRatio: 0.8,
             crossAxisSpacing: 20,
             mainAxisSpacing: 24,
-            mainAxisExtent: 200,
+            mainAxisExtent: 50,
           ),
           itemBuilder: (context, index) {
             return CategoryCard(
@@ -88,21 +92,32 @@ class Body extends StatelessWidget {
 }
 
 class CategoryCard extends StatelessWidget {
-  final Category category;
+  final Categorylist category;
   const CategoryCard({
     Key? key,
     required this.category,
   }) : super(key: key);
 
+  // int _selectedIndex = 0;
+
+  // static const List<Widget> _widgetOptions = <Widget>[
+  //   StudentListScreen(),
+  //   TeacherListScreen(),
+  // ];
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const CourseScreen(),
-        ),
-      ),
+      // onTap: () => Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     // builder: (context) => const CourseScreen(),
+      //     //builder: (context) => const StudentListScreen(category.kategori),
+      //   ),
+      // ),
+      onTap: () {
+        Get.toNamed(RouteHelper.getlist(category.kategori));
+      },
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -139,6 +154,7 @@ class CategoryCard extends StatelessWidget {
           ],
         ),
       ),
+      
     );
   }
 }

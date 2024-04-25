@@ -1,4 +1,4 @@
-class Category {
+class Categorylist {
   // String thumbnail;
   // String name;
   // int noOfCourses;
@@ -10,15 +10,17 @@ class Category {
   // });
 
   // String thumbnail;
+  String kategori;
   String name;
   // int noOfCourses;
 
-  Category({
+  Categorylist({
+    required this.kategori,
     required this.name,
   });
 }
 
-List<Category> categoryList = [
+List<Categorylist> categoryList = [
   // Category(
   //   name: 'Development',
   //   noOfCourses: 55,
@@ -39,10 +41,12 @@ List<Category> categoryList = [
   //   noOfCourses: 25,
   //   thumbnail: 'assets/icons/design.jpg',
   // ),
-  Category(
+  Categorylist(
+    kategori: "1",
     name: 'Teachers',
   ),
-  Category(
+  Categorylist(
+    kategori: "4",
     name: 'Students',
   ),
 ];

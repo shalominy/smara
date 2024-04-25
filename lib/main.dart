@@ -1,5 +1,7 @@
+import 'package:education_app/routes/route_helper.dart';
 import 'package:education_app/screens/base_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Education App',
       theme: ThemeData(
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const BaseScreen(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }
