@@ -2,6 +2,7 @@
 // import 'package:education_app/models/course.dart';
 import 'package:education_app/models/studentlist.dart';
 import 'package:education_app/screens/details_screen.dart';
+import 'package:education_app/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -49,46 +50,51 @@ class _StudentListScreenState extends State<StudentListScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                Table(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                   TableRow(
-                    decoration:  BoxDecoration(
-                      color: Colors.blue,
-                    ),
-                      children: [
-                        TableCell(
-                        // child: Padding(
-                        //   padding: EdgeInsets.all(1.0),
-                          child: Text('Name'),),
-                        // ),
-                        TableCell(
-                        // child: Padding(
-                        //   padding: EdgeInsets.all(1.0),
-                          child: Text('Id', textScaler: TextScaler.linear(1.0)),),
-                        // ),
-                        TableCell(
-                        // child: Padding(
-                        //   padding: EdgeInsets.all(1.0),
-                          child: Text('Class', textScaler: TextScaler.linear(1.0)),),
-                        // ),
-                        TableCell(
-                        // child: Padding(
-                        //   padding: EdgeInsets.all(1.0),
-                          child: Text('Grade', textScaler: TextScaler.linear(1.0)),),
-                        // ),
-                        TableCell(
-                        // child: Padding(
-                        //   padding: EdgeInsets.all(1.0),
-                          child: Text('Transcript', textScaler: TextScaler.linear(0.9)),),
-                        // ),
-                      ],
-                    ),
+                Column(
+                  children: [
+                 
+                    Table(
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      TableRow(
+                          decoration:   BoxDecoration(
+                          color: Colors.blue,
+                          ),
+                        children: [
+                          TableCell( child: 
+                            Text("students.name", textScaler:  TextScaler.linear(0.8),
+                            ),
+                          ),
+
+                          TableCell( child: 
+                            Text("students.studentid", textScaler:  TextScaler.linear(0.8),
+                            ),
+                          ),
+
+                          TableCell( 
+                          child: 
+                            Text("students.studentclass", textScaler: TextScaler.linear(0.8),
+                            ),
+                          ),
+
+                          TableCell( child: 
+                            Text("students.grade", textScaler:  TextScaler.linear(0.8),
+                            ),
+                          ),
+
+                          TableCell( child: 
+                            Text("students.transcript", textScaler:  TextScaler.linear(0.8),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                   ],
                 ),
                 Expanded(
                   child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.symmetric(vertical: 20,),
                     separatorBuilder: (_, __) {
                       return const SizedBox(
                         height: 10,
@@ -122,12 +128,12 @@ class StudentContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => DetailsScreen(
-      //               title: course.name,
-      //             ))),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const DetailsScreen(
+                    title: "course.name",
+                  ))),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -151,100 +157,36 @@ class StudentContainer extends StatelessWidget {
               child: Table(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // const TableRow(
-                  //   decoration:  BoxDecoration(
-                  //     color: Colors.blue,
-                  //   ),
-                  //     children: [
-                  //       TableCell(
-                  //       // child: Padding(
-                  //       //   padding: EdgeInsets.all(1.0),
-                  //         child: Text('Name'),),
-                  //       // ),
-                  //       TableCell(
-                  //       // child: Padding(
-                  //       //   padding: EdgeInsets.all(1.0),
-                  //         child: Text('Id', textScaler: TextScaler.linear(1.0)),),
-                  //       // ),
-                  //       TableCell(
-                  //       // child: Padding(
-                  //       //   padding: EdgeInsets.all(1.0),
-                  //         child: Text('Class', textScaler: TextScaler.linear(1.0)),),
-                  //       // ),
-                  //       TableCell(
-                  //       // child: Padding(
-                  //       //   padding: EdgeInsets.all(1.0),
-                  //         child: Text('Grade', textScaler: TextScaler.linear(1.0)),),
-                  //       // ),
-                  //       TableCell(
-                  //       // child: Padding(
-                  //       //   padding: EdgeInsets.all(1.0),
-                  //         child: Text('Transcript', textScaler: TextScaler.linear(0.9)),),
-                  //       // ),
-                  //     ],
-
-
-                  // ),
-
                    TableRow(
-                   children: [
-                    TableCell( child: 
-                      Text(students.name, textScaler: const TextScaler.linear(0.8),
-                      ),
+                    decoration:  const BoxDecoration(
+                      color: Colors.blue,
                     ),
-
-                    TableCell( child: 
-                      Text(students.studentid, textScaler: const TextScaler.linear(0.8),
+                    children: [
+                      TableCell( child: 
+                        Text(students.name, textScaler: const TextScaler.linear(0.8),
+                        ),
                       ),
-                    ),
 
-                    TableCell( child: 
-                      Text(students.studentclass, textScaler: const TextScaler.linear(0.8),
+                      TableCell( child: 
+                        Text(students.studentid, textScaler: const TextScaler.linear(0.8),
+                        ),
                       ),
-                    ),
 
-                    TableCell( child: 
-                      Text(students.grade, textScaler: const TextScaler.linear(0.8),
+                      TableCell( 
+                      child: 
+                        Text(students.studentclass, textScaler: const TextScaler.linear(0.8),
+                        ),
                       ),
-                    ),
 
-                    TableCell( child: 
-                      Text(students.transcript, textScaler: const TextScaler.linear(0.8),
+                      TableCell( child: 
+                        Text(students.grade, textScaler: const TextScaler.linear(0.8),
+                        ),
                       ),
-                    ),
 
-
-
-
-
-                      // Text(
-                      //   " ${students.studentid}",
-                      //   // style: Theme.of(context).textTheme.bodySmall,
-                      //   textScaler: const TextScaler.linear(0.8),
-                      // ),
-                      // Text(
-                      //   " ${students.studentclass}",
-                      //   // style: Theme.of(context).textTheme.bodySmall,
-                      //   textScaler: const TextScaler.linear(0.8),
-                      // ),
-                      // Text(
-                      //   " ${students.grade}",
-                      //   // style: Theme.of(context).textTheme.bodySmall,
-                      //   textScaler: const TextScaler.linear(0.8),
-                      // ),
-                      // Text(
-                      //   " ${students.transcript}",
-                      //   // style: Theme.of(context).textTheme.bodySmall,
-                      //   textScaler: const TextScaler.linear(0.8),
-                      // ),
-                      // const SizedBox(
-                      //   height: 5,
-                      // ),
-                      // LinearProgressIndicator(
-                      //   value: course.completedPercentage,
-                      //   backgroundColor: Colors.black12,
-                      //   color: kPrimaryColor,
-                      // )
+                      TableCell( child: 
+                        Text(students.transcript, textScaler: const TextScaler.linear(0.8),
+                        ),
+                      ),
                       
                     ],
                   ),
@@ -254,6 +196,73 @@ class StudentContainer extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TableHeader extends StatelessWidget {
+  const TableHeader({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Table (
+        border: TableBorder.all(color: Colors.white30),
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        children: const[
+           TableRow(
+            decoration: BoxDecoration(
+              color: Colors.redAccent,
+            ),
+            children: [
+              TableCell(
+              verticalAlignment: TableCellVerticalAlignment.middle,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Name'),
+                ),
+              ),
+
+              TableCell(
+              verticalAlignment: TableCellVerticalAlignment.middle,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Id'),
+                ),
+              ),
+
+              TableCell(
+              verticalAlignment: TableCellVerticalAlignment.middle,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Class'),
+                ),
+              ),
+
+              TableCell(
+              verticalAlignment: TableCellVerticalAlignment.middle,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Grade'),
+                ),
+              ),
+
+              TableCell(
+              verticalAlignment: TableCellVerticalAlignment.middle,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Transcript'),
+                ),
+              ),
+            ],
+          ),
+        ],
+        )
       ),
     );
   }

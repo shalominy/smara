@@ -1,4 +1,4 @@
-import 'package:education_app/constants/color.dart';
+// import 'package:education_app/constants/color.dart';
 //import 'package:education_app/constants/size.dart';
 import 'package:education_app/models/category.dart';
 import 'package:education_app/routes/route_helper.dart';

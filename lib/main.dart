@@ -1,9 +1,12 @@
+import 'package:education_app/dbHelper/mongodb.dart';
 import 'package:education_app/routes/route_helper.dart';
 import 'package:education_app/screens/base_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MongoDatabase.connect();
   runApp(const MyApp());
 }
 
