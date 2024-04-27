@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../widgets/search_testfield.dart';
 import 'package:get/get.dart';
-import 'package:mongo_dart/mongo_dart.dart' as M;
+import 'package:mongo_dart/mongo_dart.dart' as m;
 
 class UpdateStudent extends StatefulWidget {
   const UpdateStudent({Key? key}) : super(key: key);
@@ -238,7 +238,7 @@ class Body extends StatelessWidget {
     );
   }
   Future<void> _insertData(String studentName, String studentId, String studentClass, String studentGrade, String studentTranscript) async {
-    var _id = M.ObjectId();
+    var _id = m.ObjectId();
     final data = StudentModel(id: _id, name: studentName, studentid: studentId, studentclass: studentClass, grade: studentGrade, transcript: studentTranscript);
     // var result = await MongoDatabase.insertstudent(data);
     await MongoDatabase.insertstudent(data);
@@ -379,7 +379,7 @@ class AppBar extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          const SearchTextField()
+          const SearchTextField(placeholder: "",)
         ],
       ),
     );

@@ -24,7 +24,7 @@ class MongoDatabase{
         return "Something went wrong while inserting student data";
       }
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
       return e.toString();
     }
   }

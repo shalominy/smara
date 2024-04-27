@@ -10,7 +10,7 @@ import 'package:education_app/widgets/circle_button.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../widgets/search_testfield.dart';
+// import '../widgets/search_testfield.dart';
 import 'package:get/get.dart';
 
 class FeaturedScreen extends StatefulWidget {
@@ -193,6 +193,7 @@ class AppBar extends StatelessWidget {
             children: [
               Text(
                 "Hello,\nGood Morning",
+              textScaler: const TextScaler.linear(0.8),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               CircleButton(
@@ -204,7 +205,15 @@ class AppBar extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          const SearchTextField()
+          Center(
+            child: Text(
+              "Aly Zanaty",
+              textScaler: const TextScaler.linear(3.5),
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+
+          // const SearchTextField()
         ],
       ),
     );
