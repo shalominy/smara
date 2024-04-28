@@ -1,6 +1,9 @@
-//import 'package:education_app/constants/color.dart';
+// import 'package:education_app/constants/color.dart';
 // import 'package:education_app/models/course.dart';
-import 'package:education_app/models/studentlist.dart';
+// import 'package:education_app/dbHelper/mongodb.dart';
+import 'package:education_app/dbHelper/mongodb.dart';
+import 'package:education_app/models/student_model.dart';
+// import 'package:education_app/models/studentlist.dart';
 import 'package:education_app/screens/details_screen.dart';
 // import 'package:education_app/widgets/circle_button.dart';
 import 'package:education_app/widgets/custom_icon_button.dart';
@@ -18,7 +21,8 @@ class StudentListScreen extends StatefulWidget {
 class _StudentListScreenState extends State<StudentListScreen> {
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
+    return //Scaffold(body: SafeArea(child: FutureBuilder(future: MongoDatabase.getstudents(), builder: (, Asyncsnapshot snapshot) )))
+        AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
         body: SafeArea(
@@ -51,6 +55,27 @@ class _StudentListScreenState extends State<StudentListScreen> {
                         onTap: () => Navigator.pop(context),
                       ),
                     ),
+                    // Scaffold(
+                    //     body: SafeArea(
+                    //         child: FutureBuilder(
+                    //             future: MongoDatabase.getstudents(),
+                    //             builder: (context, AsyncSnapshot snapshot) {
+                    //               if (snapshot.hasData) {
+                    //                 var totalData = snapshot.data.length;
+                    //                 print("Total Data" + totalData.toString());
+                    //                 return ListView.builder(
+                    //                     itemCount: snapshot.data.length,
+                    //                     itemBuilder: (context, index) {
+                    //                       return StudentCard(
+                    //                           StudentModel.fromJson(
+                    //                               snapshot.data[index]));
+                    //                     });
+                    //               } else {
+                    //                 return Center(
+                    //                   child: Text("No Data Available"),
+                    //                 );
+                    //               }
+                    //             })))
                   ],
                 ),
               )
@@ -86,69 +111,65 @@ class _StudentListScreenState extends State<StudentListScreen> {
                 height: 10,
               ),
               const TableHeader(),
-              // Column(
-              //   children: [
-              //     Table(
-              //       // crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: const [
-              //         TableRow(
-              //           decoration: BoxDecoration(
-              //             color: Colors.blue,
-              //           ),
-              //           children: [
-              //             TableCell(
-              //               child: Text(
-              //                 "students.name",
-              //                 textScaler: TextScaler.linear(0.8),
-              //               ),
-              //             ),
-              //             TableCell(
-              //               child: Text(
-              //                 "students.studentid",
-              //                 textScaler: TextScaler.linear(0.8),
-              //               ),
-              //             ),
-              //             TableCell(
-              //               child: Text(
-              //                 "students.studentclass",
-              //                 textScaler: TextScaler.linear(0.8),
-              //               ),
-              //             ),
-              //             TableCell(
-              //               child: Text(
-              //                 "students.grade",
-              //                 textScaler: TextScaler.linear(0.8),
-              //               ),
-              //             ),
-              //             TableCell(
-              //               child: Text(
-              //                 "students.transcript",
-              //                 textScaler: TextScaler.linear(0.8),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       ],
+
+              // Expanded(
+              //   child: ListView.separated(
+              //     padding: const EdgeInsets.symmetric(
+              //       vertical: 3,
               //     ),
-              //   ],
+              //     separatorBuilder: (_, __) {
+              //       return const SizedBox(
+              //         height: 2,
+              //       );
+              //     },
+              //     // shrinkWrap: true,
+              //     itemBuilder: (_, int index) {
+              //       return StudentContainer(
+              //         students: students[index],
+              //       );
+              //     },
+              //     itemCount: students.length,
+              //   ),
               // ),
               Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(vertical: 3,),
-                  separatorBuilder: (_, __) {
-                    return const SizedBox(
-                      height: 2,
-                    );
-                  },
-                  // shrinkWrap: true,
-                  itemBuilder: (_, int index) {
-                    return StudentContainer(
-                      students: students[index],
-                    );
-                  },
-                  itemCount: students.length,
-                ),
-              ),
+                  child: FutureBuilder(
+                      future: MongoDatabase.getstudents(),
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          var totalData = snapshot.data.length;
+                          print("Total Data" + totalData.toString());
+                          return ListView.builder(
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                return StudentContainer2(students :StudentModel.fromJson(
+                                    snapshot.data[index]));
+                              });
+                        } else {
+                          return Center(
+                            child: Text("No Data Available"),
+                          );
+                        }
+                      }))
+
+              // Expanded(
+              //   child: ListView.separated(
+              //     padding: const EdgeInsets.symmetric(
+              //       vertical: 3,
+              //     ),
+              //     separatorBuilder: (_, __) {
+              //       return const SizedBox(
+              //         height: 2,
+              //       );
+              //     },
+              //     // shrinkWrap: true,
+              //     itemBuilder: (_, int index) {
+              //       return StudentContainer(
+              //         students: students[index],
+              //       );
+              //     },
+              //     itemCount: students.length,
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -156,14 +177,22 @@ class _StudentListScreenState extends State<StudentListScreen> {
       // ),
     );
   }
+
+//   Widget StudentCard(StudentModel data) {
+//     return Card(
+//       child: Column(
+//         children: [
+//           Text(data.name),
+//           Text("${data.id}"),
+//         ],
+//       ),
+//     );
+//   }
 }
 
-class StudentContainer extends StatelessWidget {
-  final Studentlist students;
-  const StudentContainer({
-    Key? key,
-    required this.students,
-  }) : super(key: key);
+class StudentContainer2 extends StatelessWidget {
+  final StudentModel students;
+  const StudentContainer2({ Key? key, required this.students}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -193,6 +222,7 @@ class StudentContainer extends StatelessWidget {
             // const SizedBox(
             //   width: 10,
             // ),
+
             Expanded(
               child: Table(
                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,6 +272,7 @@ class StudentContainer extends StatelessWidget {
       ),
     );
   }
+  
 }
 
 class TableHeader extends StatelessWidget {
@@ -252,59 +283,79 @@ class TableHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: 
-      // Padding(
+      child:
+          // Padding(
           // padding: const EdgeInsets.all(15.0),
-          // child: 
+          // child:
           Table(
-            border: TableBorder.all(color: Colors.white30),
-            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-            children: const [
-              TableRow(
-                decoration: BoxDecoration(
-                  color: Colors.redAccent,
+        border: TableBorder.all(color: Colors.white30),
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        children: const [
+          TableRow(
+            decoration: BoxDecoration(
+              color: Colors.redAccent,
+            ),
+            children: [
+              TableCell(
+                verticalAlignment: TableCellVerticalAlignment.middle,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Name',
+                    textScaler: TextScaler.linear(0.8),
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-                children: [
-                  TableCell(
-                    verticalAlignment: TableCellVerticalAlignment.middle,
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Name',  textScaler: TextScaler.linear(0.8), style: TextStyle(fontWeight: FontWeight.bold),),
-                    ),
+              ),
+              TableCell(
+                verticalAlignment: TableCellVerticalAlignment.middle,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Id',
+                    textScaler: TextScaler.linear(0.8),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  TableCell(
-                    verticalAlignment: TableCellVerticalAlignment.middle,
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Id', textScaler: TextScaler.linear(0.8), style: TextStyle(fontWeight: FontWeight.bold),),
-                    ),
+                ),
+              ),
+              TableCell(
+                verticalAlignment: TableCellVerticalAlignment.middle,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Class',
+                    textScaler: TextScaler.linear(0.8),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  TableCell(
-                    verticalAlignment: TableCellVerticalAlignment.middle,
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Class',  textScaler: TextScaler.linear(0.8), style: TextStyle(fontWeight: FontWeight.bold),),
-                    ),
+                ),
+              ),
+              TableCell(
+                verticalAlignment: TableCellVerticalAlignment.middle,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Grade',
+                    textScaler: TextScaler.linear(0.8),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  TableCell(
-                    verticalAlignment: TableCellVerticalAlignment.middle,
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Grade',  textScaler: TextScaler.linear(0.8), style: TextStyle(fontWeight: FontWeight.bold),),
-                    ),
+                ),
+              ),
+              TableCell(
+                verticalAlignment: TableCellVerticalAlignment.middle,
+                child: Padding(
+                  padding: EdgeInsets.all(0),
+                  child: Text(
+                    'Transcript',
+                    textScaler: TextScaler.linear(0.8),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  TableCell(
-                    verticalAlignment: TableCellVerticalAlignment.middle,
-                    child: Padding(
-                      padding: EdgeInsets.all(0),
-                      child: Text('Transcript',  textScaler: TextScaler.linear(0.8), style: TextStyle(fontWeight: FontWeight.bold),),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
-          // )
           ),
+        ],
+        // )
+      ),
     );
   }
 }
