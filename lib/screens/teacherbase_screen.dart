@@ -6,14 +6,14 @@ import 'package:education_app/screens/update_student.dart';
 import 'package:education_app/screens/update_user.dart';
 import 'package:flutter/material.dart';
 
-class BaseScreen extends StatefulWidget {
-  const BaseScreen({Key? key}) : super(key: key);
+class TeacherBaseScreen extends StatefulWidget {
+  const TeacherBaseScreen({Key? key}) : super(key: key);
 
   @override
-  _BaseScreenState createState() => _BaseScreenState();
+  _TeacherBaseScreen createState() => _TeacherBaseScreen();
 }
 
-class _BaseScreenState extends State<BaseScreen> {
+class _TeacherBaseScreen extends State<TeacherBaseScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
@@ -43,7 +43,7 @@ class _BaseScreenState extends State<BaseScreen> {
                 icFeaturedOutlined,
                 height: kBottomNavigationBarItemSize,
               ),
-              label: "Featured",
+              label: "Home",
             ),
             BottomNavigationBarItem(
               activeIcon: Image.asset(
@@ -54,7 +54,7 @@ class _BaseScreenState extends State<BaseScreen> {
                 icLearningOutlined,
                 height: kBottomNavigationBarItemSize,
               ),
-              label: "My Learning",
+              label: "Homework",
             ),
             BottomNavigationBarItem(
               activeIcon: Image.asset(
@@ -65,7 +65,7 @@ class _BaseScreenState extends State<BaseScreen> {
                 icWishlistOutlined,
                 height: kBottomNavigationBarItemSize,
               ),
-              label: "Wishlist",
+              label: "Material\n  Notice  ",
             ),
             BottomNavigationBarItem(
               activeIcon: Image.asset(
@@ -76,7 +76,7 @@ class _BaseScreenState extends State<BaseScreen> {
                 icSettingOutlined,
                 height: kBottomNavigationBarItemSize,
               ),
-              label: "Settings",
+              label: "Profile",
             ),
           ],
           currentIndex: _selectedIndex,

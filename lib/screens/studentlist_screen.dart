@@ -141,8 +141,9 @@ class _StudentListScreenState extends State<StudentListScreen> {
                           return ListView.builder(
                               itemCount: snapshot.data.length,
                               itemBuilder: (context, index) {
-                                return StudentContainer2(students :StudentModel.fromJson(
-                                    snapshot.data[index]));
+                                return StudentContainer2(
+                                    students: StudentModel.fromJson(
+                                        snapshot.data[index]));
                               });
                         } else {
                           return Center(
@@ -192,7 +193,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
 
 class StudentContainer2 extends StatelessWidget {
   final StudentModel students;
-  const StudentContainer2({ Key? key, required this.students}) : super(key: key);
+  const StudentContainer2({Key? key, required this.students}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +273,6 @@ class StudentContainer2 extends StatelessWidget {
       ),
     );
   }
-  
 }
 
 class TableHeader extends StatelessWidget {
