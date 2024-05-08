@@ -1,6 +1,10 @@
 // import 'package:education_app/constants/color.dart';
 //import 'package:education_app/constants/size.dart';
+// import 'package:education_app/dbHelper/mongodb.dart';
+import 'package:education_app/dbHelper/userprovider.dart';
+// import 'package:education_app/main.dart';
 import 'package:education_app/models/category.dart';
+// import 'package:education_app/models/users_modeltemporary.dart';
 import 'package:education_app/routes/route_helper.dart';
 //import 'package:education_app/screens/course_screen.dart';
 // import 'package:education_app/screens/studentlist_screen.dart';
@@ -12,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import '../widgets/search_testfield.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class FeaturedScreen extends StatefulWidget {
   const FeaturedScreen({Key? key}) : super(key: key);
@@ -21,15 +26,17 @@ class FeaturedScreen extends StatefulWidget {
 }
 
 class _FeaturedScreenState extends State<FeaturedScreen> {
+
+
   @override
   Widget build(BuildContext context) {
-    return const AnnotatedRegion<SystemUiOverlayStyle>(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: Column(
           children:  [
             AppBar(),
-            Body(),
+            const Body(),
           ],
         ),
       ),
@@ -66,21 +73,21 @@ class Body extends StatelessWidget {
             ],
           ),
         ),
-        GridView.builder(
+        ListView.builder(
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 8,
           ),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            childAspectRatio: 0.8,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 24,
-            mainAxisExtent: 50,
-          ),
+          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //   crossAxisCount: 1,
+          //   childAspectRatio: 0.8,
+          //   crossAxisSpacing: 20,
+          //   mainAxisSpacing: 24,
+          //   mainAxisExtent: 50,
+          // ),
           itemBuilder: (context, index) {
-            return CategoryCard(
+            return  CategoryCard(
               category: categoryList[index],
             );
           },
@@ -118,7 +125,9 @@ class CategoryCard extends StatelessWidget {
       onTap: () {
         Get.toNamed(RouteHelper.getlist(category.kategori));
       },
-      child: Container(
+      child: 
+      Padding(padding: const EdgeInsets.only(top: 10, left: 20, right: 20), child: 
+      Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -154,15 +163,22 @@ class CategoryCard extends StatelessWidget {
           ],
         ),
       ),
-      
+      )
     );
   }
 }
 
 class AppBar extends StatelessWidget {
-  const AppBar({
+  // final String name;
+   AppBar({
     Key? key,
+    // required this.name,
   }) : super(key: key);
+
+  // final Future<UserModelTemporary> bb = MongoDatabase.getuserdetails(MongoDatabase.getuserid());
+  // final Future<String> bb = MongoDatabase.getuserdetailstesting(MongoDatabase.getuserid());
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -205,17 +221,53 @@ class AppBar extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Center(
-            child: Text(
-              "Aly Zanaty",
+      //     const Center(
+      //   child: Column(
+      //     mainAxisSize: MainAxisSize.min,
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: <Widget>[
+      //       Text('You have pushed the button this many times:'),
+
+      //       /// Extracted as a separate widget for performance optimization.
+      //       /// As a separate widget, it will rebuild independently from [MyHomePage].
+      //       ///
+      //       /// This is totally optional (and rarely needed).
+      //       /// Similarly, we could also use [Consumer] or [Selector].
+      //       Name(),
+      //     ],
+      //   ),
+      // ),
+           Center(
+            child: 
+            Text(
+              // "Aly Zanaty",
+              // "{$context.watch<UserProvider>().name}",
+              '${context.watch<UserProvider>().name}',
+               key: const Key('counterState'),
               textScaler: const TextScaler.linear(3.5),
               style: Theme.of(context).textTheme.titleLarge,
             ),
+             
           ),
 
           // const SearchTextField()
         ],
       ),
+    );
+  }
+
+}
+
+  class Name extends StatelessWidget {
+  const Name({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      /// Calls `context.watch` to make [Count] rebuild when [Counter] changes.
+      '${context.watch<UserProvider>().name}',
+      key: const Key('counterState'),
+      style: Theme.of(context).textTheme.headlineMedium,
     );
   }
 }

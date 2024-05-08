@@ -1,9 +1,9 @@
 // import 'package:education_app/constants/color.dart';
 import 'package:flutter/material.dart';
 
-class SearchTextField extends StatelessWidget {
+class SearchTextFieldPlacehold extends StatelessWidget {
   final String placeholder;
-  const SearchTextField({
+  const SearchTextFieldPlacehold({
     Key? key,
         required this.placeholder,
   }) : super(key: key);

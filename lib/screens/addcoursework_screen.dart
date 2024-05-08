@@ -1,24 +1,48 @@
 // import 'package:education_app/constants/color.dart';
 // import 'package:education_app/models/course.dart';
 // import 'package:education_app/dbHelper/mongodb.dart';
+import 'package:education_app/constants/color.dart';
 import 'package:education_app/dbHelper/mongodb.dart';
 import 'package:education_app/models/student_model.dart';
+import 'package:education_app/models/users_modeltemporary.dart';
 // import 'package:education_app/models/studentlist.dart';
 import 'package:education_app/screens/details_screen.dart';
+import 'package:education_app/widgets/checkbox.dart';
 // import 'package:education_app/widgets/circle_button.dart';
 import 'package:education_app/widgets/custom_icon_button.dart';
 import 'package:education_app/widgets/search_testfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mongo_dart/mongo_dart.dart' as m;
 
-class StudentListScreen extends StatefulWidget {
-  const StudentListScreen({Key? key}) : super(key: key);
+
+class AddCoursework extends StatefulWidget {
+  const AddCoursework({Key? key}) : super(key: key);
 
   @override
-  _StudentListScreenState createState() => _StudentListScreenState();
+  _AddCoursework createState() => _AddCoursework();
 }
 
-class _StudentListScreenState extends State<StudentListScreen> {
+class _AddCoursework extends State<AddCoursework> {
+
+  var username = TextEditingController();
+  var useremail = TextEditingController();
+  var userrole = TextEditingController();
+
+  List<DropdownMenuItem<String>> get dropdownItems{
+  List<DropdownMenuItem<String>> menuItems = [
+    const DropdownMenuItem(child: Text("USA"),value: "USA"),
+    const DropdownMenuItem(child: Text("Canada"),value: "Canada"),
+    const DropdownMenuItem(child: Text("Brazil"),value: "Brazil"),
+    const DropdownMenuItem(child: Text("England"),value: "England"),
+  ];
+  return menuItems;
+}
+
+bool _isSelected = false;
+
+String selectedValue = "USA";
+
   @override
   Widget build(BuildContext context) {
     return //Scaffold(body: SafeArea(child: FutureBuilder(future: MongoDatabase.getstudents(), builder: (, Asyncsnapshot snapshot) )))
@@ -42,7 +66,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                   children: [
                     Align(
                       child: Text(
-                        'Student List',
+                        'Add Coursework',
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
                     ),
@@ -106,11 +130,11 @@ class _StudentListScreenState extends State<StudentListScreen> {
               const SizedBox(
                 height: 15,
               ),
-              const AppBar(),
+              // const AppBar(),
               const SizedBox(
                 height: 10,
               ),
-              const TableHeader(),
+              // const TableHeader(),
 
               // Expanded(
               //   child: ListView.separated(
@@ -131,27 +155,206 @@ class _StudentListScreenState extends State<StudentListScreen> {
               //     itemCount: students.length,
               //   ),
               // ),
-              Expanded(
-                  child: FutureBuilder(
-                      future: MongoDatabase.getstudents(),
-                      builder: (context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          var totalData = snapshot.data.length;
-                          print("Total Data" + totalData.toString());
-                          return ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, index) {
-                                return StudentContainer2(
-                                    students: StudentModel.fromJson(
-                                        snapshot.data[index]));
-                              });
-                        } else {
-                          return Center(
-                            child: Text("No Data Available"),
-                          );
-                        }
-                      }))
-
+              // Expanded(
+              //     child: FutureBuilder(
+              //         future: MongoDatabase.getstudents(),
+              //         builder: (context, AsyncSnapshot snapshot) {
+              //           if (snapshot.hasData) {
+              //             var totalData = snapshot.data.length;
+              //             print("Total Data" + totalData.toString());
+              //             return ListView.builder(
+              //                 itemCount: snapshot.data.length,
+              //                 itemBuilder: (context, index) {
+              //                   return StudentContainer2(
+              //                       students: StudentModel.fromJson(
+              //                           snapshot.data[index]));
+              //                 });
+              //           } else {
+              //             return Center(
+              //               child: Text("No Data Available"),
+              //             );
+              //           }
+              //         }))
+Padding(
+            padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Create User",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                // TextButton(
+                //   onPressed: () {},
+                //   child: Text(
+                //     "See All",
+                //     style: Theme.of(context)
+                //         .textTheme
+                //         .bodyMedium
+                //         ?.copyWith(color: kPrimaryColor),
+                //   ),
+                // )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Align(
+            child: Text(
+              "User Information",
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          // Text(
+          //   "Student Information",
+          //   style: Theme.of(context).textTheme.bodyMedium,
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              controller: username,
+              decoration: const InputDecoration(
+                hintText: 'Enter User Name',
+                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // labelText: "Student Transcript",
+                labelStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(40),
+                    ),
+                isDense: true,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              controller: useremail,
+              decoration: const InputDecoration(
+                hintText: 'Enter User Email',
+                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // labelText: "Student Transcript",
+                labelStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(40),
+                    ),
+                isDense: true,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              controller: userrole,
+              decoration: const InputDecoration(
+                hintText: 'Admin, Teacher, Student',
+                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // labelText: "Student Transcript",
+                labelStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(40),
+                    ),
+                isDense: true,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10), child: 
+          DropdownButtonFormField(
+                style:  TextStyle(fontSize: 20, color: Colors.grey, fontWeight: FontWeight.lerp(FontWeight.w500, FontWeight.w400, 0.5),),
+                decoration: const InputDecoration(
+                hintText: 'Admin, Teacher, Student',
+                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // labelText: "Student Transcript",
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(40),
+                    ),
+                isDense: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black, width: 1),
+                    // borderRadius: BorderRadius.circular(20),
+                  ),
+                  // border: OutlineInputBorder(
+                  //   borderSide: BorderSide(color: Colors.black, width: 1),
+                  //   // borderRadius: BorderRadius.circular(20),
+                  // ),
+                  // filled: true,
+                  // fillColor: Colors.white,
+                ),
+                dropdownColor: Colors.white,
+                value: selectedValue,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedValue = newValue!;
+                  });
+                },
+                items: dropdownItems),
+                ),
+                LabeledCheckbox(
+          label: 'Ahmad Ameerul Rasyid',
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          value: _isSelected,
+          onChanged: (bool newValue) {
+            setState(() {
+              _isSelected = newValue;
+            });
+          },
+        ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Text(
+                //   "Update Student",
+                //   style: Theme.of(context).textTheme.bodyLarge,
+                // ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    fixedSize: const Size(150, 45),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Cancel",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(color: kPrimaryColor),
+                  ),
+                ),
+                CustomIconButton(
+                  onTap: () {
+                    // _insertDataUser( 
+                    //     username.text, useremail.text, userrole.text);
+                  },
+                  color: kPrimaryColor,
+                  height: 45,
+                  width: 150,
+                  child: const Text(
+                    "Submit",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
               // Expanded(
               //   child: ListView.separated(
               //     padding: const EdgeInsets.symmetric(
@@ -189,6 +392,26 @@ class _StudentListScreenState extends State<StudentListScreen> {
 //       ),
 //     );
 //   }
+
+Future<void> _insertDataUser(
+    String username,
+    String useremail,
+    String userrole,
+  ) async {
+    var _id = m.ObjectId();
+    final data = UserModelTemporary(
+        id: _id, name: username, emel: useremail, role: userrole);
+    await MongoDatabase.insertusertemporary(data);
+
+    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Inserted ID" + _id.oid),));
+    _clearAll();
+  }
+
+  void _clearAll() {
+    username.text = "";
+    useremail.text = "";
+    userrole.text = "";
+  }
 }
 
 class StudentContainer2 extends StatelessWidget {

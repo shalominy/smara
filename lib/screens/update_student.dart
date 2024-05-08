@@ -54,6 +54,15 @@ class Body extends StatelessWidget {
   var studentgrade = TextEditingController();
   var studenttranscript = TextEditingController();
 
+  Future<void> _insertData(String studentName, String studentId, String studentClass, String studentGrade, String studentTranscript, BuildContext context) async {
+    var _id = m.ObjectId();
+    final data = StudentModel(id: _id, name: studentName, studentid: studentId, studentclass: studentClass, grade: studentGrade, transcript: studentTranscript);
+    // var result = await MongoDatabase.insertstudent(data);
+    String result = await MongoDatabase.insertstudent(data);
+    print(result);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Inserted ID" + _id.oid),));
+    _clearAll();
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -217,7 +226,7 @@ class Body extends StatelessWidget {
               ),
                CustomIconButton(
               onTap: () {
-                _insertData(studentname.text, studentid.text, studentclass.text, studentgrade.text, studenttranscript.text);
+                _insertData(studentname.text, studentid.text, studentclass.text, studentgrade.text, studenttranscript.text, context);
               },
               color: kPrimaryColor,
               height: 45,
@@ -236,16 +245,10 @@ class Body extends StatelessWidget {
         ],
       ),
     );
-  }
-  Future<void> _insertData(String studentName, String studentId, String studentClass, String studentGrade, String studentTranscript) async {
-    var _id = m.ObjectId();
-    final data = StudentModel(id: _id, name: studentName, studentid: studentId, studentclass: studentClass, grade: studentGrade, transcript: studentTranscript);
-    // var result = await MongoDatabase.insertstudent(data);
-    await MongoDatabase.insertstudent(data);
+
     
-    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Inserted ID" + _id.oid),));
-    _clearAll();
-    }
+  }
+  
 
   void _clearAll() {
 
@@ -379,7 +382,7 @@ class AppBar extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          const SearchTextField(placeholder: "",)
+          const SearchTextFieldPlacehold(placeholder: "",)
         ],
       ),
     );

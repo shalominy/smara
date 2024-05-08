@@ -1,15 +1,50 @@
 import 'package:education_app/dbHelper/mongodb.dart';
+import 'package:education_app/dbHelper/userprovider.dart';
 import 'package:education_app/routes/route_helper.dart';
+// import 'package:education_app/screens/addcoursework_screen.dart';
 // import 'package:education_app/screens/base_screen.dart';
 import 'package:education_app/screens/login_screen.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MongoDatabase.connect();
-  runApp(const MyApp());
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),);
 }
+
+// class Counter with ChangeNotifier, DiagnosticableTreeMixin {
+//   int _count = 222;
+
+//   int get count => _count;
+
+//   // int get counttambahsatu => _count + 1;
+
+//   void increment() {
+//     _count++;
+//     notifyListeners();
+//   }
+
+//   void setto2881() {
+//   _count = 2881;
+//     notifyListeners();
+
+//   }
+
+//   /// Makes `Counter` readable inside the devtools by listing all of its properties
+//   @override
+//   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+//     super.debugFillProperties(properties);
+//     properties.add(IntProperty('count', count));
+//   }
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -44,8 +79,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      // home: const BaseScreen(),
-      home: const UsersListScreen(),
+      home: const LoginScreen(),
       initialRoute: RouteHelper.initial,
       getPages: RouteHelper.routes,
     );

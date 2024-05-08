@@ -1,18 +1,20 @@
 import 'package:education_app/dbHelper/mongodb.dart';
+import 'package:education_app/dbHelper/userprovider.dart';
 import 'package:education_app/models/users_modeltemporary.dart';
 import 'package:education_app/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
-class UsersListScreen extends StatefulWidget {
-  const UsersListScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  _UsersListScreen createState() => _UsersListScreen();
+  _LoginScreen createState() => _LoginScreen();
 }
 
-class _UsersListScreen extends State<UsersListScreen> {
+class _LoginScreen extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return //Scaffold(body: SafeArea(child: FutureBuilder(future: MongoDatabase.getstudents(), builder: (, Asyncsnapshot snapshot) )))
@@ -80,6 +82,7 @@ class _UsersListScreen extends State<UsersListScreen> {
                         if (snapshot.hasData) {
                           var totalData = snapshot.data.length;
                           print("Total Data" + totalData.toString());
+                          // print("All Data" + snapshot.data.toString());
                           return ListView.builder(
                               itemCount: snapshot.data.length,
                               itemBuilder: (context, index) {
@@ -87,6 +90,7 @@ class _UsersListScreen extends State<UsersListScreen> {
                                     users: UserModelTemporary.fromJson(
                                         snapshot.data[index]));
                               });
+                              
                         } else {
                           return Center(
                             child: Text("No Data Available"),
@@ -145,7 +149,12 @@ class UsersContainer extends StatelessWidget {
       //     MaterialPageRoute(
       //         builder: (context) => const BaseScreen())),
       onTap: () {
+        context.read<UserProvider>().setuser(users);
+        // MongoDatabase.setusers(users.id);
+
         Get.toNamed(RouteHelper.getlist(users.role));
+        // MongoDatabase.setuserid(users.id.toString());
+        // MongoDatabase.setuserid("users.id.toString()");
       },
       child: Padding(
           padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
@@ -190,87 +199,4 @@ class UsersContainer extends StatelessWidget {
   }
 }
 
-class TableHeader extends StatelessWidget {
-  const TableHeader({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child:
-          // Padding(
-          // padding: const EdgeInsets.all(15.0),
-          // child:
-          Table(
-        border: TableBorder.all(color: Colors.white30),
-        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-        children: const [
-          TableRow(
-            decoration: BoxDecoration(
-              color: Colors.redAccent,
-            ),
-            children: [
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Name',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Id',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Class',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Grade',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Padding(
-                  padding: EdgeInsets.all(0),
-                  child: Text(
-                    'Transcript',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-        // )
-      ),
-    );
-  }
-}

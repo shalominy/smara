@@ -31,14 +31,13 @@ class UpdateUser extends StatefulWidget {
 class _UpdateUser extends State<UpdateUser> {
   @override
   Widget build(BuildContext context) {
-    return   AnnotatedRegion<SystemUiOverlayStyle>(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: Column(
           children: [
             const AppBar(),
             Body(),
-            
           ],
         ),
       ),
@@ -53,39 +52,37 @@ class Body extends StatelessWidget {
   var useremail = TextEditingController();
   var userrole = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: 
-        ListView(
+      child: ListView(
         padding: const EdgeInsets.all(8),
         children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Create User",
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              // TextButton(
-              //   onPressed: () {},
-              //   child: Text(
-              //     "See All",
-              //     style: Theme.of(context)
-              //         .textTheme
-              //         .bodyMedium
-              //         ?.copyWith(color: kPrimaryColor),
-              //   ),
-              // )
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Create User",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                // TextButton(
+                //   onPressed: () {},
+                //   child: Text(
+                //     "See All",
+                //     style: Theme.of(context)
+                //         .textTheme
+                //         .bodyMedium
+                //         ?.copyWith(color: kPrimaryColor),
+                //   ),
+                // )
+              ],
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
+          const SizedBox(
+            height: 30,
+          ),
           Align(
             child: Text(
               "User Information",
@@ -95,7 +92,7 @@ class Body extends StatelessWidget {
           // Text(
           //   "Student Information",
           //   style: Theme.of(context).textTheme.bodyMedium,
-        // ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(10),
             child: TextFormField(
@@ -154,42 +151,45 @@ class Body extends StatelessWidget {
             ),
           ),
           Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Text(
-              //   "Update Student",
-              //   style: Theme.of(context).textTheme.bodyLarge,
-              // ),
-              TextButton(
-                style: TextButton.styleFrom(
-                fixedSize: const Size(150, 45),
+            padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Text(
+                //   "Update Student",
+                //   style: Theme.of(context).textTheme.bodyLarge,
+                // ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    fixedSize: const Size(150, 45),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Cancel",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(color: kPrimaryColor),
+                  ),
                 ),
-                onPressed: () {},
-                child: Text(
-                  "Cancel",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: kPrimaryColor),
+                CustomIconButton(
+                  onTap: () {
+                    _insertDataUser(
+                        username.text, useremail.text, userrole.text);
+                  },
+                  color: kPrimaryColor,
+                  height: 45,
+                  width: 150,
+                  child: const Text(
+                    "Submit",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
-              ),
-               CustomIconButton(
-              onTap: () {
-                _insertDataUser( username.text, useremail.text, userrole.text);
-              },
-              color: kPrimaryColor,
-              height: 45,
-              width: 150,
-              child: const Text(
-                "Submit",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              ),
-            ),
               ],
             ),
           ),
@@ -197,34 +197,27 @@ class Body extends StatelessWidget {
       ),
     );
   }
-  Future<void> _insertDataUser(String username, String useremail, String userrole,) async {
+
+  Future<void> _insertDataUser(
+    String username,
+    String useremail,
+    String userrole,
+  ) async {
     var _id = m.ObjectId();
-    final data = UserModelTemporary(id: _id, name: username, emel: useremail, role: userrole);
-    // var result = await MongoDatabase.insertstudent(data);
+    final data = UserModelTemporary(
+        id: _id, name: username, emel: useremail, role: userrole);
     await MongoDatabase.insertusertemporary(data);
-    
+
     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Inserted ID" + _id.oid),));
     _clearAll();
-    }
-
-  void _clearAll() {
-
-
-   username.text = "";
-   useremail.text = "";
-   userrole.text = "";
-
   }
 
-
-
-
-
+  void _clearAll() {
+    username.text = "";
+    useremail.text = "";
+    userrole.text = "";
+  }
 }
-
-
-
-
 
 class CategoryCard extends StatelessWidget {
   final Categorylist category;
@@ -338,10 +331,11 @@ class AppBar extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          const SearchTextField(placeholder: "",)
+          const SearchTextFieldPlacehold(
+            placeholder: "",
+          )
         ],
       ),
     );
   }
 }
-

@@ -2,7 +2,10 @@ import 'package:education_app/constants/color.dart';
 import 'package:education_app/constants/icons.dart';
 import 'package:education_app/constants/size.dart';
 import 'package:education_app/screens/featuerd_screen.dart';
-import 'package:education_app/screens/update_student.dart';
+import 'package:education_app/screens/login_screen.dart';
+// import 'package:education_app/screens/teachercoursework_screen.dart';
+import 'package:education_app/screens/teachercoursework_screen.dart';
+// import 'package:education_app/screens/update_student.dart';
 import 'package:education_app/screens/update_user.dart';
 import 'package:flutter/material.dart';
 
@@ -18,9 +21,9 @@ class _TeacherBaseScreen extends State<TeacherBaseScreen> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     FeaturedScreen(),
-    UpdateStudent(),
+    TeacherCoursework(title: "",),
     UpdateUser(),
-    FeaturedScreen(),
+    LoginScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -54,7 +57,7 @@ class _TeacherBaseScreen extends State<TeacherBaseScreen> {
                 icLearningOutlined,
                 height: kBottomNavigationBarItemSize,
               ),
-              label: "Homework",
+              label: "Coursework",
             ),
             BottomNavigationBarItem(
               activeIcon: Image.asset(
