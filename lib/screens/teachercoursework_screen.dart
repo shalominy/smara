@@ -132,7 +132,7 @@ class _TeacherCoursework2 extends State<TeacherCoursework> {
                   //   mainAxisExtent: 50,
                   // ),
                   itemBuilder: (context, index) {
-                    return CategoryCard(
+                    return CourseCard(
                       coursework: courseworkList[index],
                     );
                   },
@@ -254,9 +254,9 @@ class _TeacherCoursework2 extends State<TeacherCoursework> {
   }
 }
 
-class CategoryCard extends StatelessWidget {
+class CourseCard extends StatelessWidget {
   final Coursework coursework;
-  const CategoryCard({
+  const CourseCard({
     Key? key,
     required this.coursework,
   }) : super(key: key);

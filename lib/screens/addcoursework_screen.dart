@@ -7,9 +7,10 @@ import 'package:education_app/models/student_model.dart';
 import 'package:education_app/models/users_modeltemporary.dart';
 // import 'package:education_app/models/studentlist.dart';
 import 'package:education_app/screens/details_screen.dart';
-import 'package:education_app/widgets/checkbox.dart';
+// import 'package:education_app/widgets/checkbox.dart';
 // import 'package:education_app/widgets/circle_button.dart';
 import 'package:education_app/widgets/custom_icon_button.dart';
+import 'package:education_app/widgets/multiselect.dart';
 import 'package:education_app/widgets/search_testfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +31,9 @@ class _AddCoursework extends State<AddCoursework> {
   var userrole = TextEditingController();
 
   List<DropdownMenuItem<String>> get dropdownItems{
+  
   List<DropdownMenuItem<String>> menuItems = [
+  
     const DropdownMenuItem(child: Text("USA"),value: "USA"),
     const DropdownMenuItem(child: Text("Canada"),value: "Canada"),
     const DropdownMenuItem(child: Text("Brazil"),value: "Brazil"),
@@ -39,9 +42,47 @@ class _AddCoursework extends State<AddCoursework> {
   return menuItems;
 }
 
+// ignore: unused_field, prefer_final_fields
 bool _isSelected = false;
 
-String selectedValue = "USA";
+String selectedValue = "England";
+
+// List<List<String>> _selectedItems = [];
+List<String> _selectedItems = [];
+
+void _showMultiSelect() async {
+    // a list of selectable items
+    // these items can be hard-coded or dynamically fetched from a database/API
+    // final List<List<String>> items = [
+    final List<String> items = [
+      // ['Flutter', '1111'],
+      // ['Node.js', '22222'],
+      // ['Reacnative'],
+      // ['Java', '4444'],
+      'Node.js',
+      'React Native',
+      'Java',
+      'Docker',
+      'MySQL'
+    ];
+
+    // final List<List<String>>? results = await showDialog(
+    final List<String>? results = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MultiSelect(items: items, selecteditems: _selectedItems);
+      },
+    );
+
+    // Update UI
+    if (results != null) {
+      setState(() {
+        _selectedItems = results;
+      });
+    }
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,47 +175,7 @@ String selectedValue = "USA";
               const SizedBox(
                 height: 10,
               ),
-              // const TableHeader(),
 
-              // Expanded(
-              //   child: ListView.separated(
-              //     padding: const EdgeInsets.symmetric(
-              //       vertical: 3,
-              //     ),
-              //     separatorBuilder: (_, __) {
-              //       return const SizedBox(
-              //         height: 2,
-              //       );
-              //     },
-              //     // shrinkWrap: true,
-              //     itemBuilder: (_, int index) {
-              //       return StudentContainer(
-              //         students: students[index],
-              //       );
-              //     },
-              //     itemCount: students.length,
-              //   ),
-              // ),
-              // Expanded(
-              //     child: FutureBuilder(
-              //         future: MongoDatabase.getstudents(),
-              //         builder: (context, AsyncSnapshot snapshot) {
-              //           if (snapshot.hasData) {
-              //             var totalData = snapshot.data.length;
-              //             print("Total Data" + totalData.toString());
-              //             return ListView.builder(
-              //                 itemCount: snapshot.data.length,
-              //                 itemBuilder: (context, index) {
-              //                   return StudentContainer2(
-              //                       students: StudentModel.fromJson(
-              //                           snapshot.data[index]));
-              //                 });
-              //           } else {
-              //             return Center(
-              //               child: Text("No Data Available"),
-              //             );
-              //           }
-              //         }))
 Padding(
             padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
             child: Row(
@@ -184,16 +185,6 @@ Padding(
                   "Create User",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                // TextButton(
-                //   onPressed: () {},
-                //   child: Text(
-                //     "See All",
-                //     style: Theme.of(context)
-                //         .textTheme
-                //         .bodyMedium
-                //         ?.copyWith(color: kPrimaryColor),
-                //   ),
-                // )
               ],
             ),
           ),
@@ -267,13 +258,12 @@ Padding(
               ),
             ),
           ),
-          Padding(
+                Padding(
             padding: const EdgeInsets.all(10), child: 
           DropdownButtonFormField(
-                style:  TextStyle(fontSize: 20, color: Colors.grey, fontWeight: FontWeight.lerp(FontWeight.w500, FontWeight.w400, 0.5),),
+                style:  TextStyle(fontSize: 20, color: Colors.grey, fontWeight: FontWeight.lerp(FontWeight.w500, FontWeight.w400, 0.5), overflow: TextOverflow.visible,),
                 decoration: const InputDecoration(
-                hintText: 'Admin, Teacher, Student',
-                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                // hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 // labelText: "Student Transcript",
                 filled: true,
@@ -302,16 +292,67 @@ Padding(
                 },
                 items: dropdownItems),
                 ),
-                LabeledCheckbox(
-          label: 'Ahmad Ameerul Rasyid',
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          value: _isSelected,
-          onChanged: (bool newValue) {
-            setState(() {
-              _isSelected = newValue;
-            });
-          },
-        ),
+                 Padding(
+            padding: const EdgeInsets.all(10), child: 
+                CustomIconButton(
+                  onTap: 
+                  // () {
+              _showMultiSelect,
+                  
+                    // _insertDataUser( 
+                    //     username.text, useremail.text, userrole.text);
+                  // },
+                  color: kPrimaryColor,
+                  height: 45,
+                  width: 500,
+                  child: const Text(
+                    "Add Students",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                ),
+                 Wrap(
+              children: _selectedItems
+                  .map((e) => Chip(
+                        label: Text(e.toString()),
+                      ))
+                  .toList(),
+            ),
+              const TableHeader(),
+              Expanded(
+                  child: FutureBuilder(
+                      future: MongoDatabase.getstudents(),
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          var totalData = snapshot.data.length;
+                          print("Total Data" + totalData.toString());
+                          return ListView.builder(
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                return StudentContainer(
+                                    students: StudentModel.fromJson(
+                                        snapshot.data[index]));
+                              });
+                        } else {
+                          return Center(
+                            child: Text("No Data Available"),
+                          );
+                        }
+                      })),
+
+        //         LabeledCheckbox(
+        //   label: 'Ahmad Ameerul Rasyid' + _selectedItems.toString(),
+        //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        //   value: _isSelected,
+        //   onChanged: (bool newValue) {
+        //     setState(() {
+        //       _isSelected = newValue;
+        //     });
+        //   },
+        // ),
           Padding(
             padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
             child: Row(
@@ -414,9 +455,9 @@ Future<void> _insertDataUser(
   }
 }
 
-class StudentContainer2 extends StatelessWidget {
+class StudentContainer extends StatelessWidget {
   final StudentModel students;
-  const StudentContainer2({Key? key, required this.students}) : super(key: key);
+  const StudentContainer({Key? key, required this.students}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -474,18 +515,18 @@ class StudentContainer2 extends StatelessWidget {
                           textScaler: const TextScaler.linear(0.8),
                         ),
                       ),
-                      TableCell(
-                        child: Text(
-                          students.grade,
-                          textScaler: const TextScaler.linear(0.8),
-                        ),
-                      ),
-                      TableCell(
-                        child: Text(
-                          students.transcript,
-                          textScaler: const TextScaler.linear(0.8),
-                        ),
-                      ),
+                      // TableCell(
+                      //   child: Text(
+                      //     students.grade,
+                      //     textScaler: const TextScaler.linear(0.8),
+                      //   ),
+                      // ),
+                      // TableCell(
+                      //   child: Text(
+                      //     students.transcript,
+                      //     textScaler: const TextScaler.linear(0.8),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],
@@ -552,28 +593,28 @@ class TableHeader extends StatelessWidget {
                   ),
                 ),
               ),
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Grade',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Padding(
-                  padding: EdgeInsets.all(0),
-                  child: Text(
-                    'Transcript',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+              // TableCell(
+              //   verticalAlignment: TableCellVerticalAlignment.middle,
+              //   child: Padding(
+              //     padding: EdgeInsets.all(8.0),
+              //     child: Text(
+              //       'Grade',
+              //       textScaler: TextScaler.linear(0.8),
+              //       style: TextStyle(fontWeight: FontWeight.bold),
+              //     ),
+              //   ),
+              // ),
+              // TableCell(
+              //   verticalAlignment: TableCellVerticalAlignment.middle,
+              //   child: Padding(
+              //     padding: EdgeInsets.all(0),
+              //     child: Text(
+              //       'Transcript',
+              //       textScaler: TextScaler.linear(0.8),
+              //       style: TextStyle(fontWeight: FontWeight.bold),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ],
