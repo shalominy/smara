@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class MultiSelect extends StatefulWidget {
   // final List<List<String>> items;
   final List<String> items;
+  // final Future<List<String>> items;
   // final List<List<String>> selecteditems;
   final List<String> selecteditems;
   const MultiSelect({Key? key, required this.items, required this.selecteditems}) : super(key: key);

@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const LoginScreen(),
+      home: const SafeArea(child: LoginScreen()) ,
       initialRoute: RouteHelper.initial,
       getPages: RouteHelper.routes,
     );

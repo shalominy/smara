@@ -6,3 +6,5 @@ const MONGO_CONN_URL = "mongodb+srv://user1:111111111111@smara.dstgmgz.mongodb.n
 const TEACHER_COLLECTION = "Teachers";
 const STUDENTS_COLLECTION = "Students";
 const USERS_COLLECTION = "Users";
+const CLASS_COLLECTION = "cClass";
+const COURSEWORK_COLLECTION = "Coursework";

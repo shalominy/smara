@@ -207,25 +207,42 @@ class _CustomTabViewState extends State<CustomTabView> {
   final List<String> _tags = ["Playlist (22)", "Description"];
 
   Widget _buildTags(int index) {
-    return GestureDetector(
+    return 
+    Expanded(child: 
+    GestureDetector(
       onTap: () {
         widget.changeTab(index);
       },
-      child: Container(
+      child: 
+      
+      
+      Container(
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * .08, vertical: 15),
         decoration: BoxDecoration(
           color: widget.index == index ? kPrimaryColor : null,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Text(
+        child: 
+        Center(child: 
+        Text(
           _tags[index],
           style: TextStyle(
             color: widget.index != index ? Colors.black : Colors.white,
           ),
         ),
+
+
+        )
+
+        
       ),
-    );
+
+
+
+    )
+
+,);
   }
 
   @override
