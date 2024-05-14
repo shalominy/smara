@@ -1,43 +1,31 @@
-// import 'package:education_app/constants/color.dart';
-//import 'package:education_app/constants/size.dart';
-// import 'package:education_app/dbHelper/mongodb.dart';
+
 import 'package:education_app/dbHelper/userprovider.dart';
-// import 'package:education_app/main.dart';
 import 'package:education_app/models/category.dart';
-// import 'package:education_app/models/users_modeltemporary.dart';
 import 'package:education_app/routes/route_helper.dart';
-//import 'package:education_app/screens/course_screen.dart';
-// import 'package:education_app/screens/studentlist_screen.dart';
-// import 'package:education_app/screens/teacherlist_screen.dart';
-//import 'package:education_app/screens/details_screen.dart';
 import 'package:education_app/widgets/circle_button.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import '../widgets/search_testfield.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import '../widgets/search_testfield.dart';
+import 'package:get/get.dart';
 
-class FeaturedScreen extends StatefulWidget {
-  const FeaturedScreen({Key? key}) : super(key: key);
+class UploadData extends StatefulWidget {
+  const UploadData({Key? key}) : super(key: key);
 
   @override
-  _FeaturedScreenState createState() => _FeaturedScreenState();
+  _UploadData createState() => _UploadData();
 }
 
-class _FeaturedScreenState extends State<FeaturedScreen> {
-  
-
+class _UploadData extends State<UploadData> {
   @override
   Widget build(BuildContext context) {
-  String userrole = '${context.watch<UserProvider>().role}';
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: Column(
-          children:  [
-            AppBar(),
-            // Body(userrole: userrole),
+          children: [
+            const AppBar(),
+            Body(),
           ],
         ),
       ),
@@ -45,37 +33,59 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
   }
 }
 
+// ignore: must_be_immutable
 class Body extends StatelessWidget {
-  final String userrole;
-  const Body({Key? key, required this.userrole}) : super(key: key);
+  Body({Key? key}) : super(key: key);
+  var username = TextEditingController();
+  var useremail = TextEditingController();
+  var userrole = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Categories",
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              // TextButton(
-              //   onPressed: () {},
-              //   child: Text(
-              //     "See All",
-              //     style: Theme.of(context)
-              //         .textTheme
-              //         .bodyMedium
-              //         ?.copyWith(color: kPrimaryColor),
-              //   ),
-              // )
-            ],
+  String role = '${context.watch<UserProvider>().role}';
+    return Expanded(
+      child: 
+      
+      ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Upload Data",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                // TextButton(
+                //   onPressed: () {},
+                //   child: Text(
+                //     "See All",
+                //     style: Theme.of(context)
+                //         .textTheme
+                //         .bodyMedium
+                //         ?.copyWith(color: kPrimaryColor),
+                //   ),
+                // )
+              ],
+            ),
           ),
-        ),
-        ListView.builder(
+          const SizedBox(
+            height: 30,
+          ),
+          Align(
+            child: Text(
+              "Select To Upload",
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          // Text(
+          //   "Student Information",
+          //   style: Theme.of(context).textTheme.bodyMedium,
+          // ),
+
+          ListView.builder(
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
@@ -89,24 +99,29 @@ class Body extends StatelessWidget {
           //   mainAxisExtent: 50,
           // ),
           itemBuilder: (context, index) {
-            return  CategoryCard( role: userrole,
+            return  CategoryCard( userrole: role,
               category: categoryList[index],
             );
           },
           itemCount: categoryList.length,
         ),
-      ],
+          
+
+
+        ],
+      ),
     );
   }
+
+  
 }
 
 class CategoryCard extends StatelessWidget {
-  final String role;
   final DataList category;
+  final String userrole;
   const CategoryCard({
     Key? key,
-    required this.category, 
-    required this.role,
+    required this.category, required this.userrole,
   }) : super(key: key);
 
   // int _selectedIndex = 0;
@@ -127,7 +142,7 @@ class CategoryCard extends StatelessWidget {
       //   ),
       // ),
       onTap: () {
-        Get.toNamed(RouteHelper.getlist(role, category.list));
+        Get.toNamed(RouteHelper.goto(userrole, category.upload));
       },
       child: 
       Padding(padding: const EdgeInsets.only(top: 10, left: 20, right: 20), child: 
@@ -173,16 +188,9 @@ class CategoryCard extends StatelessWidget {
 }
 
 class AppBar extends StatelessWidget {
-  // final String name;
-   AppBar({
+  const AppBar({
     Key? key,
-    // required this.name,
   }) : super(key: key);
-
-  // final Future<UserModelTemporary> bb = MongoDatabase.getuserdetails(MongoDatabase.getuserid());
-  // final Future<String> bb = MongoDatabase.getuserdetailstesting(MongoDatabase.getuserid());
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +221,6 @@ class AppBar extends StatelessWidget {
             children: [
               Text(
                 "Hello,\nGood Morning",
-              textScaler: const TextScaler.linear(0.8),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               CircleButton(
@@ -225,53 +232,11 @@ class AppBar extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-      //     const Center(
-      //   child: Column(
-      //     mainAxisSize: MainAxisSize.min,
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: <Widget>[
-      //       Text('You have pushed the button this many times:'),
-
-      //       /// Extracted as a separate widget for performance optimization.
-      //       /// As a separate widget, it will rebuild independently from [MyHomePage].
-      //       ///
-      //       /// This is totally optional (and rarely needed).
-      //       /// Similarly, we could also use [Consumer] or [Selector].
-      //       Name(),
-      //     ],
-      //   ),
-      // ),
-           Center(
-            child: 
-            Text(
-              // "Aly Zanaty",
-              // "{$context.watch<UserProvider>().name}",
-              '${context.watch<UserProvider>().name}',
-               key: const Key('counterState'),
-              textScaler: const TextScaler.linear(3.5),
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-             
-          ),
-
-          // const SearchTextField()
+          const SearchTextFieldPlacehold(
+            placeholder: "",
+          )
         ],
       ),
-    );
-  }
-
-}
-
-  class Name extends StatelessWidget {
-  const Name({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      /// Calls `context.watch` to make [Count] rebuild when [Counter] changes.
-      '${context.watch<UserProvider>().name}',
-      key: const Key('counterState'),
-      style: Theme.of(context).textTheme.headlineMedium,
     );
   }
 }

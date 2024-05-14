@@ -18,14 +18,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class FeaturedScreen extends StatefulWidget {
-  const FeaturedScreen({Key? key}) : super(key: key);
+class DatabaseScreen extends StatefulWidget {
+  const DatabaseScreen({Key? key}) : super(key: key);
 
   @override
-  _FeaturedScreenState createState() => _FeaturedScreenState();
+  _DatabaseScreen createState() => _DatabaseScreen();
 }
 
-class _FeaturedScreenState extends State<FeaturedScreen> {
+class _DatabaseScreen extends State<DatabaseScreen> {
   
 
   @override
@@ -37,7 +37,7 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
         body: Column(
           children:  [
             AppBar(),
-            // Body(userrole: userrole),
+            Body(userrole: userrole),
           ],
         ),
       ),

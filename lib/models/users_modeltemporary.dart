@@ -15,12 +15,14 @@ class UserModelTemporary {
     String name;
     String emel;
     String role;
+    String password;
 
     UserModelTemporary({
         required this.id,
         required this.name,
         required this.emel, 
         required this.role,
+        required this.password,
     });
 
     factory UserModelTemporary.fromJson(Map<String, dynamic> json) => UserModelTemporary(
@@ -28,6 +30,7 @@ class UserModelTemporary {
         name: json["name"],
         emel: json["emel"],
         role: json["role"],
+        password: json["password"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -35,5 +38,6 @@ class UserModelTemporary {
         "name": name,
         "emel": emel,
         "role": role,
+        "password": password,
     };
 }

@@ -1,28 +1,24 @@
-// import 'package:education_app/constants/color.dart';
-// import 'package:education_app/models/course.dart';
-// import 'package:education_app/dbHelper/mongodb.dart';
-import 'package:date_picker_plus/date_picker_plus.dart';
+
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:education_app/constants/color.dart';
 import 'package:education_app/dbHelper/mongodb.dart';
+import 'package:education_app/dbHelper/userprovider.dart';
 import 'package:education_app/models/assignstudent_model.dart';
 import 'package:education_app/models/coursework_model.dart';
 import 'package:education_app/models/student_model.dart';
 import 'package:education_app/models/users_modeltemporary.dart';
-// import 'package:education_app/models/studentlist.dart';
-import 'package:education_app/screens/details_screen.dart';
-// import 'package:education_app/widgets/checkbox.dart';
-// import 'package:education_app/widgets/circle_button.dart';
+import 'package:education_app/routes/route_helper.dart';
 import 'package:education_app/widgets/custom_icon_button.dart';
 import 'package:education_app/widgets/selectmongodbdata.dart';
-import 'package:education_app/widgets/multiselect.dart';
 import 'package:education_app/widgets/search_testfield.dart';
-import 'package:education_app/widgets/teacher_dropdowncontentbutton.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as m;
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AddCoursework extends StatefulWidget {
   const AddCoursework({Key? key}) : super(key: key);
@@ -198,8 +194,8 @@ class _AddCoursework extends State<AddCoursework> {
 
   Future<void> _selectDate(BuildContext context) async {
     setState(() {
-        assigneddate = DateTime.now();
-      });
+      assigneddate = DateTime.now();
+    });
 
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -246,6 +242,9 @@ class _AddCoursework extends State<AddCoursework> {
 
   @override
   Widget build(BuildContext context) {
+    m.ObjectId teacherid = m.ObjectId.parse(
+        // ignore: unnecessary_string_interpolations
+        '${context.watch<UserProvider>().id}'.substring(10, 34));
     return //Scaffold(body: SafeArea(child: FutureBuilder(future: MongoDatabase.getstudents(), builder: (, Asyncsnapshot snapshot) )))
         AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
@@ -257,7 +256,8 @@ class _AddCoursework extends State<AddCoursework> {
               //   padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10),
               //   child:
               SingleChildScrollView(
-            child: Column(
+            child: 
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IntrinsicHeight(
@@ -609,7 +609,7 @@ class _AddCoursework extends State<AddCoursework> {
                                         const Text('Assigned Date'),
                                         const SizedBox(height: 10),
                                         GestureDetector(
-                                          onTap: () => _selectDate(context)   ,
+                                          onTap: () => _selectDate(context),
                                           child: Container(
                                               alignment: Alignment.centerLeft,
                                               width: double.infinity,
@@ -740,7 +740,7 @@ class _AddCoursework extends State<AddCoursework> {
                                         const Text('Assignees'),
                                         const SizedBox(height: 10),
                                         DropdownButtonFormField(
-                                        value: assigneestype,
+                                          value: assigneestype,
                                           style: TextStyle(
                                             fontSize: 20,
                                             color: Colors.black,
@@ -883,8 +883,8 @@ class _AddCoursework extends State<AddCoursework> {
                                                   builder: (context,
                                                       AsyncSnapshot snapshot) {
                                                     if (snapshot.hasData) {
-                                                      var totalData =
-                                                          snapshot.data.length;
+                                                      // var totalData =
+                                                      //     snapshot.data.length;
 
                                                       final List<
                                                               Map<String,
@@ -1469,10 +1469,20 @@ class _AddCoursework extends State<AddCoursework> {
                       onTap: () {
                         // _insertDataUser(
                         //     username.text, useremail.text, userrole.text);
-                       
-                        _insertCoursework(coursetype!, courseworkname.text, assigneddate!, duedate!, assigneestype!, assignees, courseworkcontent.text);
+
+                        _insertCoursework(
+                            teacherid,
+                            coursetype!,
+                            courseworkname.text,
+                            assigneddate!,
+                            duedate!,
+                            assigneestype!,
+                            assignees,
+                            courseworkcontent.text);
                         // _insertCoursework(coursetype, courseworkname.text, assinggn, sdsd, sssss, assignees, courseworkcontent.text);
                         print("submit pressed");
+
+                        
                       },
                       color: kPrimaryColor,
                       height: 45,
@@ -1510,10 +1520,14 @@ class _AddCoursework extends State<AddCoursework> {
     String username,
     String useremail,
     String userrole,
+    String password,
   ) async {
     var _id = m.ObjectId();
+    var bytes = utf8.encode(password); // data being hashed
+    var digest = sha1.convert(bytes);
+
     final data = UserModelTemporary(
-        id: _id, name: username, emel: useremail, role: userrole);
+        id: _id, name: username, emel: useremail, role: userrole, password: digest.toString());
     await MongoDatabase.insertusertemporary(data);
 
     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Inserted ID" + _id.oid),));
@@ -1527,6 +1541,7 @@ class _AddCoursework extends State<AddCoursework> {
   // }
 
   Future<void> _insertCoursework(
+      m.ObjectId teacherid,
       String coursetype,
       String courseworkname,
       DateTime assigneddate,
@@ -1534,26 +1549,24 @@ class _AddCoursework extends State<AddCoursework> {
       String assigneestype,
       List<List<String>> assignees,
       String courseworkcontent) async {
-
     final List<StudentModel> studentslist = assignees.map((userData) {
-      m.ObjectId id = m.ObjectId.parse(userData[0].substring(10 , 34));
+      m.ObjectId id = m.ObjectId.parse(userData[0].substring(10, 34));
       String name = userData[1];
       String studentid = userData[2];
       String studentclass = userData[3];
-      String grade = userData[4];
-      String transcript = userData[5];
+      String gender = userData[4];
+
 
       return StudentModel(
           id: id,
           name: name,
           studentid: studentid,
           studentclass: studentclass,
-          grade: grade,
-          transcript: transcript);
+          gender: gender,
+          );
     }).toList();
 
-    final List<AssignStudentModel> assignstudent =
-        studentslist.map((userData) {
+    final List<AssignStudentModel> assignstudent = studentslist.map((userData) {
       StudentModel student = userData;
       String submission = 'ASSIGNED';
 
@@ -1563,7 +1576,6 @@ class _AddCoursework extends State<AddCoursework> {
     // print(assignstudentModelToJson(submissionstatus));
 
     final List<String> studentsubmissionstatus = assignstudent.map((userData) {
-    
       return assignstudentModelToJson(userData);
     }).toList();
 
@@ -1571,6 +1583,7 @@ class _AddCoursework extends State<AddCoursework> {
 
     final data = CourseworkModel(
         id: _id,
+        teacherid: teacherid,
         type: coursetype,
         name: courseworkname,
         assigndate: assigneddate,
@@ -1580,15 +1593,18 @@ class _AddCoursework extends State<AddCoursework> {
         content: courseworkcontent);
     await MongoDatabase.insertcoursework(data);
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Inserted Coursework " + _id.oid),));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Inserted Coursework " + _id.oid),
+    ));
     // _clearAll();
 
-    Navigator.pop(context);
+
+    // Navigator.pop(context);
 
 
+
+     Get.toNamed(RouteHelper.goto('Teacher','Coursework' ));
   }
-
-  
 }
 
 class StudentContainer extends StatelessWidget {

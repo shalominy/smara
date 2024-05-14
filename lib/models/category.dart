@@ -1,4 +1,4 @@
-class Categorylist {
+class DataList {
   // String thumbnail;
   // String name;
   // int noOfCourses;
@@ -10,17 +10,19 @@ class Categorylist {
   // });
 
   // String thumbnail;
-  String kategori;
+  String list;
   String name;
+  String upload;
   // int noOfCourses;
 
-  Categorylist({
-    required this.kategori,
+  DataList({
+    required this.list,
     required this.name,
+    required this.upload,
   });
 }
 
-List<Categorylist> categoryList = [
+List<DataList> categoryList = [
   // Category(
   //   name: 'Development',
   //   noOfCourses: 55,
@@ -41,12 +43,19 @@ List<Categorylist> categoryList = [
   //   noOfCourses: 25,
   //   thumbnail: 'assets/icons/design.jpg',
   // ),
-  Categorylist(
-    kategori: "1",
+  DataList(
+    upload: "UploadTeacherData",
+    list: "TeacherList",
     name: 'Teachers',
   ),
-  Categorylist(
-    kategori: "4",
+  DataList(
+    upload: "UploadStudentData",
+    list: "StudentList",
     name: 'Students',
+  ),
+  DataList(
+    upload: "UploadUserData",
+    list: "UserList",
+    name: 'Users',
   ),
 ];

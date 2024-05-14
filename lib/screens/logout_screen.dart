@@ -9,14 +9,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class Logout extends StatefulWidget {
+  const Logout({Key? key}) : super(key: key);
 
   @override
-  _LoginScreen createState() => _LoginScreen();
+  _Logout createState() => _Logout();
 }
 
-class _LoginScreen extends State<LoginScreen> {
+class _Logout extends State<Logout> {
 
 var username = TextEditingController();
   var password = TextEditingController();
@@ -44,7 +44,7 @@ var username = TextEditingController();
                   children: [
                     Align(
                       child: Text(
-                        'Login as User ',
+                        'Logout ',
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
                     ),
@@ -54,81 +54,17 @@ var username = TextEditingController();
                   ),
                   SizedBox(height: 200,),
 
-                  Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: username,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
-                      labelText: 'Enter Student Name',
-                      border: const OutlineInputBorder(),
-                      floatingLabelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: password,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
-                      labelText: 'Enter Student ID',
-                      border: const OutlineInputBorder(),
-                      floatingLabelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 25,),
                 Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        fixedSize: const Size(150, 45),
-                      ),
-                      onPressed: () {
-                        // Navigator.pop(context);
-                      },
-                      child: Text(
-                        "Cancel",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(color: kPrimaryColor),
-                      ),
-                    ),
                     CustomIconButton(
                       onTap: () {
+                                Get.toNamed(RouteHelper.loginscreen());  
 
-                        MongoDatabase.login(username.text, password.text, context);
                         // _insertData(studentname.text, studentid.text,
                         //     studentclass.text, studentgender!, context);
                       },
@@ -136,7 +72,7 @@ var username = TextEditingController();
                       height: 45,
                       width: 150,
                       child: const Text(
-                        "Submit",
+                        "Logout",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -175,28 +111,28 @@ var username = TextEditingController();
               //     itemCount: students.length,
               //   ),
               // ),
-              Expanded(
-                  child: FutureBuilder(
-                      future: MongoDatabase.getusers(),
-                      builder: (context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          var totalData = snapshot.data.length;
-                          print("Total Data" + totalData.toString());
-                          // print("All Data" + snapshot.data.toString());
-                          return ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, index) {
-                                return UsersContainer(
-                                    users: UserModelTemporary.fromJson(
-                                        snapshot.data[index]));
-                              });
+              // Expanded(
+              //     child: FutureBuilder(
+              //         future: MongoDatabase.getusers(),
+              //         builder: (context, AsyncSnapshot snapshot) {
+              //           if (snapshot.hasData) {
+              //             var totalData = snapshot.data.length;
+              //             print("Total Data" + totalData.toString());
+              //             // print("All Data" + snapshot.data.toString());
+              //             return ListView.builder(
+              //                 itemCount: snapshot.data.length,
+              //                 itemBuilder: (context, index) {
+              //                   return UsersContainer(
+              //                       users: UserModelTemporary.fromJson(
+              //                           snapshot.data[index]));
+              //                 });
                               
-                        } else {
-                          return Center(
-                            child: Text("No Data Available"),
-                          );
-                        }
-                      })),
+              //           } else {
+              //             return Center(
+              //               child: Text("No Data Available"),
+              //             );
+              //           }
+              //         })),
                       
                 
 

@@ -141,7 +141,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                           return ListView.builder(
                               itemCount: snapshot.data.length,
                               itemBuilder: (context, index) {
-                                return StudentContainer2(
+                                return StudentContainer(
                                     students: StudentModel.fromJson(
                                         snapshot.data[index]));
                               });
@@ -191,9 +191,9 @@ class _StudentListScreenState extends State<StudentListScreen> {
 //   }
 }
 
-class StudentContainer2 extends StatelessWidget {
+class StudentContainer extends StatelessWidget {
   final StudentModel students;
-  const StudentContainer2({Key? key, required this.students}) : super(key: key);
+  const StudentContainer({Key? key, required this.students}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -226,6 +226,12 @@ class StudentContainer2 extends StatelessWidget {
 
             Expanded(
               child: Table(
+              columnWidths: const {
+                0: FlexColumnWidth(50),
+                1: FlexColumnWidth(20),
+                2: FlexColumnWidth(15),
+                3: FlexColumnWidth(15),
+              }, 
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TableRow(
@@ -240,29 +246,34 @@ class StudentContainer2 extends StatelessWidget {
                         ),
                       ),
                       TableCell(
-                        child: Text(
+                        child: 
+                        Center( child: 
+                        Text(
                           students.studentid,
                           textScaler: const TextScaler.linear(0.8),
                         ),
+                        )
                       ),
                       TableCell(
-                        child: Text(
+                        child: 
+                         Center(child: 
+                        Text(
                           students.studentclass,
                           textScaler: const TextScaler.linear(0.8),
                         ),
+                        )
                       ),
                       TableCell(
-                        child: Text(
-                          students.grade,
+                        child: 
+                         Center(child: 
+                        Text(
+                          students.gender,
                           textScaler: const TextScaler.linear(0.8),
                         ),
+                        )
                       ),
-                      TableCell(
-                        child: Text(
-                          students.transcript,
-                          textScaler: const TextScaler.linear(0.8),
-                        ),
-                      ),
+                      
+                      
                     ],
                   ),
                 ],
@@ -288,6 +299,12 @@ class TableHeader extends StatelessWidget {
           // padding: const EdgeInsets.all(15.0),
           // child:
           Table(
+          columnWidths: const {
+                0: FlexColumnWidth(50),
+                1: FlexColumnWidth(20),
+                2: FlexColumnWidth(15),
+                3: FlexColumnWidth(15),
+              }, 
         border: TableBorder.all(color: Colors.white30),
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         children: const [
@@ -311,46 +328,55 @@ class TableHeader extends StatelessWidget {
                 verticalAlignment: TableCellVerticalAlignment.middle,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text(
+                  child: 
+                  Center(child: 
+                  Text(
                     'Id',
                     textScaler: TextScaler.linear(0.8),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  )
                 ),
               ),
               TableCell(
                 verticalAlignment: TableCellVerticalAlignment.middle,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text(
+                  child: 
+                  Center(child: 
+                  Text(
                     'Class',
                     textScaler: TextScaler.linear(0.8),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  )
                 ),
               ),
               TableCell(
                 verticalAlignment: TableCellVerticalAlignment.middle,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Grade',
+                  child: 
+                  Center(child: 
+                  Text(
+                    'M/F',
                     textScaler: TextScaler.linear(0.8),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  )
                 ),
               ),
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Padding(
-                  padding: EdgeInsets.all(0),
-                  child: Text(
-                    'Transcript',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+              // TableCell(
+              //   verticalAlignment: TableCellVerticalAlignment.middle,
+              //   child: Padding(
+              //     padding: EdgeInsets.all(0),
+              //     child: Text(
+              //       'Transcript',
+              //       textScaler: TextScaler.linear(0.8),
+              //       style: TextStyle(fontWeight: FontWeight.bold),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ],

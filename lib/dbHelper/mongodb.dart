@@ -1,11 +1,18 @@
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:crypto/crypto.dart';
 import 'package:education_app/dbHelper/constant.dart';
+import 'package:education_app/dbHelper/userprovider.dart';
 // import 'package:education_app/models/assignstudent_model.dart';
 import 'package:education_app/models/coursework_model.dart';
 // import 'package:education_app/dbHelper/userprovider.dart';
 import 'package:education_app/models/student_model.dart';
+import 'package:education_app/routes/route_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:provider/provider.dart';
 // import 'package:mongo_dart/mongo_dart.dart' as m;
 
 import '../models/users_modeltemporary.dart';
@@ -20,9 +27,71 @@ class MongoDatabase {
     // userCollection= db.collection(USER__COLLECTION);
   }
 
+  // static Future<List<Map<String, dynamic>>> getstudents() async {
+  static Future<void> login(String username, String password, BuildContext context) async {
+  
+    // userCollection = db.collection(STUDENTS_COLLECTION);
+    userCollection = db.collection(USERS_COLLECTION);
+    // final arrData = await userCollection.find().toList();
+    // final arrData = await userCollection.find(where.eq('name', 'asasas')).toList();
+    try{
+    var arrData = await userCollection.findOne(where.eq('name', username));
+    var bytes = utf8.encode(password); // data being hashed
+    var digest = sha1.convert(bytes);
+
+    if(arrData != null){
+
+      if(digest.toString() == arrData["password"]){
+
+        print("nice");
+        UserModelTemporary users = UserModelTemporary(id: arrData["_id"], name: arrData["name"], emel: arrData["emel"], role: arrData["role"], password: arrData["password"]);
+
+        context.read<UserProvider>().setuser(users);
+        Get.toNamed(RouteHelper.gettocontext(users.role));  
+
+
+      }else{
+        print(arrData["password"]);
+        print("wrong password");
+      }
+      
+    }else{
+      print("user not found");
+    }
+
+
+    }catch(e){
+      print(e);
+    }
+
+    // UserModelTemporary users = UserModelTemporary(id: null, name: '', emel: '', role: '');
+
+    // context.read<UserProvider>().setuser(users);
+
+        // Get.toNamed(RouteHelper.gettocontext(users.role));  
+    // print(arrData ?? 'got');
+    // print(arrData["studentid"]);
+    // print(digest);
+    // return arrData;
+  }
+
   static Future<List<Map<String, dynamic>>> getstudents() async {
-    userCollection = db.collection(TEACHER_COLLECTION);
+  // static Future<void> getstudents(String username, String password, BuildContext context) async {
+  
+    userCollection = db.collection(STUDENTS_COLLECTION);
+    // userCollection = db.collection(USERS_COLLECTION);
     final arrData = await userCollection.find().toList();
+    // final arrData = await userCollection.find(where.eq('name', 'asasas')).toList();
+    // var arrData = await userCollection.findOne(where.eq('name', 'asasas'));
+    // final owo = null;
+
+    // UserModelTemporary users = UserModelTemporary(id: null, name: '', emel: '', role: '');
+
+    // context.read<UserProvider>().setuser(users);
+
+        // Get.toNamed(RouteHelper.gettocontext(users.role));  
+    // print(arrData ?? 'got');
+    // print(arrData["studentid"]);
     return arrData;
   }
 
@@ -50,8 +119,7 @@ class MongoDatabase {
     // return arrData.map((doc) => doc['name'] as String);
   }
 
-  static Future<List<Map<String, dynamic>>> getstudentsbyclass(
-      List<String> classes) async {
+  static Future<List<Map<String, dynamic>>> getstudentsbyclass(List<String> classes) async {
     // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
     userCollection = db.collection(TEACHER_COLLECTION);
     final arrData = await userCollection
@@ -62,23 +130,16 @@ class MongoDatabase {
     // return arrData.map((doc) => doc['name'] as String);
   }
 
-  //works
-  // static Future<List<Map<String, dynamic>>> setusers(ObjectId objectid) async {
-  //   userCollection= db.collection(USERS_COLLECTION);
-  //   final arrData = await userCollection.find(where.eq('_id', objectid)).toList();
-  //   // print(arrData._id.toString());
-  //   // UserProvider().setuser();
-  //   return arrData;
-  // }
-
-  // testing
-  static Future<String> setusers(ObjectId objectid) async {
-    userCollection = db.collection(USERS_COLLECTION);
-    final arrData =
-        await userCollection.find(where.eq('_id', objectid)).toList();
-    // print(arrData._id.toString());
-    // UserProvider().setuser();
+  static Future<List<Map<String, dynamic>>> getcourseworkbyteacherid(ObjectId teacherid) async {
+    // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
+    
+    userCollection = db.collection(COURSEWORK_COLLECTION);
+    final arrData = await userCollection
+        .find(where.eq('teacherid', teacherid).sortBy('_id', descending:true ))
+        .toList();
+    // final arrData = await userCollection.find().toList();
     return arrData;
+    // return arrData.map((doc) => doc['name'] as String);
   }
 
   static String setuserid(String userid) {
@@ -136,27 +197,6 @@ class MongoDatabase {
       return e.toString();
     }
   }
-
-  // static Future<UserModelTemporary> getuserdetails(String id) async {
-  //   userCollection= db.collection(TEACHER_COLLECTION);
-  //   id = "Ameerul";
-  //   final arrData = await userCollection.find({'name': id});
-  //   UserModelTemporary data = UserModelTemporary(id: arrData._id, name: arrData.name, emel: arrData.emel, role: arrData.role);
-  //   print("" + data.id.toString() + "sdsd" + data.name);
-  //   return data;
-
-  // }
-
-  // static Future<String> getuserdetailstesting(String id) async {
-  //   userCollection= db.collection(TEACHER_COLLECTION);
-  //   id = "Ameerul";
-  //   final arrData = await userCollection.find({'name': id});
-  //   // UserModelTemporary data = UserModelTemporary(id: arrData._id, name: arrData.name, emel: arrData.emel, role: arrData.role);
-  //   // print("" + data.id.toString() + "sdsd" + data.name);
-  //   // print("" + data.id.toString() + "sdsd" + data.name);
-  //   return arrData._id.toString();
-
-  // }
   
 }
 

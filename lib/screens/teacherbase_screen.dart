@@ -3,10 +3,11 @@ import 'package:education_app/constants/icons.dart';
 import 'package:education_app/constants/size.dart';
 import 'package:education_app/screens/featuerd_screen.dart';
 import 'package:education_app/screens/login_screen.dart';
+import 'package:education_app/screens/logout_screen.dart';
 // import 'package:education_app/screens/teachercoursework_screen.dart';
 import 'package:education_app/screens/teachercoursework_screen.dart';
 // import 'package:education_app/screens/update_student.dart';
-import 'package:education_app/screens/update_user.dart';
+import 'package:education_app/screens/uploaddata_screen.dart';
 import 'package:flutter/material.dart';
 
 class TeacherBaseScreen extends StatefulWidget {
@@ -21,10 +22,12 @@ class _TeacherBaseScreen extends State<TeacherBaseScreen> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     FeaturedScreen(),
-    TeacherCoursework(title: "",),
-    UpdateUser(),
-    LoginScreen(),
+    TeacherCoursework(),
+    UploadData(),
+    Logout(),
   ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

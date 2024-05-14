@@ -2,8 +2,7 @@ import 'package:education_app/constants/color.dart';
 import 'package:education_app/constants/icons.dart';
 import 'package:education_app/constants/size.dart';
 import 'package:education_app/screens/featuerd_screen.dart';
-import 'package:education_app/screens/update_student.dart';
-import 'package:education_app/screens/update_user.dart';
+import 'package:education_app/screens/uploaddata_screen.dart';
 import 'package:flutter/material.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -18,8 +17,8 @@ class _BaseScreenState extends State<BaseScreen> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     FeaturedScreen(),
-    UpdateStudent(),
-    UpdateUser(),
+    FeaturedScreen(),
+    UploadData(),
     FeaturedScreen(),
   ];
   @override

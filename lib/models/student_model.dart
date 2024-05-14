@@ -14,16 +14,14 @@ class StudentModel {
     String name;
     String studentid;
     String studentclass;
-    String grade;
-    String transcript;
+    String gender;
 
     StudentModel({
         required this.id,
         required this.name,
         required this.studentid,
         required this.studentclass,
-        required this.grade,
-        required this.transcript,
+        required this.gender
     });
 
     factory StudentModel.fromJson(Map<String, dynamic> json) => StudentModel(
@@ -31,8 +29,8 @@ class StudentModel {
         name: json["name"],
         studentid: json["studentid"],
         studentclass: json["studentclass"],
-        grade: json["grade"],
-        transcript: json["transcript"],
+        gender: json["gender"],
+    
     );
 
     Map<String, dynamic> toJson() => {
@@ -40,7 +38,6 @@ class StudentModel {
         "name": name,
         "studentid": studentid,
         "studentclass": studentclass,
-        "grade": grade,
-        "transcript": transcript,
+        "gender": gender,
     };
 }
