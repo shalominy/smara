@@ -107,7 +107,7 @@ var username = TextEditingController();
                           }),
                           //print(_isButtonEnabled),
                         //  randomString = generateRandomString(5)
-                         } : null;
+                         } :     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" Please wait 5 seconds before generating a new code again"),));
                         //  randomString = generateRandomString(5);
                         // print(_isButtonEnabled);
                         // getregistrationcode();

@@ -322,8 +322,10 @@ var username = TextEditingController();
         id: _id, name: username, emel: useremail, role: userrole, password: digest.toString());
     await MongoDatabase.userregister(secretcode, data);
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" User Registered" + _id.oid),));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" User Registered " + _id.oid),));
     Navigator.pop(context);
+    Get.toNamed(RouteHelper.loginscreen());  
+
   }
 
 //   Widget StudentCard(StudentModel data) {

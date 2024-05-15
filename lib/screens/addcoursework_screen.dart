@@ -1528,23 +1528,23 @@ class _AddCoursework extends State<AddCoursework> {
 //     );
 //   }
 
-  Future<void> _insertDataUser(
-    String username,
-    String useremail,
-    String userrole,
-    String password,
-  ) async {
-    var _id = m.ObjectId();
-    var bytes = utf8.encode(password); // data being hashed
-    var digest = sha1.convert(bytes);
+  // Future<void> _insertDataUser(
+  //   String username,
+  //   String useremail,
+  //   String userrole,
+  //   String password,
+  // ) async {
+  //   var _id = m.ObjectId();
+  //   var bytes = utf8.encode(password); // data being hashed
+  //   var digest = sha1.convert(bytes);
 
-    final data = UserModelTemporary(
-        id: _id, name: username, emel: useremail, role: userrole, password: digest.toString());
-    await MongoDatabase.insertusertemporary(data);
+  //   final data = UserModelTemporary(
+  //       id: _id, name: username, emel: useremail, role: userrole, password: digest.toString());
+  //   await MongoDatabase.insertusertemporary(data);
 
-    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Inserted ID" + _id.oid),));
-    // _clearAll();
-  }
+  //   // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Inserted ID" + _id.oid),));
+  //   // _clearAll();
+  // }
 
   // void _clearAll() {
   //   username.text = "";
@@ -1614,7 +1614,7 @@ class _AddCoursework extends State<AddCoursework> {
     // Navigator.pop(context);
 
 
-
+    
      Get.toNamed(RouteHelper.goto('Teacher','Coursework' ));
   }
 }

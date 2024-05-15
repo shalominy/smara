@@ -228,6 +228,7 @@ var username = TextEditingController();
               //     itemCount: students.length,
               //   ),
               // ),
+              const SizedBox(height: 10,)
             ],
           ),
         ),
@@ -268,7 +269,7 @@ class UsersContainer extends StatelessWidget {
 
       },
       child: Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+          padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
           child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(

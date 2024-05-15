@@ -102,34 +102,34 @@ class MongoDatabase {
     // return arrData["generatedcode"];
   }
 
-  static Future<String> userregister(String code,UserModelTemporary data) async {
+  static Future<void> userregister(String code,UserModelTemporary data) async {
     userCollection = db.collection(USERS_COLLECTION);
     secret = db.collection("secret");
     var secretcode = await secret.findOne(where.eq('type', 'secret code'));
 
     try {
-      if(code = secretcode["generatedcode"]){
+      if(code == secretcode["generatedcode"]){
 
         var result = await userCollection.insertOne(data.toJson());
         if (result.isSuccess) {
           print ("User Registered" + data.toJson().toString());
 
-          return "User Registered" + data.toJson().toString();
+          // return "User Registered" + data.toJson().toString();
         } else {
           print ("Something went wrong while registering");
-          return "Something went wrong while registering";
+          // return "Something went wrong while registering";
         }
 
         
       
       }else{
         print("code is not correct");
-        return "code is not correct";
+        // return "code is not correct";
       }
       
     } catch (e) {
       print(e.toString());
-      return e.toString();
+      // return e.toString();
     }
   }
 
