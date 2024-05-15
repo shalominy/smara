@@ -1,4 +1,4 @@
-# education_app
+# smart_hub
 
 A new Flutter project.
 
