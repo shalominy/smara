@@ -1,9 +1,15 @@
-import 'package:education_app/constants/color.dart';
-import 'package:education_app/constants/icons.dart';
-import 'package:education_app/constants/size.dart';
-import 'package:education_app/screens/featuerd_screen.dart';
-import 'package:education_app/screens/uploaddata_screen.dart';
+// import 'package:education_app/constants/color.dart';
+// import 'package:education_app/constants/icons.dart';
+// import 'package:education_app/constants/size.dart';
+// import 'package:education_app/screens/featuerd_screen.dart';
+// import 'package:education_app/screens/uploaddata_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../constants/color.dart';
+import '../constants/icons.dart';
+import '../constants/size.dart';
+import 'featuerd_screen.dart';
+import 'uploaddata_screen.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({Key? key}) : super(key: key);

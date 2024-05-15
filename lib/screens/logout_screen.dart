@@ -1,13 +1,19 @@
-import 'package:education_app/constants/color.dart';
-import 'package:education_app/dbHelper/mongodb.dart';
-import 'package:education_app/dbHelper/userprovider.dart';
-import 'package:education_app/models/users_modeltemporary.dart';
-import 'package:education_app/routes/route_helper.dart';
-import 'package:education_app/widgets/custom_icon_button.dart';
+// import 'package:education_app/constants/color.dart';
+// import 'package:education_app/dbHelper/mongodb.dart';
+// import 'package:education_app/dbHelper/userprovider.dart';
+// import 'package:education_app/models/users_modeltemporary.dart';
+// import 'package:education_app/routes/route_helper.dart';
+// import 'package:education_app/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import '../constants/color.dart';
+import '../dbHelper/userprovider.dart';
+import '../models/users_modeltemporary.dart';
+import '../routes/route_helper.dart';
+import '../widgets/custom_icon_button.dart';
 
 class Logout extends StatefulWidget {
   const Logout({Key? key}) : super(key: key);
@@ -191,7 +197,7 @@ class UsersContainer extends StatelessWidget {
       // MongoDatabase.getstudents(context);
         context.read<UserProvider>().setuser(users);
 
-        Get.toNamed(RouteHelper.gettocontext(users.role));
+        Get.toNamed(RouteHelper.gotocontext(users.role));
 
       },
       child: Padding(

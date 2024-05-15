@@ -2,13 +2,18 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
-import 'package:education_app/constants/color.dart';
-import 'package:education_app/dbHelper/mongodb.dart';
-import 'package:education_app/models/users_modeltemporary.dart';
-import 'package:education_app/widgets/custom_icon_button.dart';
+// import 'package:education_app/constants/color.dart';
+// import 'package:education_app/dbHelper/mongodb.dart';
+// import 'package:education_app/models/users_modeltemporary.dart';
+// import 'package:education_app/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mongo_dart/mongo_dart.dart' as m;
+
+import '../constants/color.dart';
+import '../dbHelper/mongodb.dart';
+import '../models/users_modeltemporary.dart';
+import '../widgets/custom_icon_button.dart';
 
 class UploadUser extends StatefulWidget {
   const UploadUser({Key? key}) : super(key: key);

@@ -2,24 +2,29 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:crypto/crypto.dart';
-import 'package:education_app/dbHelper/constant.dart';
-import 'package:education_app/dbHelper/userprovider.dart';
-// import 'package:education_app/models/assignstudent_model.dart';
-import 'package:education_app/models/coursework_model.dart';
+// import 'package:education_app/dbHelper/constant.dart';
 // import 'package:education_app/dbHelper/userprovider.dart';
-import 'package:education_app/models/student_model.dart';
-import 'package:education_app/routes/route_helper.dart';
+// // import 'package:education_app/models/assignstudent_model.dart';
+// import 'package:education_app/models/coursework_model.dart';
+// // import 'package:education_app/dbHelper/userprovider.dart';
+// import 'package:education_app/models/student_model.dart';
+// import 'package:education_app/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:provider/provider.dart';
 // import 'package:mongo_dart/mongo_dart.dart' as m;
 
+import '../models/coursework_model.dart';
+import '../models/student_model.dart';
 import '../models/users_modeltemporary.dart';
+import '../routes/route_helper.dart';
+import 'constant.dart';
+import 'userprovider.dart';
 
 class MongoDatabase {
   // ignore: prefer_typing_uninitialized_variables
-  static var db, userCollection, id;
+  static var db, userCollection, id, secret;
   static connect() async {
     db = await Db.create(MONGO_CONN_URL);
     await db.open();
@@ -47,7 +52,7 @@ class MongoDatabase {
         UserModelTemporary users = UserModelTemporary(id: arrData["_id"], name: arrData["name"], emel: arrData["emel"], role: arrData["role"], password: arrData["password"]);
 
         context.read<UserProvider>().setuser(users);
-        Get.toNamed(RouteHelper.gettocontext(users.role));  
+        Get.toNamed(RouteHelper.gotocontext(users.role));  
 
 
       }else{
@@ -73,6 +78,59 @@ class MongoDatabase {
     // print(arrData["studentid"]);
     // print(digest);
     // return arrData;
+  }
+
+  static Future<String> getregistrationcode(BuildContext context) async {
+  
+    userCollection = db.collection("secret");
+
+    var arrData = await userCollection.findOne(where.eq('type', 'secret code'));
+    print(arrData["genratedcode"]);
+  
+    return arrData["generatedcode"];
+  }
+
+  static Future<void> insertnewregistrationcode(String newcode,BuildContext context) async {
+  
+    userCollection = db.collection("secret");
+
+    // try{
+    // var arrData = await userCollection.findOne(where.eq('type', 'secret code'));
+    userCollection.updateOne(where.eq('type', 'secret code'), modify.set('generatedcode', newcode));
+    // print(arrData["genratedcode"]);
+  
+    // return arrData["generatedcode"];
+  }
+
+  static Future<String> userregister(String code,UserModelTemporary data) async {
+    userCollection = db.collection(USERS_COLLECTION);
+    secret = db.collection("secret");
+    var secretcode = await secret.findOne(where.eq('type', 'secret code'));
+
+    try {
+      if(code = secretcode["generatedcode"]){
+
+        var result = await userCollection.insertOne(data.toJson());
+        if (result.isSuccess) {
+          print ("User Registered" + data.toJson().toString());
+
+          return "User Registered" + data.toJson().toString();
+        } else {
+          print ("Something went wrong while registering");
+          return "Something went wrong while registering";
+        }
+
+        
+      
+      }else{
+        print("code is not correct");
+        return "code is not correct";
+      }
+      
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
   }
 
   static Future<List<Map<String, dynamic>>> getstudents() async {
@@ -111,7 +169,7 @@ class MongoDatabase {
   static Future<List<Map<String, dynamic>>> getstudentsbyname(
       List<String> name) async {
     // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
-    userCollection = db.collection(TEACHER_COLLECTION);
+    userCollection = db.collection(STUDENTS_COLLECTION);
     final arrData =
         await userCollection.find(where.oneFrom('name', name)).toList();
     // final arrData = await userCollection.find().toList();
@@ -121,7 +179,7 @@ class MongoDatabase {
 
   static Future<List<Map<String, dynamic>>> getstudentsbyclass(List<String> classes) async {
     // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
-    userCollection = db.collection(TEACHER_COLLECTION);
+    userCollection = db.collection(STUDENTS_COLLECTION);
     final arrData = await userCollection
         .find(where.oneFrom('studentclass', classes))
         .toList();

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 // import 'package:education_app/constants/color.dart';
 // import 'package:education_app/dbHelper/mongodb.dart';
 // import 'package:education_app/dbHelper/userprovider.dart';
@@ -7,6 +10,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:mongo_dart/mongo_dart.dart' as m;
 import 'package:provider/provider.dart';
 
 import '../constants/color.dart';
@@ -16,17 +20,21 @@ import '../models/users_modeltemporary.dart';
 import '../routes/route_helper.dart';
 import '../widgets/custom_icon_button.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreen createState() => _LoginScreen();
+  _RegisterScreen createState() => _RegisterScreen();
 }
 
-class _LoginScreen extends State<LoginScreen> {
+class _RegisterScreen extends State<RegisterScreen> {
 
 var username = TextEditingController();
   var password = TextEditingController();
+  var useremail = TextEditingController();
+  var userrole = TextEditingController();
+  var secretcode = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return //Scaffold(body: SafeArea(child: FutureBuilder(future: MongoDatabase.getstudents(), builder: (, Asyncsnapshot snapshot) )))
@@ -62,53 +70,118 @@ var username = TextEditingController();
                   SizedBox(height: 200,),
 
                   Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: username,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
+                  padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Add New User",
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      labelText: 'Enter Student Name',
-                      border: const OutlineInputBorder(),
-                      floatingLabelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
-                    ),
+                    ],
                   ),
                 ),
+
+
                 Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: password,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
-                      labelText: 'Password',
-                      border: const OutlineInputBorder(),
-                      floatingLabelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              controller: username,
+              decoration: const InputDecoration(
+                hintText: 'Enter User Name',
+                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // labelText: "Student Transcript",
+                labelStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(40),
                     ),
-                  ),
-                ),
+                isDense: true,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              controller: password,
+              decoration: const InputDecoration(
+                hintText: 'Enter User Password',
+                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // labelText: "Student Transcript",
+                labelStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(40),
+                    ),
+                isDense: true,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              controller: useremail,
+              decoration: const InputDecoration(
+                hintText: 'Enter User Email',
+                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // labelText: "Student Transcript",
+                labelStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(40),
+                    ),
+                isDense: true,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              controller: userrole,
+              decoration: const InputDecoration(
+                hintText: 'Admin, Teacher, Student',
+                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // labelText: "Student Transcript",
+                labelStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(40),
+                    ),
+                isDense: true,
+              ),
+            ),
+          ),
+
+                SizedBox(height: 25,),
+
+
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              controller: secretcode,
+              decoration: const InputDecoration(
+                hintText: 'Secret Code',
+                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                // labelText: "Student Transcript",
+                labelStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(40),
+                    ),
+                isDense: true,
+              ),
+            ),
+          ),
                 SizedBox(height: 25,),
                 Padding(
                 padding: const EdgeInsets.symmetric(
@@ -123,11 +196,9 @@ var username = TextEditingController();
                       ),
                       onPressed: () {
                         // Navigator.pop(context);
-                                Get.toNamed(RouteHelper.gotocontext("Register"));  
-
                       },
                       child: Text(
-                        "Register",
+                        "Cancel",
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge
@@ -137,15 +208,15 @@ var username = TextEditingController();
                     CustomIconButton(
                       onTap: () {
 
-                        MongoDatabase.login(username.text, password.text, context);
-                        // _insertData(studentname.text, studentid.text,
-                        //     studentclass.text, studentgender!, context);
+                        // MongoDatabase.login(username.text, password.text, context);
+
+                        _userregister(username.text, password.text, useremail.text, userrole.text, secretcode.text, context);    
                       },
                       color: kPrimaryColor,
                       height: 45,
                       width: 150,
                       child: const Text(
-                        "Submit",
+                        "Register",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -184,28 +255,28 @@ var username = TextEditingController();
               //     itemCount: students.length,
               //   ),
               // ),
-              Expanded(
-                  child: FutureBuilder(
-                      future: MongoDatabase.getusers(),
-                      builder: (context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          var totalData = snapshot.data.length;
-                          print("Total Data" + totalData.toString());
-                          // print("All Data" + snapshot.data.toString());
-                          return ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, index) {
-                                return UsersContainer(
-                                    users: UserModelTemporary.fromJson(
-                                        snapshot.data[index]));
-                              });
+              // Expanded(
+              //     child: FutureBuilder(
+              //         future: MongoDatabase.getusers(),
+              //         builder: (context, AsyncSnapshot snapshot) {
+              //           if (snapshot.hasData) {
+              //             var totalData = snapshot.data.length;
+              //             print("Total Data" + totalData.toString());
+              //             // print("All Data" + snapshot.data.toString());
+              //             return ListView.builder(
+              //                 itemCount: snapshot.data.length,
+              //                 itemBuilder: (context, index) {
+              //                   return UsersContainer(
+              //                       users: UserModelTemporary.fromJson(
+              //                           snapshot.data[index]));
+              //                 });
                               
-                        } else {
-                          return Center(
-                            child: Text("No Data Available"),
-                          );
-                        }
-                      })),
+              //           } else {
+              //             return Center(
+              //               child: Text("No Data Available"),
+              //             );
+              //           }
+              //         })),
                       
                 
 
@@ -234,6 +305,25 @@ var username = TextEditingController();
       ),
       // ),
     );
+  }
+
+  Future<void> _userregister(
+    String username,
+    String password,
+    String useremail,
+    String userrole,
+    String secretcode,
+    BuildContext context,
+  ) async {
+    var _id = m.ObjectId();
+    var bytes = utf8.encode(password); // data being hashed
+    var digest = sha1.convert(bytes);
+    final data = UserModelTemporary(
+        id: _id, name: username, emel: useremail, role: userrole, password: digest.toString());
+    await MongoDatabase.userregister(secretcode, data);
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" User Registered" + _id.oid),));
+    Navigator.pop(context);
   }
 
 //   Widget StudentCard(StudentModel data) {

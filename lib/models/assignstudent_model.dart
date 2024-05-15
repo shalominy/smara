@@ -2,7 +2,9 @@
 
 import 'dart:convert';
 
-import 'package:education_app/models/student_model.dart';
+import 'student_model.dart';
+
+// import 'package:education_app/models/student_model.dart';
 // import 'package:mongo_dart/mongo_dart.dart';
 
 AssignStudentModel assignstudentModelFromJson(String str) => AssignStudentModel.fromJson(json.decode(str));

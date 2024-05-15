@@ -1,11 +1,15 @@
 
-import 'package:education_app/dbHelper/userprovider.dart';
-import 'package:education_app/models/category.dart';
-import 'package:education_app/routes/route_helper.dart';
-import 'package:education_app/widgets/circle_button.dart';
+// import 'package:education_app/dbHelper/userprovider.dart';
+// import 'package:education_app/models/category.dart';
+// import 'package:education_app/routes/route_helper.dart';
+// import 'package:education_app/widgets/circle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../dbHelper/userprovider.dart';
+import '../models/category.dart';
+import '../routes/route_helper.dart';
+import '../widgets/circle_button.dart';
 import '../widgets/search_testfield.dart';
 import 'package:get/get.dart';
 
@@ -105,6 +109,37 @@ class Body extends StatelessWidget {
           },
           itemCount: categoryList.length,
         ),
+        GestureDetector(
+      onTap: () {
+        Get.toNamed(RouteHelper.goto(role, "GenerateRegCode"));
+      },
+      child: 
+      Padding(padding: const EdgeInsets.only( left: 40, right: 40), child: 
+      Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.green,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(.1),
+              blurRadius: 4.0,
+              spreadRadius: .05,
+            ), //BoxShadow
+          ],
+        ),
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Align(
+              child: Text("Registration Code"),
+            ),
+          ],
+        ),
+      ),
+      )
+    )
+    
           
 
 

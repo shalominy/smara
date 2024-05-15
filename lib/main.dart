@@ -1,13 +1,22 @@
-import 'package:education_app/dbHelper/mongodb.dart';
-import 'package:education_app/dbHelper/userprovider.dart';
-import 'package:education_app/routes/route_helper.dart';
-// import 'package:education_app/screens/addcoursework_screen.dart';
-// import 'package:education_app/screens/base_screen.dart';
-import 'package:education_app/screens/login_screen.dart';
-// import 'package:flutter/foundation.dart';
+// import 'package:education_app/dbHelper/mongodb.dart';
+// import 'package:education_app/dbHelper/userprovider.dart';
+// import 'package:education_app/routes/route_helper.dart';
+// // import 'package:education_app/screens/addcoursework_screen.dart';
+// // import 'package:education_app/screens/base_screen.dart';
+// import 'package:education_app/screens/login_screen.dart';
+// // import 'package:flutter/foundation.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:provider/provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import 'dbHelper/mongodb.dart';
+import 'dbHelper/userprovider.dart';
+import 'routes/route_helper.dart';
+import 'screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,15 +1,21 @@
 // import 'package:education_app/constants/color.dart';
 // import 'package:education_app/models/course.dart';
 // import 'package:education_app/dbHelper/mongodb.dart';
-import 'package:education_app/dbHelper/mongodb.dart';
-import 'package:education_app/models/student_model.dart';
-// import 'package:education_app/models/studentlist.dart';
-import 'package:education_app/screens/details_screen.dart';
-// import 'package:education_app/widgets/circle_button.dart';
-import 'package:education_app/widgets/custom_icon_button.dart';
-import 'package:education_app/widgets/search_testfield.dart';
+// import 'package:education_app/dbHelper/mongodb.dart';
+// import 'package:education_app/models/student_model.dart';
+// // import 'package:education_app/models/studentlist.dart';
+// import 'package:education_app/screens/details_screen.dart';
+// // import 'package:education_app/widgets/circle_button.dart';
+// import 'package:education_app/widgets/custom_icon_button.dart';
+// import 'package:education_app/widgets/search_testfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../dbHelper/mongodb.dart';
+import '../models/student_model.dart';
+import '../widgets/custom_icon_button.dart';
+import '../widgets/search_testfield.dart';
+import 'details_screen.dart';
 
 class StudentListScreen extends StatefulWidget {
   const StudentListScreen({Key? key}) : super(key: key);

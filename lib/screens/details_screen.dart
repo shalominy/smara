@@ -1,12 +1,17 @@
-import 'package:education_app/constants/color.dart';
-import 'package:education_app/constants/icons.dart';
-import 'package:education_app/models/lesson.dart';
-import 'package:education_app/widgets/custom_icon_button.dart';
-import 'package:education_app/widgets/custom_video_player.dart';
+// import 'package:education_app/constants/color.dart';
+// import 'package:education_app/constants/icons.dart';
+// import 'package:education_app/models/lesson.dart';
+// import 'package:education_app/widgets/custom_icon_button.dart';
+// import 'package:education_app/widgets/custom_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:video_player/video_player.dart';
 
+import '../constants/color.dart';
+import '../constants/icons.dart';
+import '../models/lesson.dart';
+import '../widgets/custom_icon_button.dart';
+import '../widgets/custom_video_player.dart';
 import '../widgets/lesson_card.dart';
 
 class DetailsScreen extends StatefulWidget {

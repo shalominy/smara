@@ -1,22 +1,27 @@
 // import 'package:education_app/constants/color.dart';
 //import 'package:education_app/constants/size.dart';
 // import 'package:education_app/dbHelper/mongodb.dart';
-import 'package:education_app/dbHelper/userprovider.dart';
-// import 'package:education_app/main.dart';
-import 'package:education_app/models/category.dart';
-// import 'package:education_app/models/users_modeltemporary.dart';
-import 'package:education_app/routes/route_helper.dart';
-//import 'package:education_app/screens/course_screen.dart';
-// import 'package:education_app/screens/studentlist_screen.dart';
-// import 'package:education_app/screens/teacherlist_screen.dart';
-//import 'package:education_app/screens/details_screen.dart';
-import 'package:education_app/widgets/circle_button.dart';
+// import 'package:education_app/dbHelper/userprovider.dart';
+// // import 'package:education_app/main.dart';
+// import 'package:education_app/models/category.dart';
+// // import 'package:education_app/models/users_modeltemporary.dart';
+// import 'package:education_app/routes/route_helper.dart';
+// //import 'package:education_app/screens/course_screen.dart';
+// // import 'package:education_app/screens/studentlist_screen.dart';
+// // import 'package:education_app/screens/teacherlist_screen.dart';
+// //import 'package:education_app/screens/details_screen.dart';
+// import 'package:education_app/widgets/circle_button.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import '../widgets/search_testfield.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import '../dbHelper/userprovider.dart';
+import '../models/category.dart';
+import '../routes/route_helper.dart';
+import '../widgets/circle_button.dart';
 
 class FeaturedScreen extends StatefulWidget {
   const FeaturedScreen({Key? key}) : super(key: key);

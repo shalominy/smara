@@ -1,6 +1,9 @@
-import 'package:education_app/constants/icons.dart';
-import 'package:education_app/models/lesson.dart';
+// import 'package:education_app/constants/icons.dart';
+// import 'package:education_app/models/lesson.dart';
 import 'package:flutter/material.dart';
+
+import '../constants/icons.dart';
+import '../models/lesson.dart';
 
 class LessonCard extends StatelessWidget {
   final Lesson lesson;
