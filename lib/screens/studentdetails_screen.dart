@@ -5,6 +5,8 @@
 // import 'package:education_app/widgets/custom_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:smart_hub/models/teacher_model.dart';
 //import 'package:video_player/video_player.dart';
 
 import '../constants/color.dart';
@@ -14,18 +16,18 @@ import '../widgets/custom_icon_button.dart';
 import '../widgets/custom_video_player.dart';
 import '../widgets/lesson_card.dart';
 
-class DetailsScreen extends StatefulWidget {
-  final String title;
-  const DetailsScreen({
+class StudentDetailsScreen extends StatefulWidget {
+  // final String title;
+  const StudentDetailsScreen({
     Key? key,
-    required this.title,
+    // required this.title,
   }) : super(key: key);
 
   @override
-  _DetailsScreenState createState() => _DetailsScreenState();
+  _StudentDetailsScreenState createState() => _StudentDetailsScreenState();
 }
 
-class _DetailsScreenState extends State<DetailsScreen> {
+class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
   int _selectedTag = 0;
 
   void changeTab(int index) {
@@ -36,6 +38,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final student = Get.arguments ;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
@@ -51,7 +54,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     children: [
                       Align(
                         child: Text(
-                          "Flutter",
+                          // "Teacher Details",
+                          "Student Details",
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
                       ),
@@ -70,13 +74,23 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const SizedBox(
                   height: 25,
                 ),
-                const CustomVideoPlayer(),
+                // const CustomVideoPlayer(),
+                SizedBox(
+                  height: 200,
+                  child: Center(
+                    child: Text(
+                    // "NICKNAME",
+                    student["studentid"],
+                     style: TextStyle(fontSize: 40)),
+                  ),
+                ),
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
-                  "Futter Novice to Ninja",
-                  style: TextStyle(
+                Text(
+                  // "Full Name",
+                  student["name"],
+                  style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 18,
                   ),
@@ -84,9 +98,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const SizedBox(
                   height: 3,
                 ),
-                const Text(
-                  "Created by DevWheels",
-                  style: TextStyle(
+                Text(
+                  // "Teacher Id",
+                  student["studentclass"],
+                  style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                   ),
@@ -94,54 +109,72 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const SizedBox(
                   height: 3,
                 ),
-                Row(
-                  children: [
-                    Image.asset(
-                      icFeaturedOutlined,
-                      height: 20,
-                    ),
-                    const Text(
-                      " 4.8",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    const Icon(
-                      Icons.timer,
-                      color: Colors.grey,
-                    ),
-                    const Text(
-                      " 72 Hours",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const Spacer(),
-                    const Text(
-                      " \$40",
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
+                Text(
+                  // "Teacher Id",
+                  student["gender"],
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
                 ),
+                // const Text(
+                //   "Created by DevWheels",
+                //   style: TextStyle(
+                //     fontWeight: FontWeight.w500,
+                //     fontSize: 16,
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 3,
+                // ),
+                // Row(
+                //   children: [
+                //     Image.asset(
+                //       icFeaturedOutlined,
+                //       height: 20,
+                //     ),
+                //     const Text(
+                //       " 4.8",
+                //       style: TextStyle(
+                //         color: Colors.grey,
+                //         fontWeight: FontWeight.w500,
+                //         fontSize: 16,
+                //       ),
+                //     ),
+                //     const SizedBox(
+                //       width: 15,
+                //     ),
+                //     const Icon(
+                //       Icons.timer,
+                //       color: Colors.grey,
+                //     ),
+                //     const Text(
+                //       " 72 Hours",
+                //       style: TextStyle(
+                //         color: Colors.grey,
+                //         fontWeight: FontWeight.w500,
+                //         fontSize: 16,
+                //       ),
+                //     ),
+                //     const Spacer(),
+                //     const Text(
+                //       " \$40",
+                //       style: TextStyle(
+                //         color: kPrimaryColor,
+                //         fontWeight: FontWeight.w700,
+                //         fontSize: 20,
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 const SizedBox(
                   height: 15,
                 ),
-                CustomTabView(
-                  index: _selectedTag,
-                  changeTab: changeTab,
-                ),
-                _selectedTag == 0 ? const PlayList() : const Description(),
+                // CustomTabView(
+                //   index: _selectedTag,
+                //   changeTab: changeTab,
+                // ),
+                // _selectedTag == 0 ? const PlayList() : const Description(),
               ],
             ),
           ),
@@ -153,7 +186,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           builder: (context) {
             return const SizedBox(
               height: 80,
-              child: EnrollBottomSheet(),
+              child: BacktoHomeButton(),
             );
           },
         ),
@@ -257,51 +290,84 @@ class _CustomTabViewState extends State<CustomTabView> {
   }
 }
 
-class EnrollBottomSheet extends StatefulWidget {
-  const EnrollBottomSheet({Key? key}) : super(key: key);
+class BacktoHomeButton extends StatefulWidget {
+  const BacktoHomeButton({Key? key}) : super(key: key);
 
   @override
-  _EnrollBottomSheetState createState() => _EnrollBottomSheetState();
+  _BacktoHomeButtonState createState() => _BacktoHomeButtonState();
 }
 
-class _EnrollBottomSheetState extends State<EnrollBottomSheet> {
+class _BacktoHomeButtonState extends State<BacktoHomeButton> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 30.0,
-      ),
-      child: Row(
-        children: [
-          CustomIconButton(
-            onTap: () {},
-            height: 45,
-            width: 45,
-            child: const Icon(
-              Icons.favorite,
-              color: Colors.pink,
-              size: 30,
-            ),
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          Expanded(
-            child: CustomIconButton(
-              onTap: () {},
-              color: kPrimaryColor,
-              height: 45,
-              width: 45,
-              child: const Text(
-                "Enroll Now",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
+    // return Padding(
+    //   padding: const EdgeInsets.symmetric(
+    //     horizontal: 30.0,
+    //   ),
+    //   child: Row(
+    //     children: [
+    //       CustomIconButton(
+    //         onTap: () {},
+    //         height: 45,
+    //         width: 45,
+    //         child: const Icon(
+    //           Icons.favorite,
+    //           color: Colors.pink,
+    //           size: 30,
+    //         ),
+    //       ),
+    //       const SizedBox(
+    //         width: 20,
+    //       ),
+    //       Expanded(
+    //         child: CustomIconButton(
+    //           onTap: () {},
+    //           color: kPrimaryColor,
+    //           height: 45,
+    //           width: 45,
+    //           child: const Text(
+    //             "Enroll Now",
+    //             style: TextStyle(
+    //               color: Colors.white,
+    //               fontSize: 18,
+    //             ),
+    //           ),
+    //         ),
+    //       )
+    //     ],
+    //   ),
+    // );
+    return SizedBox(
+      height: 80,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20.0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: CustomIconButton(
+                onTap: () {
+                  print("back!");
+
+                  Navigator.pop(context);
+                },
+                // color: kPrimaryColor,
+                // color: Colors.white,
+                height: 45,
+                width: 150,
+                child: const Text(
+                  "Back to Home ",
+                  style: TextStyle(
+                    // color: Colors.white,
+                    fontSize: 18,
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

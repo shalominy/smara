@@ -1,40 +1,38 @@
-
-
 import 'dart:convert';
 
 import 'package:mongo_dart/mongo_dart.dart';
 
-CourseworkModel courseworkModelFromJson(String str) => CourseworkModel.fromJson(json.decode(str));
+CourseworkModel courseworkModelFromJson(String str) =>
+    CourseworkModel.fromJson(json.decode(str));
 
-String courseworkModelToJson(CourseworkModel data) => json.encode(data.toJson());
+String courseworkModelToJson(CourseworkModel data) =>
+    json.encode(data.toJson());
 
 class CourseworkModel {
+  ObjectId id;
+  ObjectId teacherid;
+  String type;
+  String name;
+  DateTime assigndate;
+  DateTime duedate;
+  String assigneestype;
+  List<String> assigneeslist;
+  String content;
 
-    ObjectId id;
-    ObjectId teacherid;
-    String type;
-    String name;
-    DateTime assigndate;
-    DateTime duedate;
-    String assigneestype;
-    List<String> assigneeslist;
-    String content;
+  CourseworkModel({
+    required this.id,
+    required this.teacherid,
+    required this.type,
+    required this.name,
+    required this.assigndate,
+    required this.duedate,
+    required this.assigneestype,
+    required this.assigneeslist,
+    required this.content,
+  });
 
-    CourseworkModel({
-        required this.id,
-        required this.teacherid,
-        required this.type,
-        required this.name,
-        required this.assigndate,
-        required this.duedate,
-        required this.assigneestype,
-        required this.assigneeslist,
-        required this.content,
-    });
-
-    
-
-    factory CourseworkModel.fromJson(Map<String, dynamic> json) => CourseworkModel(
+  factory CourseworkModel.fromJson(Map<String, dynamic> json) =>
+      CourseworkModel(
         id: json["_id"],
         teacherid: json["teacherid"],
         type: json["type"],
@@ -45,13 +43,9 @@ class CourseworkModel {
         // assigneeslist: json["assigneeslist"],
         assigneeslist: json.values.map((value) => value.toString()).toList(),
         content: json["content"],
-        
+      );
 
-
-
-    );
-
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "_id": id,
         "teacherid": teacherid,
         "type": type,
@@ -61,6 +55,5 @@ class CourseworkModel {
         "assigneestype": assigneestype,
         "assigneeslist": assigneeslist,
         "content": content,
-     
-    };
+      };
 }

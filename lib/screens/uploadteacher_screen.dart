@@ -9,6 +9,7 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mongo_dart/mongo_dart.dart' as m;
+import 'package:smart_hub/models/teacher_model.dart';
 
 import '../constants/color.dart';
 import '../dbHelper/mongodb.dart';
@@ -16,20 +17,21 @@ import '../models/student_model.dart';
 import '../models/users_modeltemporary.dart';
 import '../widgets/custom_icon_button.dart';
 
-class UploadStudent extends StatefulWidget {
-  const UploadStudent({Key? key}) : super(key: key);
+class UploadTeacher extends StatefulWidget {
+  const UploadTeacher({Key? key}) : super(key: key);
 
   @override
-  _UploadStudent createState() => _UploadStudent();
+  _UploadTeacher createState() => _UploadTeacher();
 }
 
-class _UploadStudent extends State<UploadStudent> {
-  var studentname = TextEditingController();
-  var studentid = TextEditingController();
-  var studentclass = TextEditingController();
-  var studentgrade = TextEditingController();
-  var studenttranscript = TextEditingController();
-  String? studentgender;
+class _UploadTeacher extends State<UploadTeacher> {
+  var teachername = TextEditingController();
+  var teachernickname = TextEditingController();
+  var teacherid = TextEditingController();
+  // var studentclass = TextEditingController();
+  // var studentgrade = TextEditingController();
+  // var studenttranscript = TextEditingController();
+  // String? studentgender;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class _UploadStudent extends State<UploadStudent> {
                     children: [
                       Align(
                         child: Text(
-                          'Upload Student',
+                          'Upload Teacher',
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
                       ),
@@ -78,7 +80,7 @@ class _UploadStudent extends State<UploadStudent> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Add New Student",
+                        "Add New Teacher",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ],
@@ -87,7 +89,7 @@ class _UploadStudent extends State<UploadStudent> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: studentname,
+                    controller: teachername,
                     decoration: InputDecoration(
                       labelStyle: TextStyle(
                         fontSize: 20,
@@ -96,7 +98,7 @@ class _UploadStudent extends State<UploadStudent> {
                             FontWeight.w500, FontWeight.w400, 0.5),
                         overflow: TextOverflow.visible,
                       ),
-                      labelText: 'Enter Student Name',
+                      labelText: 'Enter Teacher Name',
                       border: const OutlineInputBorder(),
                       floatingLabelStyle: TextStyle(
                         fontSize: 20,
@@ -111,7 +113,7 @@ class _UploadStudent extends State<UploadStudent> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: studentid,
+                    controller: teachernickname,
                     decoration: InputDecoration(
                       labelStyle: TextStyle(
                         fontSize: 20,
@@ -120,7 +122,7 @@ class _UploadStudent extends State<UploadStudent> {
                             FontWeight.w500, FontWeight.w400, 0.5),
                         overflow: TextOverflow.visible,
                       ),
-                      labelText: 'Enter Student ID',
+                      labelText: 'Enter Teacher Nickname',
                       border: const OutlineInputBorder(),
                       floatingLabelStyle: TextStyle(
                         fontSize: 20,
@@ -135,7 +137,7 @@ class _UploadStudent extends State<UploadStudent> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: studentclass,
+                    controller: teacherid,
                     decoration: InputDecoration(
                       labelStyle: TextStyle(
                         fontSize: 20,
@@ -144,7 +146,7 @@ class _UploadStudent extends State<UploadStudent> {
                             FontWeight.w500, FontWeight.w400, 0.5),
                         overflow: TextOverflow.visible,
                       ),
-                      labelText: 'Enter Student Class',
+                      labelText: 'Enter Teacher Id',
                       border: const OutlineInputBorder(),
                       floatingLabelStyle: TextStyle(
                         fontSize: 20,
@@ -156,59 +158,59 @@ class _UploadStudent extends State<UploadStudent> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: DropdownButtonFormField(
-                    value: studentgender,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.lerp(
-                          FontWeight.w500, FontWeight.w400, 0.5),
-                      overflow: TextOverflow.visible,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Male / Female",
-                      hintStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      // labelText: "Student Transcript",
-                      // filled: true,
-                      // fillColor: Colors.white,
-                      border: const OutlineInputBorder(
-                          // borderRadius: BorderRadius.circular(40),
-                          ),
-                      // isDense: true,
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 1),
-                        // borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    isExpanded:
-                        true, // Ensure the dropdown opens below the button
-                    items: const [
-                      DropdownMenuItem(
-                        value: "M",
-                        child: Text("Male"),
-                      ),
-                      DropdownMenuItem(
-                        value: "F",
-                        child: Text("Female"),
-                      ),
-                      // Add more items as needed
-                    ],
-                    onChanged: (value) {
-                      studentgender = value.toString();
-                      // coursetype = value.toString();
-                      // Handle the selected value
-                    },
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(10),
+                //   child: DropdownButtonFormField(
+                //     value: studentgender,
+                //     style: TextStyle(
+                //       fontSize: 20,
+                //       color: Colors.black,
+                //       fontWeight: FontWeight.lerp(
+                //           FontWeight.w500, FontWeight.w400, 0.5),
+                //       overflow: TextOverflow.visible,
+                //     ),
+                //     decoration: InputDecoration(
+                //       hintText: "Male / Female",
+                //       hintStyle: TextStyle(
+                //         fontSize: 20,
+                //         color: Colors.grey,
+                //         fontWeight: FontWeight.lerp(
+                //             FontWeight.w500, FontWeight.w400, 0.5),
+                //         overflow: TextOverflow.visible,
+                //       ),
+                //       floatingLabelBehavior: FloatingLabelBehavior.never,
+                //       // labelText: "Student Transcript",
+                //       // filled: true,
+                //       // fillColor: Colors.white,
+                //       border: const OutlineInputBorder(
+                //           // borderRadius: BorderRadius.circular(40),
+                //           ),
+                //       // isDense: true,
+                //       enabledBorder: const OutlineInputBorder(
+                //         borderSide: BorderSide(color: Colors.black, width: 1),
+                //         // borderRadius: BorderRadius.circular(20),
+                //       ),
+                //     ),
+                //     isExpanded:
+                //         true, // Ensure the dropdown opens below the button
+                //     items: const [
+                //       DropdownMenuItem(
+                //         value: "M",
+                //         child: Text("Male"),
+                //       ),
+                //       DropdownMenuItem(
+                //         value: "F",
+                //         child: Text("Female"),
+                //       ),
+                //       // Add more items as needed
+                //     ],
+                //     onChanged: (value) {
+                //       studentgender = value.toString();
+                //       // coursetype = value.toString();
+                //       // Handle the selected value
+                //     },
+                //   ),
+                // ),
                 const SizedBox(
                   height: 100,
                 )
@@ -247,8 +249,8 @@ class _UploadStudent extends State<UploadStudent> {
                     ),
                     CustomIconButton(
                       onTap: () {
-                        _insertData(studentname.text, studentid.text,
-                            studentclass.text, studentgender!, context);
+                        _insertData(teachername.text, teachernickname.text,
+                            teacherid.text, context);
                       },
                       color: kPrimaryColor,
                       height: 45,
@@ -271,19 +273,19 @@ class _UploadStudent extends State<UploadStudent> {
     );
   }
 
-  Future<void> _insertData(String studentName, String studentId,
-      String studentClass, String studentGender, BuildContext context) async {
+  Future<void> _insertData(String teachername, String teachernickname,
+      String teacherid, BuildContext context) async {
     var _id = m.ObjectId();
-    final data = StudentModel(
+    final data = TeacherModel(
         id: _id,
-        name: studentName,
-        studentid: studentId,
-        studentclass: studentClass,
-        gender: studentGender);
-    await MongoDatabase.insertstudent(data);
+        name: teachername,
+        nickname: teachernickname,
+        teacherid: teacherid,
+        );
+    await MongoDatabase.insertteacher(data);
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("Inserted ID" + _id.oid),
+      content: Text("Inserted Teacher " + _id.oid),
     ));
     Navigator.pop(context);
   }

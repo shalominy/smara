@@ -15,22 +15,23 @@ import '../constants/icons.dart';
 import '../constants/size.dart';
 import 'featuerd_screen.dart';
 import 'logout_screen.dart';
+import 'studentcoursework_screen.dart';
 import 'teachercoursework_screen.dart';
 import 'uploaddata_screen.dart';
 
-class TeacherBaseScreen extends StatefulWidget {
-  const TeacherBaseScreen({Key? key}) : super(key: key);
+class StudentBaseScreen extends StatefulWidget {
+  const StudentBaseScreen({Key? key}) : super(key: key);
 
   @override
-  _TeacherBaseScreen createState() => _TeacherBaseScreen();
+  _StudentBaseScreen createState() => _StudentBaseScreen();
 }
 
-class _TeacherBaseScreen extends State<TeacherBaseScreen> {
+class _StudentBaseScreen extends State<StudentBaseScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
     FeaturedScreen(),
-    TeacherCoursework(),
+    StudentCoursework(),
     UploadData(),
     Logout(),
   ];

@@ -6,7 +6,9 @@ class MultiSelect extends StatefulWidget {
   // final Future<List<String>> items;
   // final List<List<String>> selecteditems;
   final List<String> selecteditems;
-  const MultiSelect({Key? key, required this.items, required this.selecteditems}) : super(key: key);
+  const MultiSelect(
+      {Key? key, required this.items, required this.selecteditems})
+      : super(key: key);
 
   @override
   _MultiSelectState createState() => _MultiSelectState();
@@ -19,28 +21,28 @@ class _MultiSelectState extends State<MultiSelect> {
 
   // final List<List<String>> _selectedItems = [];
   final List<String> _selectedItems = [];
-  
-@override
+
+  @override
   void initState() {
     super.initState();
     // _selectedItems = [];
     print(widget.selecteditems.toString());
     // final List<List<String>> _selectedItems = widget.selecteditems;
-    
-  // _itemChange(flattenList(widget.selecteditems), widget.selecteditems.contains(widget.items));
+
+    // _itemChange(flattenList(widget.selecteditems), widget.selecteditems.contains(widget.items));
 
     print(_selectedItems);
-
   }
+
 // This function is triggered when a checkbox is checked or unchecked
   void _itemChange(String itemValue, bool isSelected) {
     setState(() {
       if (isSelected) {
-        _selectedItems.add(itemValue);widget.selecteditems.add(itemValue);
-        
+        _selectedItems.add(itemValue);
+        widget.selecteditems.add(itemValue);
       } else {
-        _selectedItems.remove(itemValue);widget.selecteditems.remove(itemValue);
-
+        _selectedItems.remove(itemValue);
+        widget.selecteditems.remove(itemValue);
       }
     });
   }
@@ -68,7 +70,6 @@ class _MultiSelectState extends State<MultiSelect> {
                     title: Text(item),
                     controlAffinity: ListTileControlAffinity.leading,
                     onChanged: (isChecked) => _itemChange(item, isChecked!),
-                    
                   ))
               .toList(),
         ),
@@ -89,4 +90,4 @@ class _MultiSelectState extends State<MultiSelect> {
 
 List<String> flattenList(List<List<String>> nestedList) {
   return nestedList.expand((innerList) => innerList).toList();
-  }
+}

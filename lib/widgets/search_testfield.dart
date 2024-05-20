@@ -5,7 +5,7 @@ class SearchTextFieldPlacehold extends StatelessWidget {
   final String placeholder;
   const SearchTextFieldPlacehold({
     Key? key,
-        required this.placeholder,
+    required this.placeholder,
   }) : super(key: key);
 
   @override

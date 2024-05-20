@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
@@ -268,8 +267,7 @@ class _AddCoursework extends State<AddCoursework> {
               //   padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10),
               //   child:
               SingleChildScrollView(
-            child: 
-            Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IntrinsicHeight(
@@ -915,8 +913,15 @@ class _AddCoursework extends State<AddCoursework> {
                                                       }).toList();
 
                                                       assignees = studentsList;
+                                                      print("items" +
+                                                          items.toString());
+
                                                       print("assignees" +
                                                           assignees.toString());
+
+                                                      print("encode" +
+                                                          jsonEncode(assignees
+                                                              .toString()));
                                                       // print("Total Data" + totalData.toString());
                                                       // print("Total Data" + snapshot.data.toString());
                                                       return ListView.builder(
@@ -925,10 +930,10 @@ class _AddCoursework extends State<AddCoursework> {
                                                           itemBuilder:
                                                               (context, index) {
                                                             return StudentContainer(
-                                                                students: StudentModel
-                                                                    .fromJson(snapshot
-                                                                            .data[
-                                                                        index]));
+                                                                // students: StudentModel.fromJson(snapshot.data[index]));
+                                                                students:
+                                                                    snapshot.data[
+                                                                        index]);
                                                           });
                                                     } else {
                                                       return const Center(
@@ -1027,10 +1032,11 @@ class _AddCoursework extends State<AddCoursework> {
                                                           itemBuilder:
                                                               (context, index) {
                                                             return StudentContainer(
-                                                                students: StudentModel
-                                                                    .fromJson(snapshot
-                                                                            .data[
-                                                                        index]));
+                                                                // students: StudentModel
+                                                                //     .fromJson(snapshot
+                                                                //             .data[
+                                                                //         index]));
+                                                                students: snapshot.data[index]);
                                                           });
                                                     } else {
                                                       return const Center(
@@ -1493,8 +1499,6 @@ class _AddCoursework extends State<AddCoursework> {
                             courseworkcontent.text);
                         // _insertCoursework(coursetype, courseworkname.text, assinggn, sdsd, sssss, assignees, courseworkcontent.text);
                         print("submit pressed");
-
-                        
                       },
                       color: kPrimaryColor,
                       height: 45,
@@ -1568,21 +1572,22 @@ class _AddCoursework extends State<AddCoursework> {
       String studentclass = userData[3];
       String gender = userData[4];
 
-
       return StudentModel(
-          id: id,
-          name: name,
-          studentid: studentid,
-          studentclass: studentclass,
-          gender: gender,
-          );
+        id: id,
+        name: name,
+        studentid: studentid,
+        studentclass: studentclass,
+        gender: gender,
+      );
     }).toList();
 
     final List<AssignStudentModel> assignstudent = studentslist.map((userData) {
       StudentModel student = userData;
       String submission = 'ASSIGNED';
+      String feedback = " ";
 
-      return AssignStudentModel(student: student, submission: submission);
+      return AssignStudentModel(
+          student: student, submission: submission, feedback: feedback);
     }).toList();
 
     // print(assignstudentModelToJson(submissionstatus));
@@ -1610,21 +1615,22 @@ class _AddCoursework extends State<AddCoursework> {
     ));
     // _clearAll();
 
-
     // Navigator.pop(context);
 
-
-    
-     Get.toNamed(RouteHelper.goto('Teacher','Coursework' ));
+    Get.toNamed(RouteHelper.goto('Teacher', 'Coursework'));
   }
 }
 
 class StudentContainer extends StatelessWidget {
-  final StudentModel students;
+  final students;
   const StudentContainer({Key? key, required this.students}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // StudentModel.fromJson(students);
+
+    // StudentModel(id: students[0], name: students[1], studentid: students[2], studentclass: students[3], gender: students[4]);
+
     return GestureDetector(
       onTap: () => {},
       //Navigator.push(
@@ -1664,19 +1670,22 @@ class StudentContainer extends StatelessWidget {
                     children: [
                       TableCell(
                         child: Text(
-                          students.name,
+                          // students.name,
+                          students["name"],
                           textScaler: const TextScaler.linear(0.8),
                         ),
                       ),
                       TableCell(
                         child: Text(
-                          students.studentid,
+                          // students.studentid,
+                          students["studentid"],
                           textScaler: const TextScaler.linear(0.8),
                         ),
                       ),
                       TableCell(
                         child: Text(
-                          students.studentclass,
+                          // "students.studentclass",
+                          students["studentclass"],
                           textScaler: const TextScaler.linear(0.8),
                         ),
                       ),

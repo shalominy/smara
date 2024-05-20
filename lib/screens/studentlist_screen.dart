@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 
 import '../dbHelper/mongodb.dart';
 import '../models/student_model.dart';
+import '../routes/route_helper.dart';
 import '../widgets/custom_icon_button.dart';
 import '../widgets/search_testfield.dart';
 import 'details_screen.dart';
@@ -143,13 +144,15 @@ class _StudentListScreenState extends State<StudentListScreen> {
                       builder: (context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
                           var totalData = snapshot.data.length;
+                          print(snapshot.data);
                           print("Total Data" + totalData.toString());
                           return ListView.builder(
                               itemCount: snapshot.data.length,
                               itemBuilder: (context, index) {
                                 return StudentContainer(
-                                    students: StudentModel.fromJson(
-                                        snapshot.data[index]));
+                                    // students: StudentModel.fromJson(
+                                    //     snapshot.data[index]));
+                                    students: snapshot.data[index]);
                               });
                         } else {
                           return Center(
@@ -198,18 +201,23 @@ class _StudentListScreenState extends State<StudentListScreen> {
 }
 
 class StudentContainer extends StatelessWidget {
-  final StudentModel students;
+  // final StudentModel students;
+  final students;
   const StudentContainer({Key? key, required this.students}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const DetailsScreen(
-                    title: "course.name",
-                  ))),
+      onTap: () => 
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => const DetailsScreen(
+      //               title: "course.name",
+      //             ))),
+
+      RouteHelper.navigateTo(RouteHelper.liststudentdetails,
+                    arguments: students),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -232,12 +240,12 @@ class StudentContainer extends StatelessWidget {
 
             Expanded(
               child: Table(
-              columnWidths: const {
-                0: FlexColumnWidth(50),
-                1: FlexColumnWidth(20),
-                2: FlexColumnWidth(15),
-                3: FlexColumnWidth(15),
-              }, 
+                columnWidths: const {
+                  0: FlexColumnWidth(50),
+                  1: FlexColumnWidth(20),
+                  2: FlexColumnWidth(15),
+                  3: FlexColumnWidth(15),
+                },
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TableRow(
@@ -247,39 +255,35 @@ class StudentContainer extends StatelessWidget {
                     children: [
                       TableCell(
                         child: Text(
-                          students.name,
+                          // students.name,
+                          students["name"],
                           textScaler: const TextScaler.linear(0.8),
                         ),
                       ),
                       TableCell(
-                        child: 
-                        Center( child: 
-                        Text(
-                          students.studentid,
+                          child: Center(
+                        child: Text(
+                          // students.studentid,
+                          students["studentid"],
                           textScaler: const TextScaler.linear(0.8),
                         ),
-                        )
-                      ),
+                      )),
                       TableCell(
-                        child: 
-                         Center(child: 
-                        Text(
-                          students.studentclass,
+                          child: Center(
+                        child: Text(
+                          // students.studentclass,
+                          students["studentclass"],
                           textScaler: const TextScaler.linear(0.8),
                         ),
-                        )
-                      ),
+                      )),
                       TableCell(
-                        child: 
-                         Center(child: 
-                        Text(
-                          students.gender,
+                          child: Center(
+                        child: Text(
+                          // students.gender,
+                          students["gender"],
                           textScaler: const TextScaler.linear(0.8),
                         ),
-                        )
-                      ),
-                      
-                      
+                      )),
                     ],
                   ),
                 ],
@@ -305,12 +309,12 @@ class TableHeader extends StatelessWidget {
           // padding: const EdgeInsets.all(15.0),
           // child:
           Table(
-          columnWidths: const {
-                0: FlexColumnWidth(50),
-                1: FlexColumnWidth(20),
-                2: FlexColumnWidth(15),
-                3: FlexColumnWidth(15),
-              }, 
+        columnWidths: const {
+          0: FlexColumnWidth(50),
+          1: FlexColumnWidth(20),
+          2: FlexColumnWidth(15),
+          3: FlexColumnWidth(15),
+        },
         border: TableBorder.all(color: Colors.white30),
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         children: const [
@@ -333,44 +337,38 @@ class TableHeader extends StatelessWidget {
               TableCell(
                 verticalAlignment: TableCellVerticalAlignment.middle,
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: 
-                  Center(child: 
-                  Text(
-                    'Id',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  )
-                ),
+                    padding: EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                        'Id',
+                        textScaler: TextScaler.linear(0.8),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    )),
               ),
               TableCell(
                 verticalAlignment: TableCellVerticalAlignment.middle,
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: 
-                  Center(child: 
-                  Text(
-                    'Class',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  )
-                ),
+                    padding: EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                        'Class',
+                        textScaler: TextScaler.linear(0.8),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    )),
               ),
               TableCell(
                 verticalAlignment: TableCellVerticalAlignment.middle,
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: 
-                  Center(child: 
-                  Text(
-                    'M/F',
-                    textScaler: TextScaler.linear(0.8),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  )
-                ),
+                    padding: EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                        'M/F',
+                        textScaler: TextScaler.linear(0.8),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    )),
               ),
               // TableCell(
               //   verticalAlignment: TableCellVerticalAlignment.middle,

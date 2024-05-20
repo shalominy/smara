@@ -1,4 +1,3 @@
-
 // import 'package:education_app/dbHelper/userprovider.dart';
 // import 'package:education_app/models/category.dart';
 // import 'package:education_app/routes/route_helper.dart';
@@ -40,17 +39,15 @@ class _UploadData extends State<UploadData> {
 // ignore: must_be_immutable
 class Body extends StatelessWidget {
   Body({Key? key}) : super(key: key);
-  var username = TextEditingController();
-  var useremail = TextEditingController();
-  var userrole = TextEditingController();
+  // var username = TextEditingController();
+  // var useremail = TextEditingController();
+  // var userrole = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-  String role = '${context.watch<UserProvider>().role}';
+    String role = '${context.watch<UserProvider>().role}';
     return Expanded(
-      child: 
-      
-      ListView(
+      child: ListView(
         padding: const EdgeInsets.all(8),
         children: <Widget>[
           Padding(
@@ -90,65 +87,59 @@ class Body extends StatelessWidget {
           // ),
 
           ListView.builder(
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 8,
-          ),
-          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //   crossAxisCount: 1,
-          //   childAspectRatio: 0.8,
-          //   crossAxisSpacing: 20,
-          //   mainAxisSpacing: 24,
-          //   mainAxisExtent: 50,
-          // ),
-          itemBuilder: (context, index) {
-            return  CategoryCard( userrole: role,
-              category: categoryList[index],
-            );
-          },
-          itemCount: categoryList.length,
-        ),
-        GestureDetector(
-      onTap: () {
-        Get.toNamed(RouteHelper.goto(role, "GenerateRegCode"));
-      },
-      child: 
-      Padding(padding: const EdgeInsets.only( left: 40, right: 40), child: 
-      Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(.1),
-              blurRadius: 4.0,
-              spreadRadius: .05,
-            ), //BoxShadow
-          ],
-        ),
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              child: Text("Registration Code"),
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 8,
             ),
-          ],
-        ),
-      ),
-      )
-    )
-    
-          
-
-
+            // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            //   crossAxisCount: 1,
+            //   childAspectRatio: 0.8,
+            //   crossAxisSpacing: 20,
+            //   mainAxisSpacing: 24,
+            //   mainAxisExtent: 50,
+            // ),
+            itemBuilder: (context, index) {
+              return CategoryCard(
+                userrole: role,
+                category: categoryList[index],
+              );
+            },
+            itemCount: categoryList.length,
+          ),
+          GestureDetector(
+              onTap: () {
+                Get.toNamed(RouteHelper.goto(role, "GenerateRegCode"));
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 40, right: 40),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(.1),
+                        blurRadius: 4.0,
+                        spreadRadius: .05,
+                      ), //BoxShadow
+                    ],
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        child: Text("Registration Code"),
+                      ),
+                    ],
+                  ),
+                ),
+              ))
         ],
       ),
     );
   }
-
-  
 }
 
 class CategoryCard extends StatelessWidget {
@@ -156,7 +147,8 @@ class CategoryCard extends StatelessWidget {
   final String userrole;
   const CategoryCard({
     Key? key,
-    required this.category, required this.userrole,
+    required this.category,
+    required this.userrole,
   }) : super(key: key);
 
   // int _selectedIndex = 0;
@@ -169,56 +161,55 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     // builder: (context) => const CourseScreen(),
-      //     //builder: (context) => const StudentListScreen(category.kategori),
-      //   ),
-      // ),
-      onTap: () {
-        Get.toNamed(RouteHelper.goto(userrole, category.upload));
-      },
-      child: 
-      Padding(padding: const EdgeInsets.only(top: 10, left: 20, right: 20), child: 
-      Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(.1),
-              blurRadius: 4.0,
-              spreadRadius: .05,
-            ), //BoxShadow
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Align(
-            //   alignment: Alignment.topRight,
-            //   child: Image.asset(
-            //     category.thumbnail,
-            //     height: kCategoryCardImageSize,
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            Align(
-              child: Text(category.name),
+        // onTap: () => Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     // builder: (context) => const CourseScreen(),
+        //     //builder: (context) => const StudentListScreen(category.kategori),
+        //   ),
+        // ),
+        onTap: () {
+          Get.toNamed(RouteHelper.goto(userrole, category.upload));
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(.1),
+                  blurRadius: 4.0,
+                  spreadRadius: .05,
+                ), //BoxShadow
+              ],
             ),
-            // Text(
-            //   "${category.noOfCourses.toString()} courses",
-            //   style: Theme.of(context).textTheme.bodySmall,
-            // ),
-          ],
-        ),
-      ),
-      )
-    );
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Align(
+                //   alignment: Alignment.topRight,
+                //   child: Image.asset(
+                //     category.thumbnail,
+                //     height: kCategoryCardImageSize,
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                Align(
+                  child: Text(category.name),
+                ),
+                // Text(
+                //   "${category.noOfCourses.toString()} courses",
+                //   style: Theme.of(context).textTheme.bodySmall,
+                // ),
+              ],
+            ),
+          ),
+        ));
   }
 }
 

@@ -28,8 +28,9 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreen extends State<RegisterScreen> {
-
-var username = TextEditingController();
+  var username = TextEditingController();
+  var nickname = TextEditingController();
+  var matric = TextEditingController();
   var password = TextEditingController();
   var useremail = TextEditingController();
   var userrole = TextEditingController();
@@ -47,7 +48,7 @@ var username = TextEditingController();
               // Padding(
               //   padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10),
               //   child:
-              
+SingleChildScrollView(child: 
               Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,131 +60,172 @@ var username = TextEditingController();
                   children: [
                     Align(
                       child: Text(
-                        'Login as User ',
+                        'Register',
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
                     ),
                   ],
                 ),
-              )
-                  ),
-                  SizedBox(height: 200,),
+              )),
+              SizedBox(
+                height: 80,
+              ),
 
-                  Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Add New User",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ],
+              Padding(
+                padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Register as User",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  controller: username,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter User Name',
+                    hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    // labelText: "Student Transcript",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(40),
+                        ),
+                    isDense: true,
                   ),
                 ),
-
-
-                Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: username,
-              decoration: const InputDecoration(
-                hintText: 'Enter User Name',
-                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                // labelText: "Student Transcript",
-                labelStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    // borderRadius: BorderRadius.circular(40),
-                    ),
-                isDense: true,
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: password,
-              decoration: const InputDecoration(
-                hintText: 'Enter User Password',
-                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                // labelText: "Student Transcript",
-                labelStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    // borderRadius: BorderRadius.circular(40),
-                    ),
-                isDense: true,
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  controller: nickname,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter Nickname',
+                    hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    // labelText: "Student Transcript",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(40),
+                        ),
+                    isDense: true,
+                  ),
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: useremail,
-              decoration: const InputDecoration(
-                hintText: 'Enter User Email',
-                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                // labelText: "Student Transcript",
-                labelStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    // borderRadius: BorderRadius.circular(40),
-                    ),
-                isDense: true,
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  controller: matric,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter User Matric',
+                    hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    // labelText: "Student Transcript",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(40),
+                        ),
+                    isDense: true,
+                  ),
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: userrole,
-              decoration: const InputDecoration(
-                hintText: 'Admin, Teacher, Student',
-                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                // labelText: "Student Transcript",
-                labelStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    // borderRadius: BorderRadius.circular(40),
-                    ),
-                isDense: true,
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  controller: password,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter User Password',
+                    hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    // labelText: "Student Transcript",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(40),
+                        ),
+                    isDense: true,
+                  ),
+                ),
               ),
-            ),
-          ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  controller: useremail,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter User Email',
+                    hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    // labelText: "Student Transcript",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(40),
+                        ),
+                    isDense: true,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  controller: userrole,
+                  decoration: const InputDecoration(
+                    hintText: 'Admin, Teacher, Student',
+                    hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    // labelText: "Student Transcript",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(40),
+                        ),
+                    isDense: true,
+                  ),
+                ),
+              ),
 
-                SizedBox(height: 25,),
-
-
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: secretcode,
-              decoration: const InputDecoration(
-                hintText: 'Secret Code',
-                hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                // labelText: "Student Transcript",
-                labelStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    // borderRadius: BorderRadius.circular(40),
-                    ),
-                isDense: true,
+              SizedBox(
+                height: 25,
               ),
-            ),
-          ),
-                SizedBox(height: 25,),
-                Padding(
+
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  controller: secretcode,
+                  decoration: const InputDecoration(
+                    hintText: 'Secret Code',
+                    hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    // labelText: "Student Transcript",
+                    labelStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.circular(40),
+                        ),
+                    isDense: true,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
                 ),
@@ -195,7 +237,7 @@ var username = TextEditingController();
                         fixedSize: const Size(150, 45),
                       ),
                       onPressed: () {
-                        // Navigator.pop(context);
+                        Navigator.pop(context);
                       },
                       child: Text(
                         "Cancel",
@@ -207,10 +249,17 @@ var username = TextEditingController();
                     ),
                     CustomIconButton(
                       onTap: () {
-
                         // MongoDatabase.login(username.text, password.text, context);
 
-                        _userregister(username.text, password.text, useremail.text, userrole.text, secretcode.text, context);    
+                        _userregister(
+                            username.text,
+                            nickname.text,
+                            matric.text,
+                            password.text,
+                            useremail.text,
+                            userrole.text,
+                            secretcode.text,
+                            context);
                       },
                       color: kPrimaryColor,
                       height: 45,
@@ -270,15 +319,13 @@ var username = TextEditingController();
               //                       users: UserModelTemporary.fromJson(
               //                           snapshot.data[index]));
               //                 });
-                              
+
               //           } else {
               //             return Center(
               //               child: Text("No Data Available"),
               //             );
               //           }
               //         })),
-                      
-                
 
               // Expanded(
               //   child: ListView.separated(
@@ -301,6 +348,7 @@ var username = TextEditingController();
               // ),
             ],
           ),
+          )
         ),
       ),
       // ),
@@ -309,6 +357,8 @@ var username = TextEditingController();
 
   Future<void> _userregister(
     String username,
+    String nickname,
+    String matric,
     String password,
     String useremail,
     String userrole,
@@ -319,13 +369,20 @@ var username = TextEditingController();
     var bytes = utf8.encode(password); // data being hashed
     var digest = sha1.convert(bytes);
     final data = UserModelTemporary(
-        id: _id, name: username, emel: useremail, role: userrole, password: digest.toString());
+        id: _id,
+        name: username,
+        nickname: nickname,
+        matric: matric,
+        emel: useremail,
+        role: userrole,
+        password: digest.toString());
     await MongoDatabase.userregister(secretcode, data);
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" User Registered " + _id.oid),));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(" User Registered " + _id.oid),
+    ));
     Navigator.pop(context);
-    Get.toNamed(RouteHelper.loginscreen());  
-
+    Get.toNamed(RouteHelper.loginscreen());
   }
 
 //   Widget StudentCard(StudentModel data) {
@@ -352,54 +409,50 @@ class UsersContainer extends StatelessWidget {
       //     MaterialPageRoute(
       //         builder: (context) => const BaseScreen())),
       onTap: () {
-
-      // MongoDatabase.getstudents(context);
+        // MongoDatabase.getstudents(context);
         context.read<UserProvider>().setuser(users);
 
         Get.toNamed(RouteHelper.gotocontext(users.role));
-
       },
       child: Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-          child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(.1),
-              blurRadius: 4.0,
-              spreadRadius: .05,
-            ), //BoxShadow
-          ],
+        padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(.1),
+                blurRadius: 4.0,
+                spreadRadius: .05,
+              ), //BoxShadow
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: Image.asset(
+              //     category.thumbnail,
+              //     height: kCategoryCardImageSize,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              Align(
+                child: Text(users.name + " (" + users.role + ")"),
+              ),
+              // Text(
+              //   "${category.noOfCourses.toString()} courses",
+              //   style: Theme.of(context).textTheme.bodySmall,
+              // ),
+            ],
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Align(
-            //   alignment: Alignment.topRight,
-            //   child: Image.asset(
-            //     category.thumbnail,
-            //     height: kCategoryCardImageSize,
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            Align(
-              child: Text(users.name + " (" + users.role + ")"),
-            ),
-            // Text(
-            //   "${category.noOfCourses.toString()} courses",
-            //   style: Theme.of(context).textTheme.bodySmall,
-            // ),
-          ],
-        ),
-      ),
       ),
     );
   }
 }
-
-

@@ -3,50 +3,25 @@ import 'package:collection/collection.dart';
 
 import 'package:flutter/material.dart';
 
-class SelectMongodbData extends StatefulWidget {
+class AlertForm extends StatefulWidget {
   final List<List<String>> items;
   // final List<String> items;
   // final Future<List<String>> items;
   final List<List<String>> selecteditems;
   // final List<String> selecteditems;
-  const SelectMongodbData(
-      {Key? key, required this.items, required this.selecteditems})
+  const AlertForm({Key? key, required this.items, required this.selecteditems})
       : super(key: key);
 
   @override
   _SelectMongodbData createState() => _SelectMongodbData();
 }
 
-class _SelectMongodbData extends State<SelectMongodbData> {
-  // this variable holds the selected items
-  // final List<List<String>> _selectedItems = [];// repair herere
-  // final List<List<String>> _selectedItems = widget.selecteditems;// repair herere
-
-  //  List<List<String>> _selectedItems = [];
-  // final List<String> _selectedItems = [];
-
-  // List<String> secondItems = [];
-  // List<String> itemItems = [];
+class _SelectMongodbData extends State<AlertForm> {
+  final TextEditingController _textFieldController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    // _selectedItems = [];
-    // print(widget.selecteditems.toString());
-    // final List<List<String>> _selectedItems = widget.selecteditems;
-
-    // _itemChange(flattenList(widget.selecteditems), widget.selecteditems.contains(widget.items));
-
-    // print(_selectedItems);
-//  for (var sublist in widget.selecteditems) {
-//   secondItems.add(sublist[1]); // Accessing the second item of each sublist
-// }
-
-// for (var sublist in widget.items) {
-//   itemItems.add(sublist[1]); // Accessing the second item of each sublist
-// }
-
-// print(secondItems);
   }
 
 // This function is triggered when a checkbox is checked or unchecked
@@ -77,7 +52,7 @@ class _SelectMongodbData extends State<SelectMongodbData> {
 // this function is called when the Submit button is tapped
   void _submit() {
     // Navigator.pop(context, _selectedItems);
-    Navigator.pop(context, widget.selecteditems);
+    // Navigator.pop(context, widget.selecteditems);
   }
 
   @override
@@ -87,22 +62,42 @@ class _SelectMongodbData extends State<SelectMongodbData> {
 
     // print(sublist);
     return AlertDialog(
-      title: const Text('Select Topics'),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: widget.items
-              .map((item) => CheckboxListTile(
-                    // value: widget.selecteditems.contains(item),
-                    value: widget.selecteditems
-                        .any((selectedd) => selectedd[0] == item[0]),
-                    // value: _selectedItems.contains(item),
-                    // value: secondItems.contains(item[1]),
-                    title: Text(item[1]),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    onChanged: (isChecked) => _itemChange(item, isChecked!),
-                  ))
-              .toList(),
-        ),
+      title: Text('Enter some text'),
+      content: Column(
+        children: [
+          TextField(
+            // expands: true,
+            textAlignVertical: TextAlignVertical.top,
+            maxLines: null,
+            // controller: courseworkcontent,
+            decoration: InputDecoration(
+              labelStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.grey,
+                fontWeight:
+                    FontWeight.lerp(FontWeight.w500, FontWeight.w400, 0.5),
+                overflow: TextOverflow.visible,
+              ),
+              labelText: 'Content',
+              border: const OutlineInputBorder(),
+              floatingLabelStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight:
+                    FontWeight.lerp(FontWeight.w500, FontWeight.w400, 0.5),
+                overflow: TextOverflow.visible,
+              ),
+            ),
+          ),
+          //  TextField(
+          //   controller: _textFieldController,
+          //   decoration: InputDecoration(hintText: "Type something here"),
+          // ),
+          TextField(
+            controller: _textFieldController,
+            decoration: InputDecoration(hintText: "Type something here"),
+          ),
+        ],
       ),
       actions: [
         TextButton(

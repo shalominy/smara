@@ -31,16 +31,14 @@ class FeaturedScreen extends StatefulWidget {
 }
 
 class _FeaturedScreenState extends State<FeaturedScreen> {
-  
-
   @override
   Widget build(BuildContext context) {
-  String userrole = '${context.watch<UserProvider>().role}';
+    String userrole = '${context.watch<UserProvider>().role}';
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: Column(
-          children:  [
+          children: [
             AppBar(),
             // Body(userrole: userrole),
           ],
@@ -94,7 +92,8 @@ class Body extends StatelessWidget {
           //   mainAxisExtent: 50,
           // ),
           itemBuilder: (context, index) {
-            return  CategoryCard( role: userrole,
+            return CategoryCard(
+              role: userrole,
               category: categoryList[index],
             );
           },
@@ -110,7 +109,7 @@ class CategoryCard extends StatelessWidget {
   final DataList category;
   const CategoryCard({
     Key? key,
-    required this.category, 
+    required this.category,
     required this.role,
   }) : super(key: key);
 
@@ -124,70 +123,67 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     // builder: (context) => const CourseScreen(),
-      //     //builder: (context) => const StudentListScreen(category.kategori),
-      //   ),
-      // ),
-      onTap: () {
-        Get.toNamed(RouteHelper.getlist(role, category.list));
-      },
-      child: 
-      Padding(padding: const EdgeInsets.only(top: 10, left: 20, right: 20), child: 
-      Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(.1),
-              blurRadius: 4.0,
-              spreadRadius: .05,
-            ), //BoxShadow
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Align(
-            //   alignment: Alignment.topRight,
-            //   child: Image.asset(
-            //     category.thumbnail,
-            //     height: kCategoryCardImageSize,
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            Align(
-              child: Text(category.name),
+        // onTap: () => Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     // builder: (context) => const CourseScreen(),
+        //     //builder: (context) => const StudentListScreen(category.kategori),
+        //   ),
+        // ),
+        onTap: () {
+          Get.toNamed(RouteHelper.getlist(role, category.list));
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(.1),
+                  blurRadius: 4.0,
+                  spreadRadius: .05,
+                ), //BoxShadow
+              ],
             ),
-            // Text(
-            //   "${category.noOfCourses.toString()} courses",
-            //   style: Theme.of(context).textTheme.bodySmall,
-            // ),
-          ],
-        ),
-      ),
-      )
-    );
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Align(
+                //   alignment: Alignment.topRight,
+                //   child: Image.asset(
+                //     category.thumbnail,
+                //     height: kCategoryCardImageSize,
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                Align(
+                  child: Text(category.name),
+                ),
+                // Text(
+                //   "${category.noOfCourses.toString()} courses",
+                //   style: Theme.of(context).textTheme.bodySmall,
+                // ),
+              ],
+            ),
+          ),
+        ));
   }
 }
 
 class AppBar extends StatelessWidget {
   // final String name;
-   AppBar({
+  AppBar({
     Key? key,
     // required this.name,
   }) : super(key: key);
 
   // final Future<UserModelTemporary> bb = MongoDatabase.getuserdetails(MongoDatabase.getuserid());
   // final Future<String> bb = MongoDatabase.getuserdetailstesting(MongoDatabase.getuserid());
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +214,7 @@ class AppBar extends StatelessWidget {
             children: [
               Text(
                 "Hello,\nGood Morning",
-              textScaler: const TextScaler.linear(0.8),
+                textScaler: const TextScaler.linear(0.8),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               CircleButton(
@@ -230,33 +226,31 @@ class AppBar extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-      //     const Center(
-      //   child: Column(
-      //     mainAxisSize: MainAxisSize.min,
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: <Widget>[
-      //       Text('You have pushed the button this many times:'),
+          //     const Center(
+          //   child: Column(
+          //     mainAxisSize: MainAxisSize.min,
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: <Widget>[
+          //       Text('You have pushed the button this many times:'),
 
-      //       /// Extracted as a separate widget for performance optimization.
-      //       /// As a separate widget, it will rebuild independently from [MyHomePage].
-      //       ///
-      //       /// This is totally optional (and rarely needed).
-      //       /// Similarly, we could also use [Consumer] or [Selector].
-      //       Name(),
-      //     ],
-      //   ),
-      // ),
-           Center(
-            child: 
-            Text(
+          //       /// Extracted as a separate widget for performance optimization.
+          //       /// As a separate widget, it will rebuild independently from [MyHomePage].
+          //       ///
+          //       /// This is totally optional (and rarely needed).
+          //       /// Similarly, we could also use [Consumer] or [Selector].
+          //       Name(),
+          //     ],
+          //   ),
+          // ),
+          Center(
+            child: Text(
               // "Aly Zanaty",
               // "{$context.watch<UserProvider>().name}",
-              '${context.watch<UserProvider>().name}',
-               key: const Key('counterState'),
+              '${context.watch<UserProvider>().nickname}',
+              key: const Key('counterState'),
               textScaler: const TextScaler.linear(3.5),
               style: Theme.of(context).textTheme.titleLarge,
             ),
-             
           ),
 
           // const SearchTextField()
@@ -264,10 +258,9 @@ class AppBar extends StatelessWidget {
       ),
     );
   }
-
 }
 
-  class Name extends StatelessWidget {
+class Name extends StatelessWidget {
   const Name({Key? key}) : super(key: key);
 
   @override

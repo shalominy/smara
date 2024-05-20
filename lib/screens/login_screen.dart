@@ -24,8 +24,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
-
-var username = TextEditingController();
+  var matric = TextEditingController();
   var password = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ var username = TextEditingController();
               // Padding(
               //   padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10),
               //   child:
-              
+
               Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -57,60 +56,63 @@ var username = TextEditingController();
                     ),
                   ],
                 ),
-              )
-                  ),
-                  SizedBox(height: 200,),
+              )),
+              SizedBox(
+                height: 200,
+              ),
 
-                  Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: username,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
-                      labelText: 'Enter Student Name',
-                      border: const OutlineInputBorder(),
-                      floatingLabelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: matric,
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.lerp(
+                          FontWeight.w500, FontWeight.w400, 0.5),
+                      overflow: TextOverflow.visible,
+                    ),
+                    labelText: 'Enter User Id (Matric Id) ',
+                    border: const OutlineInputBorder(),
+                    floatingLabelStyle: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.lerp(
+                          FontWeight.w500, FontWeight.w400, 0.5),
+                      overflow: TextOverflow.visible,
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: password,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
-                      labelText: 'Password',
-                      border: const OutlineInputBorder(),
-                      floatingLabelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.lerp(
-                            FontWeight.w500, FontWeight.w400, 0.5),
-                        overflow: TextOverflow.visible,
-                      ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: password,
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.lerp(
+                          FontWeight.w500, FontWeight.w400, 0.5),
+                      overflow: TextOverflow.visible,
+                    ),
+                    labelText: 'Password',
+                    border: const OutlineInputBorder(),
+                    floatingLabelStyle: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.lerp(
+                          FontWeight.w500, FontWeight.w400, 0.5),
+                      overflow: TextOverflow.visible,
                     ),
                   ),
                 ),
-                SizedBox(height: 25,),
-                Padding(
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
                 ),
@@ -123,8 +125,7 @@ var username = TextEditingController();
                       ),
                       onPressed: () {
                         // Navigator.pop(context);
-                                Get.toNamed(RouteHelper.gotocontext("Register"));  
-
+                        Get.toNamed(RouteHelper.gotocontext("Register"));
                       },
                       child: Text(
                         "Register",
@@ -136,8 +137,8 @@ var username = TextEditingController();
                     ),
                     CustomIconButton(
                       onTap: () {
-
-                        MongoDatabase.login(username.text, password.text, context);
+                        MongoDatabase.login(
+                            matric.text, password.text, context);
                         // _insertData(studentname.text, studentid.text,
                         //     studentclass.text, studentgender!, context);
                       },
@@ -199,15 +200,12 @@ var username = TextEditingController();
                                     users: UserModelTemporary.fromJson(
                                         snapshot.data[index]));
                               });
-                              
                         } else {
                           return Center(
                             child: Text("No Data Available"),
                           );
                         }
                       })),
-                      
-                
 
               // Expanded(
               //   child: ListView.separated(
@@ -228,7 +226,9 @@ var username = TextEditingController();
               //     itemCount: students.length,
               //   ),
               // ),
-              const SizedBox(height: 10,)
+              const SizedBox(
+                height: 10,
+              )
             ],
           ),
         ),
@@ -261,54 +261,51 @@ class UsersContainer extends StatelessWidget {
       //     MaterialPageRoute(
       //         builder: (context) => const BaseScreen())),
       onTap: () {
-
-      // MongoDatabase.getstudents(context);
+        // MongoDatabase.getstudents(context);
         context.read<UserProvider>().setuser(users);
 
         Get.toNamed(RouteHelper.gotocontext(users.role));
-
       },
       child: Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
-          child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(.1),
-              blurRadius: 4.0,
-              spreadRadius: .05,
-            ), //BoxShadow
-          ],
+        padding:
+            const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(.1),
+                blurRadius: 4.0,
+                spreadRadius: .05,
+              ), //BoxShadow
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: Image.asset(
+              //     category.thumbnail,
+              //     height: kCategoryCardImageSize,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              Align(
+                child: Text(users.name + " (" + users.role + ")"),
+              ),
+              // Text(
+              //   "${category.noOfCourses.toString()} courses",
+              //   style: Theme.of(context).textTheme.bodySmall,
+              // ),
+            ],
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Align(
-            //   alignment: Alignment.topRight,
-            //   child: Image.asset(
-            //     category.thumbnail,
-            //     height: kCategoryCardImageSize,
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            Align(
-              child: Text(users.name + " (" + users.role + ")"),
-            ),
-            // Text(
-            //   "${category.noOfCourses.toString()} courses",
-            //   style: Theme.of(context).textTheme.bodySmall,
-            // ),
-          ],
-        ),
-      ),
       ),
     );
   }
 }
-
-

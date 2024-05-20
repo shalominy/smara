@@ -23,30 +23,23 @@ class GenerateRegistrationCode extends StatefulWidget {
 }
 
 class _GenerateRegistrationCode extends State<GenerateRegistrationCode> {
-
-var username = TextEditingController();
+  var username = TextEditingController();
   var password = TextEditingController();
   String randomString = "CODES";
 
   bool _isButtonEnabled = true;
 
-  
-
-
   @override
   Widget build(BuildContext context) {
-                        // getregistrationcode();
+    // getregistrationcode();
 
-       
     return //Scaffold(body: SafeArea(child: FutureBuilder(future: MongoDatabase.getstudents(), builder: (, Asyncsnapshot snapshot) )))
         AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
         body: SafeArea(
           bottom: false,
-          child:
-             
-              Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               IntrinsicHeight(
@@ -63,55 +56,70 @@ var username = TextEditingController();
                     ),
                   ],
                 ),
-              )
-                  ),
-                  SizedBox(height: 200,),
+              )),
+              SizedBox(
+                height: 200,
+              ),
 
-                Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(padding: const EdgeInsets.all(10), child: Center(child: Text(randomString, style: TextStyle(fontSize: 70),),),),
-                    SizedBox(height: 20,),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Center(
+                        child: Text(
+                          randomString,
+                          style: TextStyle(fontSize: 70),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     CustomIconButton(
                       onTap: () {
-                                // Get.toNamed(RouteHelper.loginscreen());  
+                        // Get.toNamed(RouteHelper.loginscreen());
 
                         // _insertData(studentname.text, studentid.text,
                         //     studentclass.text, studentgender!, context);
 
-                          _isButtonEnabled ? {
-                         randomString = generateRandomString(5),
-                                                
-                          setState(() {
+                        _isButtonEnabled
+                            ? {
+                                randomString = generateRandomString(5),
 
-                              // getregistrationcode();
+                                setState(() {
+                                  // getregistrationcode();
 
-                          insertnewregistrationcode(randomString);
+                                  insertnewregistrationcode(randomString);
 
-                            _isButtonEnabled = false;
-                          }),
+                                  _isButtonEnabled = false;
+                                }),
 
-                          Future.delayed(Duration(seconds: 5), () {
-                            setState(() {
-                              getregistrationcode();
-                              _isButtonEnabled = true;
-
-                            });
-                          }),
-                          setState(() {
-                            // randomString = gotcode;
-                          }),
-                          //print(_isButtonEnabled),
-                        //  randomString = generateRandomString(5)
-                         } :     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" Please wait 5 seconds before generating a new code again"),));
+                                Future.delayed(Duration(seconds: 5), () {
+                                  setState(() {
+                                    getregistrationcode();
+                                    _isButtonEnabled = true;
+                                  });
+                                }),
+                                setState(() {
+                                  // randomString = gotcode;
+                                }),
+                                //print(_isButtonEnabled),
+                                //  randomString = generateRandomString(5)
+                              }
+                            : ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(
+                                content: Text(
+                                    " Please wait 5 seconds before generating a new code again"),
+                              ));
                         //  randomString = generateRandomString(5);
                         // print(_isButtonEnabled);
                         // getregistrationcode();
-                          print(randomString); 
+                        print(randomString);
 
                         // print("New Code Generated ");
                       },
@@ -137,7 +145,6 @@ var username = TextEditingController();
               const SizedBox(
                 height: 10,
               ),
-              
             ],
           ),
         ),
@@ -155,7 +162,6 @@ var username = TextEditingController();
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                   
                     // TextButton(
                     //   style: TextButton.styleFrom(
                     //     fixedSize: const Size(150, 45),
@@ -171,43 +177,39 @@ var username = TextEditingController();
                     //         ?.copyWith(color: kPrimaryColor),
                     //   ),
                     // ),
-                    Expanded(child: 
-                    CustomIconButton(
-                      onTap: () {
-                        // _insertDataUser(
-                        //     username.text, useremail.text, userrole.text);
+                    Expanded(
+                      child: CustomIconButton(
+                        onTap: () {
+                          // _insertDataUser(
+                          //     username.text, useremail.text, userrole.text);
 
-                        // _insertCoursework(
-                        //     teacherid,
-                        //     coursetype!,
-                        //     courseworkname.text,
-                        //     assigneddate!,
-                        //     duedate!,
-                        //     assigneestype!,
-                        //     assignees,
-                        //     courseworkcontent.text);
-                        // _insertCoursework(coursetype, courseworkname.text, assinggn, sdsd, sssss, assignees, courseworkcontent.text);
+                          // _insertCoursework(
+                          //     teacherid,
+                          //     coursetype!,
+                          //     courseworkname.text,
+                          //     assigneddate!,
+                          //     duedate!,
+                          //     assigneestype!,
+                          //     assignees,
+                          //     courseworkcontent.text);
+                          // _insertCoursework(coursetype, courseworkname.text, assinggn, sdsd, sssss, assignees, courseworkcontent.text);
 
+                          print("back!");
 
-
-                        print("back!");
-
-                        Navigator.pop(context);
-
-                        
-                      },
-                      // color: kPrimaryColor,
-                      // color: Colors.white,
-                      height: 45,
-                      width: 150,
-                      child: const Text(
-                        "Back to Home ",
-                        style: TextStyle(
-                          // color: Colors.white,
-                          fontSize: 18,
+                          Navigator.pop(context);
+                        },
+                        // color: kPrimaryColor,
+                        // color: Colors.white,
+                        height: 45,
+                        width: 150,
+                        child: const Text(
+                          "Back to Home ",
+                          style: TextStyle(
+                            // color: Colors.white,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
-                    ),
                     )
                   ],
                 ),
@@ -216,7 +218,6 @@ var username = TextEditingController();
           },
         ),
       ),
-      
     );
   }
 
@@ -231,33 +232,30 @@ var username = TextEditingController();
 //     );
 //   }
 
-Future<String> getregistrationcode() async {
+  Future<String> getregistrationcode() async {
     String registrationcode = await MongoDatabase.getregistrationcode(context);
     print(registrationcode);
     setState(() {
-    randomString = registrationcode;
-      
+      randomString = registrationcode;
     });
     return registrationcode;
-
   }
 
   Future<void> insertnewregistrationcode(String newcode) async {
-    await MongoDatabase.insertnewregistrationcode(newcode,context);
+    await MongoDatabase.insertnewregistrationcode(newcode, context);
     // print(registrationcode);
     // setState(() {
     // randomString = registrationcode;
-      
+
     // });
     // return registrationcode;
-
   }
 
-String generateRandomString(int length) {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  final rand = Random();
-  return List.generate(length, (index) => chars[rand.nextInt(chars.length)]).join();
-}
-
-
+  String generateRandomString(int length) {
+    const chars =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final rand = Random();
+    return List.generate(length, (index) => chars[rand.nextInt(chars.length)])
+        .join();
+  }
 }

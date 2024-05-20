@@ -41,18 +41,18 @@ import 'featuerd_screen.dart';
 import 'logout_screen.dart';
 import 'uploaddata_screen.dart';
 
-class TeacherCoursework extends StatefulWidget {
+class StudentCoursework extends StatefulWidget {
   // final String title;
-  const TeacherCoursework({
+  const StudentCoursework({
     Key? key,
     // required this.title,
   }) : super(key: key);
 
   @override
-  _TeacherCoursework createState() => _TeacherCoursework();
+  _StudentCoursework createState() => _StudentCoursework();
 }
 
-class _TeacherCoursework extends State<TeacherCoursework> {
+class _StudentCoursework extends State<StudentCoursework> {
   // ignore: unused_field
   int _selectedTag = 0;
 
@@ -408,8 +408,9 @@ class _CourseworkList extends State<CourseworkList> {
         // Padding(padding: const EdgeInsets.all(10), child:
         Expanded(
             child: FutureBuilder(
-                future: MongoDatabase.getcourseworkbyteacherid(m.ObjectId.parse(
-                    '${context.watch<UserProvider>().id}'.substring(10, 34))),
+                // future: MongoDatabase.getcourseworkbyteacherid(m.ObjectId.parse(
+                //     '${context.watch<UserProvider>().id}'.substring(10, 34))),
+                future: MongoDatabase.getcourseworkbystudent('${context.watch<UserProvider>().matric}'),
                 builder: (context, AsyncSnapshot snapshot) {
                   // print('${context.read<UserProvider>().id}'.substring(10, 34));
                   // print(m.ObjectId.parse('${context.watch<UserProvider>().id}'.substring(10, 34)));
@@ -423,9 +424,11 @@ class _CourseworkList extends State<CourseworkList> {
                         itemBuilder: (context, index) {
                           return CourseworkContainer(
                               function: widget.function,
-                              coursework: CourseworkModel.fromJson(
+                              coursework: 
+                              // CourseworkModel.fromJson(
                                   // snapshot.data[index]), color: _color.elementAt(int.parse(index.toString()[0])));
-                                  snapshot.data[index]),
+                                  // snapshot.data[index]),
+                                  snapshot.data[index],
                               color: Colors.black);
                         });
                   } else {
@@ -434,10 +437,10 @@ class _CourseworkList extends State<CourseworkList> {
                     );
                   }
                 })),
-        const SizedBox(
-          height: 80,
-          child: AddNewCoursework(),
-        ),
+        // const SizedBox(
+        //   height: 80,
+        //   child: AddNewCoursework(),
+        // ),
       ],
     ));
     // );
@@ -766,6 +769,7 @@ class CourseworkContainer extends StatelessWidget {
       //     MaterialPageRoute(
       //         builder: (context) => const BaseScreen())),
       onTap: () {
+      print("heree" + coursework.assigneeslist.toString());
         function(
             CourseworkListDetails(changetab: function, coursework: coursework));
         // print(coursework.id);
@@ -837,6 +841,79 @@ class CourseworkListDetails extends StatefulWidget {
 class _CourseworkListDetails extends State<CourseworkListDetails> {
   @override
   Widget build(BuildContext context) {
+  print("coursework assigneeslist" + widget.coursework.toString());
+  print("coursework assigneeslist" + widget.coursework.content.toString());
+  print("coursework assigneeslist" + jsonDecode(widget.coursework.assigneeslist[7]).map((studentt) {
+        // var filteredAssignees = studentt["assigneeslist"].where((student) {
+        var studentModel = AssignStudentModel.fromJson(studentt);
+        if(studentModel.student.studentid == 'UK0192')
+        {return AssignStudentModel.fromJson(studentt).feedback; } 
+        
+      // }); 
+      
+      // if (filteredAssignees.isNotEmpty) {
+      //   return CourseworkModel.fromJson(studentt);
+      // } else {
+      //   return null;
+      // }
+
+      
+      })
+      .where((studentt) => studentt != null)
+      // .cast<AssignStudentModel>()
+      .toString());
+
+    
+
+  //     List<AssignStudentModel> feedback = jsonDecode(widget.coursework.assigneeslist[7]).map((studentJson) {
+  //   var studentModel = AssignStudentModel.fromJson(studentJson);
+  //   if (studentModel.student.studentid == 'UK0192') {
+  //     return studentModel;
+  //   }
+  //   return null;
+  // }).where((student) => student != null).cast<AssignStudentModel>().toList();
+
+      String feedback = jsonDecode(widget.coursework.assigneeslist[7]).map((studentt) {
+        // var filteredAssignees = studentt["assigneeslist"].where((student) {
+        var studentModel = AssignStudentModel.fromJson(studentt);
+        if(studentModel.student.studentid == 'UK0192')
+        // {return AssignStudentModel.fromJson(studentt).feedback; } 
+        {return studentModel.feedback; } 
+        
+      // }); 
+      
+      // if (filteredAssignees.isNotEmpty) {
+      //   return CourseworkModel.fromJson(studentt);
+      // } else {
+      //   return null;
+      // }
+
+      
+      })
+      .where((studentt) => studentt != null)
+      .toString();
+
+  
+
+  // CourseworkModel courseworkfeedback = arrData0
+  //   .map((assigneeslist) {
+  //     // Filter the assigneeslist to find the student with the given id
+  //     var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
+  //       var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
+  //       return studentModel.student.studentid == studentid;
+  //     }).toList();
+
+  //     // If the filtered list is not empty, return the assigneeslist
+  //     if (filteredAssignees.isNotEmpty) {
+  //       return CourseworkModel.fromJson(assigneeslist);
+  //     } else {
+  //       return null;
+  //     }
+  //   })
+  //   .where((assigneeslist) => assigneeslist != null) // Filter out the null values
+  //   .cast<CourseworkModel>() // Ensure the list is of type List<CourseworkModel>
+  //   .toList();
+
     return
         // Column(children: [
         Expanded(
@@ -896,76 +973,81 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
         Text("Due Date" +
             DateFormat('dd-MM-yyy').format(widget.coursework.duedate)),
         Text("Assignees Type" + widget.coursework.assigneestype),
-        const CourseworkDetailsTableHeader(),
-        Expanded(
-          child: SizedBox(
-              height: 100,
-              child: SizedBox(
-                  child: FutureBuilder(
-                      future: MongoDatabase.getstudentbycoursework(
-                          widget.coursework.id),
-                      builder: (context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          var totalData = snapshot.data.length;
-                          print("Total Data" + totalData.toString());
+        const SizedBox(height: 15,),
+        const Text("coursework feedback " ),
+        (feedback == "( )") ? const Text("Feedback is yet to be received",  style: TextStyle(fontSize: 20)) : Text( feedback.substring(1, feedback.length - 1), style: const TextStyle(fontSize: 20)),
+        // Text( feedback.substring(1, feedback.length - 1), style: const TextStyle(fontSize: 20)),
+        // Text("coursework feedback" + feedback.map((e) => e.feedback.toString()).toString()),
+        // const CourseworkDetailsTableHeader(),
+        // Expanded(
+        //   child: SizedBox(
+        //       height: 100,
+        //       child: SizedBox(
+        //           child: FutureBuilder(
+        //               future: MongoDatabase.getstudentbycoursework(
+        //                   widget.coursework.id),
+        //               builder: (context, AsyncSnapshot snapshot) {
+        //                 if (snapshot.hasData) {
+        //                   var totalData = snapshot.data.length;
+        //                   print("Total Data" + totalData.toString());
 
-                          final List<Map<String, dynamic>> items =
-                              snapshot.data!;
+        //                   final List<Map<String, dynamic>> items =
+        //                       snapshot.data!;
 
-                          final List<List<String>> studentsList =
-                              items.map((map) {
-                            return map.values
-                                .map((value) => value.toString())
-                                .toList();
-                          }).toList();
+        //                   final List<List<String>> studentsList =
+        //                       items.map((map) {
+        //                     return map.values
+        //                         .map((value) => value.toString())
+        //                         .toList();
+        //                   }).toList();
 
-                          // final List<String> itemNames = items
-                          //     .map((map) => map['assigneeslist'][1] as String)
-                          //     .toList();
+        //                   // final List<String> itemNames = items
+        //                   //     .map((map) => map['assigneeslist'][1] as String)
+        //                   //     .toList();
 
-                          // print(items);
-                          // print(jsonDecode(studentsList[0][7])[1]);
+        //                   // print(items);
+        //                   // print(jsonDecode(studentsList[0][7])[1]);
 
-                          String studentt = studentsList[0][7].toString();
+        //                   String studentt = studentsList[0][7].toString();
 
-                          var josndecosdedtest = jsonDecode(studentt);
+        //                   var josndecosdedtest = jsonDecode(studentt);
 
-                          final List<AssignStudentModel> assigneeslist =
-                              (josndecosdedtest as List).map((userData) {
-                            print("inside test" + userData.toString());
+        //                   final List<AssignStudentModel> assigneeslist =
+        //                       (josndecosdedtest as List).map((userData) {
+        //                     print("inside test" + userData.toString());
 
-                            var encodedstssring = jsonEncode(userData);
-                            Map<String, dynamic> assigneeslistsss =
-                                jsonDecode(encodedstssring);
+        //                     var encodedstssring = jsonEncode(userData);
+        //                     Map<String, dynamic> assigneeslistsss =
+        //                         jsonDecode(encodedstssring);
 
-                            print("inside test 32" + userData.toString());
+        //                     print("inside test 32" + userData.toString());
 
-                            // m.ObjectId id = m.ObjectId.parse("6644659a162faa9b21000000");
+        //                     // m.ObjectId id = m.ObjectId.parse("6644659a162faa9b21000000");
 
-                            return AssignStudentModel.fromJson(
-                                assigneeslistsss);
-                          }).toList();
+        //                     return AssignStudentModel.fromJson(
+        //                         assigneeslistsss);
+        //                   }).toList();
 
-                          return ListView.builder(
-                              itemCount: assigneeslist.length,
-                              itemBuilder: (context, index) {
-                                return CourseworkDetailsStudentContainer(
-                                    assignees: assigneeslist[index]);
-                                // coursework: AssignStudentModel.fromJson(
-                              });
-                        } else {
-                          return Center(
-                            child: Text("No Data Available"),
-                          );
-                        }
-                      }))),
-        ),
-        SizedBox(
-          height: 80,
-          child: AddFeedbackButton(
-            coursework: widget.coursework,
-          ),
-        )
+        //                   return ListView.builder(
+        //                       itemCount: assigneeslist.length,
+        //                       itemBuilder: (context, index) {
+        //                         return CourseworkDetailsStudentContainer(
+        //                             assignees: assigneeslist[index]);
+        //                         // coursework: AssignStudentModel.fromJson(
+        //                       });
+        //                 } else {
+        //                   return Center(
+        //                     child: Text("No Data Available"),
+        //                   );
+        //                 }
+        //               }))),
+        // ),
+        // SizedBox(
+        //   height: 80,
+        //   child: AddFeedbackButton(
+        //     coursework: widget.coursework,
+        //   ),
+        // )
         // Text("Assignees Type" + widget.coursework.assigneestype),
 
         // ListView.builder(

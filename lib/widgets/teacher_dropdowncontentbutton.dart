@@ -15,9 +15,6 @@ class _DropDownContentButtonState extends State<DropDownContentButton> {
   TextEditingController textController1 = TextEditingController();
   TextEditingController textController2 = TextEditingController();
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,8 +28,7 @@ class _DropDownContentButtonState extends State<DropDownContentButton> {
                   isContentVisible = !isContentVisible;
                 });
               },
-              style: 
-              ButtonStyle(
+              style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0),
@@ -42,7 +38,6 @@ class _DropDownContentButtonState extends State<DropDownContentButton> {
                   Size(double.infinity,
                       48), // Set the width to fill the available space
                 ),
-                
               ),
               // child: Text(widget.title),
               //  OutlinedButton.styleFrom(

@@ -23,8 +23,7 @@ class Logout extends StatefulWidget {
 }
 
 class _Logout extends State<Logout> {
-
-var username = TextEditingController();
+  var username = TextEditingController();
   var password = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ var username = TextEditingController();
               // Padding(
               //   padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10),
               //   child:
-              
+
               Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -56,11 +55,12 @@ var username = TextEditingController();
                     ),
                   ],
                 ),
-              )
-                  ),
-                  SizedBox(height: 200,),
+              )),
+              SizedBox(
+                height: 200,
+              ),
 
-                Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
                 ),
@@ -69,7 +69,7 @@ var username = TextEditingController();
                   children: [
                     CustomIconButton(
                       onTap: () {
-                                Get.toNamed(RouteHelper.loginscreen());  
+                        Get.toNamed(RouteHelper.loginscreen());
 
                         // _insertData(studentname.text, studentid.text,
                         //     studentclass.text, studentgender!, context);
@@ -132,15 +132,13 @@ var username = TextEditingController();
               //                       users: UserModelTemporary.fromJson(
               //                           snapshot.data[index]));
               //                 });
-                              
+
               //           } else {
               //             return Center(
               //               child: Text("No Data Available"),
               //             );
               //           }
               //         })),
-                      
-                
 
               // Expanded(
               //   child: ListView.separated(
@@ -193,54 +191,50 @@ class UsersContainer extends StatelessWidget {
       //     MaterialPageRoute(
       //         builder: (context) => const BaseScreen())),
       onTap: () {
-
-      // MongoDatabase.getstudents(context);
+        // MongoDatabase.getstudents(context);
         context.read<UserProvider>().setuser(users);
 
         Get.toNamed(RouteHelper.gotocontext(users.role));
-
       },
       child: Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-          child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(.1),
-              blurRadius: 4.0,
-              spreadRadius: .05,
-            ), //BoxShadow
-          ],
+        padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(.1),
+                blurRadius: 4.0,
+                spreadRadius: .05,
+              ), //BoxShadow
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: Image.asset(
+              //     category.thumbnail,
+              //     height: kCategoryCardImageSize,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              Align(
+                child: Text(users.name + " (" + users.role + ")"),
+              ),
+              // Text(
+              //   "${category.noOfCourses.toString()} courses",
+              //   style: Theme.of(context).textTheme.bodySmall,
+              // ),
+            ],
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Align(
-            //   alignment: Alignment.topRight,
-            //   child: Image.asset(
-            //     category.thumbnail,
-            //     height: kCategoryCardImageSize,
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            Align(
-              child: Text(users.name + " (" + users.role + ")"),
-            ),
-            // Text(
-            //   "${category.noOfCourses.toString()} courses",
-            //   style: Theme.of(context).textTheme.bodySmall,
-            // ),
-          ],
-        ),
-      ),
       ),
     );
   }
 }
-
-

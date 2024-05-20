@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LabeledCheckbox extends StatelessWidget {
-  const LabeledCheckbox({Key? key, 
+  const LabeledCheckbox({
+    Key? key,
     required this.label,
     required this.padding,
     required this.value,
@@ -30,8 +31,7 @@ class LabeledCheckbox extends StatelessWidget {
               },
             ),
             // Expanded(child: Text(label)),
-             Text(label),
-
+            Text(label),
           ],
         ),
       ),
