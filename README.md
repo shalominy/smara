@@ -1,6 +1,6 @@
 # smart_hub
 
-A new Flutter project.
+This project is dedicated to an educational institude to enhance effectiveness of communication between the institude and its prospect, students and parents. This project is developed through out the semester and sepervised by a lecturer. 
 
 ## Getting Started
 
