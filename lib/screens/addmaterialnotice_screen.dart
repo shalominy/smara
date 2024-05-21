@@ -18,6 +18,7 @@ import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as m;
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_hub/models/materialnotice_model.dart';
 
 import '../constants/color.dart';
 import '../dbHelper/mongodb.dart';
@@ -31,21 +32,20 @@ import '../widgets/custom_icon_button.dart';
 import '../widgets/search_testfield.dart';
 import '../widgets/selectmongodbdata.dart';
 
-class AddCoursework extends StatefulWidget {
-  const AddCoursework({Key? key}) : super(key: key);
+class AddMaterialNotice extends StatefulWidget {
+  const AddMaterialNotice({Key? key}) : super(key: key);
 
   @override
-  _AddCoursework createState() => _AddCoursework();
+  _AddMaterialNotice createState() => _AddMaterialNotice();
 }
 
-class _AddCoursework extends State<AddCoursework> {
+class _AddMaterialNotice extends State<AddMaterialNotice> {
   String? coursetype;
-  var courseworkname = TextEditingController();
+  var materialnoticetitle = TextEditingController();
   DateTime? assigneddate;
-  DateTime? duedate;
   String? assigneestype;
   List<List<String>> assignees = [];
-  var courseworkcontent = TextEditingController();
+  var materialnoticecontent = TextEditingController();
 
   // DateTime? date;
 
@@ -229,27 +229,27 @@ class _AddCoursework extends State<AddCoursework> {
     }
   }
 
-  Future<void> _selectDueDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null && picked != duedate) {
-      setState(() {
-        duedate = picked;
-      });
-    }
-  }
+  // Future<void> _selectDueDate(BuildContext context) async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(1900),
+  //     lastDate: DateTime(2101),
+  //   );
+  //   if (picked != null && picked != duedate) {
+  //     setState(() {
+  //       duedate = picked;
+  //     });
+  //   }
+  // }
 
-  String _getFormattedDueDate() {
-    if (duedate != null) {
-      return DateFormat('EEEE, MMMM d, y').format(duedate!);
-    } else {
-      return 'No date selected';
-    }
-  }
+  // String _getFormattedDueDate() {
+  //   if (duedate != null) {
+  //     return DateFormat('EEEE, MMMM d, y').format(duedate!);
+  //   } else {
+  //     return 'No date selected';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -278,7 +278,7 @@ class _AddCoursework extends State<AddCoursework> {
                     children: [
                       Align(
                         child: Text(
-                          'Add Coursework',
+                          'Add Material Notice',
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
                       ),
@@ -353,7 +353,7 @@ class _AddCoursework extends State<AddCoursework> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Add New Coursework",
+                        "Add Material Notice",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ],
@@ -418,127 +418,127 @@ class _AddCoursework extends State<AddCoursework> {
                             // DropDownContentButton(
                             //   title: 'Coursework Type',
                             // ),
-                            Column(
-                              children: [
-                                SizedBox(
-                                  width: double
-                                      .infinity, // Make the width of the content match its parent button
-                                  child: OutlinedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          isContent1Visible =
-                                              !isContent1Visible;
-                                        });
-                                      },
-                                      style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(0),
-                                          ),
-                                        ),
-                                        minimumSize:
-                                            MaterialStateProperty.all<Size>(
-                                          const Size(double.infinity,
-                                              48), // Set the width to fill the available space
-                                        ),
-                                      ),
-                                      child: const Row(
-                                        children: [
-                                          Text(
-                                            'Coursework Type',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 20),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_drop_down,
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                                if (isContent1Visible)
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    color: Colors.grey[200],
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text('Select Coursework Type'),
-                                        const SizedBox(height: 10),
-                                        DropdownButtonFormField(
-                                          value: coursetype,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.lerp(
-                                                FontWeight.w500,
-                                                FontWeight.w400,
-                                                0.5),
-                                            overflow: TextOverflow.visible,
-                                          ),
-                                          decoration: InputDecoration(
-                                            hintText: "Select Course Type",
-                                            hintStyle: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.grey,
-                                              fontWeight: FontWeight.lerp(
-                                                  FontWeight.w500,
-                                                  FontWeight.w400,
-                                                  0.5),
-                                              overflow: TextOverflow.visible,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.never,
-                                            // labelText: "Student Transcript",
-                                            // filled: true,
-                                            // fillColor: Colors.white,
-                                            border: const OutlineInputBorder(
-                                                // borderRadius: BorderRadius.circular(40),
-                                                ),
-                                            // isDense: true,
-                                            enabledBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.black,
-                                                  width: 1),
-                                              // borderRadius: BorderRadius.circular(20),
-                                            ),
-                                          ),
-                                          isExpanded:
-                                              true, // Ensure the dropdown opens below the button
-                                          items: const [
-                                            DropdownMenuItem(
-                                              value: "homework",
-                                              child: Text("Homework"),
-                                            ),
-                                            DropdownMenuItem(
-                                              value: "extraexercise",
-                                              child: Text("Extra Exercise"),
-                                            ),
-                                            // Add more items as needed
-                                          ],
-                                          onChanged: (value) {
-                                            coursetype = value.toString();
-                                            // Handle the selected value
-                                          },
-                                        ),
-                                        // const SizedBox(height: 10),
-                                        // TextField(
-                                        //   controller: textController2,
-                                        //   decoration: const InputDecoration(
-                                        //     labelText: 'Text Input 2',
-                                        //     border: OutlineInputBorder(),
-                                        //   ),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                              ],
-                            ),
+                            // Column(
+                            //   children: [
+                            //     SizedBox(
+                            //       width: double
+                            //           .infinity, // Make the width of the content match its parent button
+                            //       child: OutlinedButton(
+                            //           onPressed: () {
+                            //             setState(() {
+                            //               isContent1Visible =
+                            //                   !isContent1Visible;
+                            //             });
+                            //           },
+                            //           style: ButtonStyle(
+                            //             shape: MaterialStateProperty.all<
+                            //                 RoundedRectangleBorder>(
+                            //               RoundedRectangleBorder(
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(0),
+                            //               ),
+                            //             ),
+                            //             minimumSize:
+                            //                 MaterialStateProperty.all<Size>(
+                            //               const Size(double.infinity,
+                            //                   48), // Set the width to fill the available space
+                            //             ),
+                            //           ),
+                            //           child: const Row(
+                            //             children: [
+                            //               Text(
+                            //                 'Coursework Type',
+                            //                 style: TextStyle(
+                            //                     color: Colors.black,
+                            //                     fontSize: 20),
+                            //               ),
+                            //               Icon(
+                            //                 Icons.arrow_drop_down,
+                            //                 color: Colors.black,
+                            //               ),
+                            //             ],
+                            //           )),
+                            //     ),
+                            //     if (isContent1Visible)
+                            //       Container(
+                            //         padding: const EdgeInsets.all(10),
+                            //         color: Colors.grey[200],
+                            //         child: Column(
+                            //           crossAxisAlignment:
+                            //               CrossAxisAlignment.start,
+                            //           children: [
+                            //             const Text('Select Coursework Type'),
+                            //             const SizedBox(height: 10),
+                            //             DropdownButtonFormField(
+                            //               value: coursetype,
+                            //               style: TextStyle(
+                            //                 fontSize: 20,
+                            //                 color: Colors.black,
+                            //                 fontWeight: FontWeight.lerp(
+                            //                     FontWeight.w500,
+                            //                     FontWeight.w400,
+                            //                     0.5),
+                            //                 overflow: TextOverflow.visible,
+                            //               ),
+                            //               decoration: InputDecoration(
+                            //                 hintText: "Select Course Type",
+                            //                 hintStyle: TextStyle(
+                            //                   fontSize: 20,
+                            //                   color: Colors.grey,
+                            //                   fontWeight: FontWeight.lerp(
+                            //                       FontWeight.w500,
+                            //                       FontWeight.w400,
+                            //                       0.5),
+                            //                   overflow: TextOverflow.visible,
+                            //                 ),
+                            //                 floatingLabelBehavior:
+                            //                     FloatingLabelBehavior.never,
+                            //                 // labelText: "Student Transcript",
+                            //                 // filled: true,
+                            //                 // fillColor: Colors.white,
+                            //                 border: const OutlineInputBorder(
+                            //                     // borderRadius: BorderRadius.circular(40),
+                            //                     ),
+                            //                 // isDense: true,
+                            //                 enabledBorder:
+                            //                     const OutlineInputBorder(
+                            //                   borderSide: BorderSide(
+                            //                       color: Colors.black,
+                            //                       width: 1),
+                            //                   // borderRadius: BorderRadius.circular(20),
+                            //                 ),
+                            //               ),
+                            //               isExpanded:
+                            //                   true, // Ensure the dropdown opens below the button
+                            //               items: const [
+                            //                 DropdownMenuItem(
+                            //                   value: "homework",
+                            //                   child: Text("Homework"),
+                            //                 ),
+                            //                 DropdownMenuItem(
+                            //                   value: "extraexercise",
+                            //                   child: Text("Extra Exercise"),
+                            //                 ),
+                            //                 // Add more items as needed
+                            //               ],
+                            //               onChanged: (value) {
+                            //                 coursetype = value.toString();
+                            //                 // Handle the selected value
+                            //               },
+                            //             ),
+                            //             // const SizedBox(height: 10),
+                            //             // TextField(
+                            //             //   controller: textController2,
+                            //             //   decoration: const InputDecoration(
+                            //             //     labelText: 'Text Input 2',
+                            //             //     border: OutlineInputBorder(),
+                            //             //   ),
+                            //             // ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //   ],
+                            // ),
                             Column(
                               children: [
                                 SizedBox(
@@ -568,7 +568,7 @@ class _AddCoursework extends State<AddCoursework> {
                                       child: const Row(
                                         children: [
                                           Text(
-                                            'Coursework Details',
+                                            'Material Info',
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 20),
@@ -591,7 +591,7 @@ class _AddCoursework extends State<AddCoursework> {
                                         const Text('Coursework Details'),
                                         const SizedBox(height: 10),
                                         TextField(
-                                          controller: courseworkname,
+                                          controller: materialnoticetitle,
                                           decoration: InputDecoration(
                                             labelStyle: TextStyle(
                                               fontSize: 20,
@@ -602,7 +602,7 @@ class _AddCoursework extends State<AddCoursework> {
                                                   0.5),
                                               overflow: TextOverflow.visible,
                                             ),
-                                            labelText: 'Coursework Name',
+                                            labelText: 'Material Title',
                                             border: const OutlineInputBorder(),
                                             floatingLabelStyle: TextStyle(
                                               fontSize: 20,
@@ -616,7 +616,7 @@ class _AddCoursework extends State<AddCoursework> {
                                           ),
                                         ),
                                         const SizedBox(height: 10),
-                                        const Text('Assigned Date'),
+                                        const Text('Assign Date'),
                                         const SizedBox(height: 10),
                                         GestureDetector(
                                           onTap: () => _selectDate(context),
@@ -655,44 +655,44 @@ class _AddCoursework extends State<AddCoursework> {
                                               )),
                                         ),
                                         const SizedBox(height: 10),
-                                        const Text('Due Date'),
-                                        const SizedBox(height: 10),
-                                        GestureDetector(
-                                          onTap: () => _selectDueDate(context),
-                                          child: Container(
-                                              alignment: Alignment.centerLeft,
-                                              width: double.infinity,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.transparent,
-                                                border: Border.all(
-                                                    color: Colors.black,
-                                                    width: 1.0), // Add border
-                                                borderRadius: BorderRadius.circular(
-                                                    5.0), // Optional: Add border radius
-                                              ),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal:
-                                                          16.0), // Add padding
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    _getFormattedDueDate(),
-                                                    style: const TextStyle(
-                                                      color: Colors
-                                                          .black, // Set text color
-                                                      fontSize: 20.0,
-                                                      // fontWeight: FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  const Icon(
-                                                    Icons.arrow_drop_down,
-                                                    color: Colors.black,
-                                                  ),
-                                                ],
-                                              )),
-                                        ),
+                                        // const Text('Due Date'),
+                                        // const SizedBox(height: 10),
+                                        // GestureDetector(
+                                        //   onTap: () => _selectDueDate(context),
+                                        //   child: Container(
+                                        //       alignment: Alignment.centerLeft,
+                                        //       width: double.infinity,
+                                        //       height: 60,
+                                        //       decoration: BoxDecoration(
+                                        //         color: Colors.transparent,
+                                        //         border: Border.all(
+                                        //             color: Colors.black,
+                                        //             width: 1.0), // Add border
+                                        //         borderRadius: BorderRadius.circular(
+                                        //             5.0), // Optional: Add border radius
+                                        //       ),
+                                        //       padding:
+                                        //           const EdgeInsets.symmetric(
+                                        //               horizontal:
+                                        //                   16.0), // Add padding
+                                        //       child: Row(
+                                        //         children: [
+                                        //           Text(
+                                        //             _getFormattedDueDate(),
+                                        //             style: const TextStyle(
+                                        //               color: Colors
+                                        //                   .black, // Set text color
+                                        //               fontSize: 20.0,
+                                        //               // fontWeight: FontWeight.bold,
+                                        //             ),
+                                        //           ),
+                                        //           const Icon(
+                                        //             Icons.arrow_drop_down,
+                                        //             color: Colors.black,
+                                        //           ),
+                                        //         ],
+                                        //       )),
+                                        // ),
                                       ],
                                     ),
                                   ),
@@ -727,7 +727,7 @@ class _AddCoursework extends State<AddCoursework> {
                                       child: const Row(
                                         children: [
                                           Text(
-                                            'Coursework Assign',
+                                            'Material Notice Targets',
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 20),
@@ -1084,7 +1084,7 @@ class _AddCoursework extends State<AddCoursework> {
                                       child: const Row(
                                         children: [
                                           Text(
-                                            'Coursework Content',
+                                            'Material Notice Content',
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 20),
@@ -1113,7 +1113,7 @@ class _AddCoursework extends State<AddCoursework> {
                                             textAlignVertical:
                                                 TextAlignVertical.top,
                                             maxLines: null,
-                                            controller: courseworkcontent,
+                                            controller: materialnoticecontent,
                                             decoration: InputDecoration(
                                               labelStyle: TextStyle(
                                                 fontSize: 20,
@@ -1488,15 +1488,15 @@ class _AddCoursework extends State<AddCoursework> {
                         // _insertDataUser(
                         //     username.text, useremail.text, userrole.text);
 
-                        _insertCoursework(
+                        _insertMaterialNotice(
                             teacherid,
-                            coursetype!,
-                            courseworkname.text,
+                            // coursetype!,
+                            materialnoticetitle.text,
                             assigneddate!,
-                            duedate!,
+                            // duedate!,
                             assigneestype!,
                             assignees,
-                            courseworkcontent.text);
+                            materialnoticecontent.text);
                         // _insertCoursework(coursetype, courseworkname.text, assinggn, sdsd, sssss, assignees, courseworkcontent.text);
                         print("submit pressed");
                       },
@@ -1556,12 +1556,10 @@ class _AddCoursework extends State<AddCoursework> {
   //   userrole.text = "";
   // }
 
-  Future<void> _insertCoursework(
+  Future<void> _insertMaterialNotice(
       m.ObjectId teacherid,
-      String coursetype,
-      String courseworkname,
+      String materialnoticetitle,
       DateTime assigneddate,
-      DateTime duedate,
       String assigneestype,
       List<List<String>> assignees,
       String courseworkcontent) async {
@@ -1598,17 +1596,15 @@ class _AddCoursework extends State<AddCoursework> {
 
     var _id = m.ObjectId();
 
-    final data = CourseworkModel(
+    final data = MaterialNoticeModel(
         id: _id,
         teacherid: teacherid,
-        type: coursetype,
-        name: courseworkname,
+        title: materialnoticetitle,
         assigndate: assigneddate,
-        duedate: duedate,
         assigneestype: assigneestype,
         assigneeslist: studentsubmissionstatus,
         content: courseworkcontent);
-    await MongoDatabase.insertcoursework(data);
+    await MongoDatabase.insertmaterialnotice(data);
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("Inserted Coursework " + _id.oid),

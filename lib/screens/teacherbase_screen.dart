@@ -16,6 +16,7 @@ import '../constants/size.dart';
 import 'featuerd_screen.dart';
 import 'logout_screen.dart';
 import 'teachercoursework_screen.dart';
+import 'teachermaterialnotice_screen.dart';
 import 'uploaddata_screen.dart';
 
 class TeacherBaseScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _TeacherBaseScreen extends State<TeacherBaseScreen> {
   static const List<Widget> _widgetOptions = <Widget>[
     FeaturedScreen(),
     TeacherCoursework(),
-    UploadData(),
+    TeacherMaterial(),
     Logout(),
   ];
 

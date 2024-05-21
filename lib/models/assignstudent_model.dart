@@ -27,7 +27,7 @@ class AssignStudentModel {
         // student: json["student"],
         student: StudentModel.fromJson(json["student"]),
         submission: json["submission"],
-        feedback: json["feedback"] ?? " ",
+        feedback: json["feedback"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

@@ -33,7 +33,7 @@ class _RegisterScreen extends State<RegisterScreen> {
   var matric = TextEditingController();
   var password = TextEditingController();
   var useremail = TextEditingController();
-  var userrole = TextEditingController();
+  // var userrole = TextEditingController();
   var secretcode = TextEditingController();
 
   @override
@@ -179,25 +179,25 @@ SingleChildScrollView(child:
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  controller: userrole,
-                  decoration: const InputDecoration(
-                    hintText: 'Admin, Teacher, Student',
-                    hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    // labelText: "Student Transcript",
-                    labelStyle: TextStyle(color: Colors.grey),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                        // borderRadius: BorderRadius.circular(40),
-                        ),
-                    isDense: true,
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(10),
+              //   child: TextFormField(
+              //     controller: userrole,
+              //     decoration: const InputDecoration(
+              //       hintText: 'Admin, Teacher, Student',
+              //       hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
+              //       floatingLabelBehavior: FloatingLabelBehavior.never,
+              //       // labelText: "Student Transcript",
+              //       labelStyle: TextStyle(color: Colors.grey),
+              //       filled: true,
+              //       fillColor: Colors.white,
+              //       border: OutlineInputBorder(
+              //           // borderRadius: BorderRadius.circular(40),
+              //           ),
+              //       isDense: true,
+              //     ),
+              //   ),
+              // ),
 
               SizedBox(
                 height: 25,
@@ -257,7 +257,7 @@ SingleChildScrollView(child:
                             matric.text,
                             password.text,
                             useremail.text,
-                            userrole.text,
+                            // userrole.text,
                             secretcode.text,
                             context);
                       },
@@ -278,11 +278,11 @@ SingleChildScrollView(child:
 
               // const AppBar(),
               const SizedBox(
-                height: 15,
+                height: 80,
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
               // const TableHeader(),
 
               // Expanded(
@@ -361,7 +361,7 @@ SingleChildScrollView(child:
     String matric,
     String password,
     String useremail,
-    String userrole,
+    // String userrole,
     String secretcode,
     BuildContext context,
   ) async {
@@ -374,15 +374,16 @@ SingleChildScrollView(child:
         nickname: nickname,
         matric: matric,
         emel: useremail,
-        role: userrole,
+        role: "",
         password: digest.toString());
-    await MongoDatabase.userregister(secretcode, data);
+    await MongoDatabase.userregister(secretcode, data, context);
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(" User Registered " + _id.oid),
-    ));
-    Navigator.pop(context);
-    Get.toNamed(RouteHelper.loginscreen());
+    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //   content: Text(" User Registered " + _id.oid),
+    // ));
+
+    // Navigator.pop(context);
+    // Get.toNamed(RouteHelper.loginscreen());
   }
 
 //   Widget StudentCard(StudentModel data) {

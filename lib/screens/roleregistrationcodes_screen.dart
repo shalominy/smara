@@ -12,14 +12,14 @@ import '../widgets/circle_button.dart';
 import '../widgets/search_testfield.dart';
 import 'package:get/get.dart';
 
-class UploadData extends StatefulWidget {
-  const UploadData({Key? key}) : super(key: key);
+class RoleRegistrationCodes extends StatefulWidget {
+  const RoleRegistrationCodes({Key? key}) : super(key: key);
 
   @override
-  _UploadData createState() => _UploadData();
+  _RoleRegistrationCodes createState() => _RoleRegistrationCodes();
 }
 
-class _UploadData extends State<UploadData> {
+class _RoleRegistrationCodes extends State<RoleRegistrationCodes> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -27,7 +27,7 @@ class _UploadData extends State<UploadData> {
       child: Scaffold(
         body: Column(
           children: [
-            const AppBar(),
+            // const AppBar(),
             Body(),
           ],
         ),
@@ -56,7 +56,7 @@ class Body extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Upload Data",
+                  "Role Registration Codes",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 // TextButton(
@@ -77,7 +77,7 @@ class Body extends StatelessWidget {
           ),
           Align(
             child: Text(
-              "Select To Upload",
+              "Select To Generate Code",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
@@ -86,37 +86,39 @@ class Body extends StatelessWidget {
           //   style: Theme.of(context).textTheme.bodyMedium,
           // ),
 
-          ListView.builder(
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 8,
-            ),
-            // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //   crossAxisCount: 1,
-            //   childAspectRatio: 0.8,
-            //   crossAxisSpacing: 20,
-            //   mainAxisSpacing: 24,
-            //   mainAxisExtent: 50,
-            // ),
-            itemBuilder: (context, index) {
-              return CategoryCard(
-                userrole: role,
-                category: categoryList[index],
-              );
-            },
-            itemCount: categoryList.length,
-          ),
+          // ListView.builder(
+          //   shrinkWrap: true,
+          //   padding: const EdgeInsets.symmetric(
+          //     horizontal: 20,
+          //     vertical: 8,
+          //   ),
+          //   // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //   //   crossAxisCount: 1,
+          //   //   childAspectRatio: 0.8,
+          //   //   crossAxisSpacing: 20,
+          //   //   mainAxisSpacing: 24,
+          //   //   mainAxisExtent: 50,
+          //   // ),
+          //   itemBuilder: (context, index) {
+          //     return CategoryCard(
+          //       userrole: role,
+          //       category: categoryList[index],
+          //     );
+          //   },
+          //   itemCount: categoryList.length,
+          // ),
           GestureDetector(
               onTap: () {
-                Get.toNamed(RouteHelper.goto(role, "RoleRegCode"));
+                // Get.toNamed(RouteHelper.goto(role, "GenerateRegCode"));
+
+                RouteHelper.navigateTo(RouteHelper.generateregistrationcode, arguments: 'Teachers');
               },
               child: Padding(
-                padding: const EdgeInsets.only(left: 40, right: 40),
+                padding: const EdgeInsets.only(top: 10, bottom: 5, left: 40, right: 40),
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -130,12 +132,137 @@ class Body extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Align(
-                        child: Text("Registration Code"),
+                        child: Text("Teachers"),
                       ),
                     ],
                   ),
                 ),
-              ))
+              )),
+              GestureDetector(
+              onTap: () {
+                // Get.toNamed(RouteHelper.goto(role, "GenerateRegCode"));
+
+                RouteHelper.navigateTo(RouteHelper.generateregistrationcode, arguments: 'Students');
+
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 5, left: 40, right: 40),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(.1),
+                        blurRadius: 4.0,
+                        spreadRadius: .05,
+                      ), //BoxShadow
+                    ],
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        child: Text("Students"),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+              GestureDetector(
+              onTap: () {
+                // Get.toNamed(RouteHelper.goto(role, "GenerateRegCode"));
+
+                RouteHelper.navigateTo(RouteHelper.generateregistrationcode, arguments: 'Parents');
+
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 5, left: 40, right: 40),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(.1),
+                        blurRadius: 4.0,
+                        spreadRadius: .05,
+                      ), //BoxShadow
+                    ],
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        child: Text("Parents"),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+              GestureDetector(
+              onTap: () {
+                // Get.toNamed(RouteHelper.goto(role, "GenerateRegCode"));
+
+                RouteHelper.navigateTo(RouteHelper.generateregistrationcode, arguments: 'Admin');
+
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 5, left: 40, right: 40),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(.1),
+                        blurRadius: 4.0,
+                        spreadRadius: .05,
+                      ), //BoxShadow
+                    ],
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        child: Text("Admin"),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+          // GestureDetector(
+          //     onTap: () {
+          //       Get.toNamed(RouteHelper.goto(role, "GenerateRegCode"));
+          //     },
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(top: 5, bottom: 5, left: 40, right: 40),
+          //       child: Container(
+          //         padding: const EdgeInsets.all(10),
+          //         decoration: BoxDecoration(
+          //           color: Colors.green,
+          //           borderRadius: BorderRadius.circular(20),
+          //           boxShadow: [
+          //             BoxShadow(
+          //               color: Colors.black.withOpacity(.1),
+          //               blurRadius: 4.0,
+          //               spreadRadius: .05,
+          //             ), //BoxShadow
+          //           ],
+          //         ),
+          //         child: const Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Align(
+          //               child: Text("Registration Code"),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ))
         ],
       ),
     );
