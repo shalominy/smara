@@ -913,6 +913,8 @@ class _AddCoursework extends State<AddCoursework> {
                                                       }).toList();
 
                                                       assignees = studentsList;
+
+                                                      print(" selected students"+ _selectedStudents.toString());
                                                       print("items" +
                                                           items.toString());
 

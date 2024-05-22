@@ -41,18 +41,18 @@ import 'featuerd_screen.dart';
 import 'logout_screen.dart';
 import 'uploaddata_screen.dart';
 
-class StudentCoursework extends StatefulWidget {
+class ParentCoursework extends StatefulWidget {
   // final String title;
-  const StudentCoursework({
+  const ParentCoursework({
     Key? key,
     // required this.title,
   }) : super(key: key);
 
   @override
-  _StudentCoursework createState() => _StudentCoursework();
+  _ParentCoursework createState() => _ParentCoursework();
 }
 
-class _StudentCoursework extends State<StudentCoursework> {
+class _ParentCoursework extends State<ParentCoursework> {
   // ignore: unused_field
   int _selectedTag = 0;
 
@@ -410,7 +410,7 @@ class _CourseworkList extends State<CourseworkList> {
             child: FutureBuilder(
                 // future: MongoDatabase.getcourseworkbyteacherid(m.ObjectId.parse(
                 //     '${context.watch<UserProvider>().id}'.substring(10, 34))),
-                future: MongoDatabase.getcourseworkbystudent('${context.watch<UserProvider>().matric}'),
+                future: MongoDatabase.getcourseworkbychildren(context.watch<UserProvider>().children),
                 builder: (context, AsyncSnapshot snapshot) {
                   // print('${context.read<UserProvider>().id}'.substring(10, 34));
                   // print(m.ObjectId.parse('${context.watch<UserProvider>().id}'.substring(10, 34)));
@@ -694,62 +694,6 @@ class _CustomTabViewState extends State<CustomTabView> {
   }
 }
 
-class AddNewCoursework extends StatefulWidget {
-  const AddNewCoursework({Key? key}) : super(key: key);
-
-  @override
-  _AddNewCoursework createState() => _AddNewCoursework();
-}
-
-class _AddNewCoursework extends State<AddNewCoursework> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 30.0,
-      ),
-      child: Row(
-        children: [
-          // CustomIconButton(
-          //   onTap: () {},
-          //   height: 45,
-          //   width: 45,
-          //   child: const Icon(
-          //     Icons.favorite,
-          //     color: Colors.pink,
-          //     size: 30,
-          //   ),
-          // ),
-          // const SizedBox(
-          //   width: 20,
-          // ),
-          Expanded(
-            child: CustomIconButton(
-              // onTap: () {Get.toNamed(RouteHelper.goto("Teacher","AddCoursework"));print(context.read<UserProvider>().role.toString());},
-              onTap: () {
-                Get.toNamed(RouteHelper.goto(
-                    context.read<UserProvider>().role.toString(),
-                    "AddCoursework"));
-              },
-              // color: kPrimaryColor,
-              color: Colors.green,
-              height: 45,
-              width: 45,
-              child: const Text(
-                "+ New Coursework",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
 class CourseworkContainer extends StatelessWidget {
   final Function function;
   final CourseworkModel coursework;
@@ -849,7 +793,8 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
         // var studentModel = AssignStudentModel.fromJson(studentt);
         var studentModel = AssignStudentModel.fromJson(jsonDecode(studentt));
         // if(studentModel.student.studentid == 'UK0192')
-        if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
+        // if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
+        if(context.watch<UserProvider>().children.contains(studentModel.student.studentid))
         // {return AssignStudentModel.fromJson(studentt).feedback; } 
         {return AssignStudentModel.fromJson(jsonDecode(studentt)).feedback; } 
         
@@ -883,7 +828,8 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
         // var studentModel = AssignStudentModel.fromJson(studentt);
         var studentModel = AssignStudentModel.fromJson(jsonDecode(studentt));
         // if(studentModel.student.studentid == 'UK0192')
-        if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
+        // if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
+        if(context.watch<UserProvider>().children.contains(studentModel.student.studentid))
         // {return AssignStudentModel.fromJson(studentt).feedback; } 
         {return studentModel.feedback; } 
         
@@ -1205,69 +1151,6 @@ class CourseworkDetailsStudentContainer extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AddFeedbackButton extends StatefulWidget {
-  final CourseworkModel coursework;
-  const AddFeedbackButton({Key? key, required this.coursework})
-      : super(key: key);
-
-  @override
-  _AddFeedback createState() => _AddFeedback();
-}
-
-class _AddFeedback extends State<AddFeedbackButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 30.0,
-      ),
-      child: Row(
-        children: [
-          // CustomIconButton(
-          //   onTap: () {},
-          //   height: 45,
-          //   width: 45,
-          //   child: const Icon(
-          //     Icons.favorite,
-          //     color: Colors.pink,
-          //     size: 30,
-          //   ),
-          // ),
-          // const SizedBox(
-          //   width: 20,
-          // ),
-          Expanded(
-            child: CustomIconButton(
-              // onTap: () {Get.toNamed(RouteHelper.goto("Teacher","AddCoursework"));print(context.read<UserProvider>().role.toString());},
-              onTap: () {
-                // Get.toNamed(RouteHelper.goto(
-                //     context.read<UserProvider>().role.toString(),
-                //     "AddFeedback"));
-
-                RouteHelper.navigateTo(RouteHelper.teacheraddfeedback,
-                    arguments: widget.coursework);
-
-                // return AddFeedback(coursework: widget.coursework)
-              },
-              // color: kPrimaryColor,
-              color: Colors.blue,
-              height: 45,
-              width: 45,
-              child: const Text(
-                "Feedback",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          )
-        ],
       ),
     );
   }

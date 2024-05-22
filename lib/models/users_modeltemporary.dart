@@ -19,6 +19,7 @@ class UserModelTemporary {
   String matric;
   String emel;
   String role;
+  List<String> children;
   String password;
 
   UserModelTemporary({
@@ -28,6 +29,7 @@ class UserModelTemporary {
     required this.matric,
     required this.emel,
     required this.role,
+    required this.children,
     required this.password,
   });
 
@@ -40,7 +42,8 @@ class UserModelTemporary {
         matric: json["matric"] ?? " ",
         emel: json["emel"] ?? " ",
         role: json["role"] ?? " ",
-        password: json["password"] ,
+        children: (json["children"] as List?)?.map((value) => value.toString()).toList() ?? [],
+        password: json["password"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,6 +53,7 @@ class UserModelTemporary {
         "matric": matric,
         "emel": emel,
         "role": role,
+        "children": children,
         "password": password,
       };
 }

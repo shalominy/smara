@@ -74,7 +74,6 @@ class _SelectMongodbData extends State<SelectMongodbData> {
     Navigator.pop(context);
   }
 
-// this function is called when the Submit button is tapped
   void _submit() {
     // Navigator.pop(context, _selectedItems);
     Navigator.pop(context, widget.selecteditems);
@@ -118,6 +117,6 @@ class _SelectMongodbData extends State<SelectMongodbData> {
   }
 }
 
-List<String> flattenList(List<List<String>> nestedList) {
-  return nestedList.expand((innerList) => innerList).toList();
-}
+// List<String> flattenList(List<List<String>> nestedList) {
+//   return nestedList.expand((innerList) => innerList).toList();
+// }

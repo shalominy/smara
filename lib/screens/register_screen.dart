@@ -28,7 +28,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreen extends State<RegisterScreen> {
-  var username = TextEditingController();
+  var fullname = TextEditingController();
   var nickname = TextEditingController();
   var matric = TextEditingController();
   var password = TextEditingController();
@@ -87,9 +87,9 @@ SingleChildScrollView(child:
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: TextFormField(
-                  controller: username,
+                  controller: fullname,
                   decoration: const InputDecoration(
-                    hintText: 'Enter User Name',
+                    hintText: 'Enter Full Name',
                     hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     // labelText: "Student Transcript",
@@ -252,7 +252,7 @@ SingleChildScrollView(child:
                         // MongoDatabase.login(username.text, password.text, context);
 
                         _userregister(
-                            username.text,
+                            fullname.text,
                             nickname.text,
                             matric.text,
                             password.text,
@@ -375,7 +375,9 @@ SingleChildScrollView(child:
         matric: matric,
         emel: useremail,
         role: "",
-        password: digest.toString());
+        password: digest.toString(),
+        children: []
+        );
     await MongoDatabase.userregister(secretcode, data, context);
 
     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(

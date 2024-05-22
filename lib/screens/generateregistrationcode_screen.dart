@@ -244,7 +244,7 @@ class _GenerateRegistrationCode extends State<GenerateRegistrationCode> {
     return registrationcode;
     } else
     if(roletype == 'Teachers'){
-    String registrationcode = await MongoDatabase.getstudentregistrationcode(context);
+    String registrationcode = await MongoDatabase.getteacherregistrationcode(context);
     print(registrationcode);
     setState(() {
       randomString = registrationcode;
@@ -252,7 +252,7 @@ class _GenerateRegistrationCode extends State<GenerateRegistrationCode> {
     return registrationcode;
     }else 
     if(roletype == 'Parents'){
-    String registrationcode = await MongoDatabase.getstudentregistrationcode(context);
+    String registrationcode = await MongoDatabase.getparentsregistrationcode(context);
     print(registrationcode);
     setState(() {
       randomString = registrationcode;
@@ -260,7 +260,7 @@ class _GenerateRegistrationCode extends State<GenerateRegistrationCode> {
     return registrationcode;
     }else 
     if(roletype == 'Admin'){
-    String registrationcode = await MongoDatabase.getstudentregistrationcode(context);
+    String registrationcode = await MongoDatabase.getadminregistrationcode(context);
     print(registrationcode);
     setState(() {
       randomString = registrationcode;
@@ -270,7 +270,7 @@ class _GenerateRegistrationCode extends State<GenerateRegistrationCode> {
   }
 
   Future<void> insertnewregistrationcode(String roletype,String newcode) async {
-    if(roletype == 'Teachers') { await MongoDatabase.insertnewteacherregistrationcode(newcode, context);}
+    if     (roletype == 'Teachers') { await MongoDatabase.insertnewteacherregistrationcode(newcode, context);}
     else if(roletype == 'Students') { await MongoDatabase.insertnewstudentregistrationcode(newcode, context);}
     else if(roletype == 'Parents') { await MongoDatabase.insertnewparentsregistrationcode(newcode, context);}
     else if(roletype == 'Admin') { await MongoDatabase.insertnewadminregistrationcode(newcode, context);}

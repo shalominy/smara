@@ -58,7 +58,9 @@ class MongoDatabase {
               matric: arrData["matric"],
               emel: arrData["emel"],
               role: arrData["role"],
-              password: arrData["password"]);
+              password: arrData["password"],
+              children: arrData["children"]
+              );
 
           context.read<UserProvider>().setuser(users);
           Get.toNamed(RouteHelper.gotocontext(users.role));
@@ -294,7 +296,10 @@ class MongoDatabase {
           // return "Something went wrong while registering";
         }
       }else if (code == parentssecretcode["generatedcode"]) {
-        data.role = "Parents";
+        data.role = "Parent";
+        // data.children = data.matric.split(' ');
+        data.children = data.matric.split(RegExp(r'[ ,/]'));
+        data.matric = "";
 
         var result = await userCollection.insertOne(data.toJson());
         if (result.isSuccess) {
@@ -533,21 +538,58 @@ class MongoDatabase {
 
       List<CourseworkModel> courseworks = arrData0
     .map((assigneeslist) {
-      // Filter the assigneeslist to find the student with the given id
+
       var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
         var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
         return studentModel.student.studentid == studentid;
       }).toList();
 
-      // If the filtered list is not empty, return the assigneeslist
       if (filteredAssignees.isNotEmpty) {
         return CourseworkModel.fromJson(assigneeslist);
       } else {
         return null;
       }
     })
-    .where((assigneeslist) => assigneeslist != null) // Filter out the null values
-    .cast<CourseworkModel>() // Ensure the list is of type List<CourseworkModel>
+    .where((assigneeslist) => assigneeslist != null) 
+    .cast<CourseworkModel>() 
+    .toList();
+
+      // return arrData0;
+      return courseworks;
+      
+    // } catch (e) {
+    //   print('An error occurred: $e');
+    //   return [];
+    // }
+  }
+
+  static Future<List<CourseworkModel>> getcourseworkbychildren(
+      List<String> studentids) async {
+    // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
+
+    userCollection = db.collection(COURSEWORK_COLLECTION);
+
+    // try {
+      final arrData0 =
+          await userCollection.find().toList();
+
+      List<CourseworkModel> courseworks = arrData0
+    .map((assigneeslist) {
+
+      var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
+        var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
+
+        return studentids.contains(studentModel.student.studentid);
+      }).toList();
+
+      if (filteredAssignees.isNotEmpty) {
+        return CourseworkModel.fromJson(assigneeslist);
+      } else {
+        return null;
+      }
+    })
+    .where((assigneeslist) => assigneeslist != null) 
+    .cast<CourseworkModel>() 
     .toList();
 
       // return arrData0;
@@ -575,6 +617,39 @@ class MongoDatabase {
       var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
         var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
         return studentModel.student.studentid == studentid;
+      }).toList();
+
+      if (filteredAssignees.isNotEmpty) {
+        return MaterialNoticeModel.fromJson(assigneeslist);
+      } else {
+        return null;
+      }
+    })
+    .where((assigneeslist) => assigneeslist != null) 
+    .cast<MaterialNoticeModel>() 
+    .toList();
+
+      return courseworks;
+      
+  }
+
+  static Future<List<MaterialNoticeModel>> getmaterialnoticebychildren(
+      List<String> studentids) async {
+    // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
+
+    userCollection = db.collection(MATERIALNOTICE_COLLECTION);
+
+    // try {
+      final arrData0 =
+          await userCollection.find().toList();
+
+      List<MaterialNoticeModel> courseworks = arrData0
+    .map((assigneeslist) {
+
+      var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
+        var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
+        // return studentModel.student.studentid == studentids;
+      return studentids.contains(studentModel.student.studentid);
       }).toList();
 
       if (filteredAssignees.isNotEmpty) {

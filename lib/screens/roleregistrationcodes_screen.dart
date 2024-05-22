@@ -9,6 +9,7 @@ import '../dbHelper/userprovider.dart';
 import '../models/category.dart';
 import '../routes/route_helper.dart';
 import '../widgets/circle_button.dart';
+import '../widgets/custom_icon_button.dart';
 import '../widgets/search_testfield.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +31,46 @@ class _RoleRegistrationCodes extends State<RoleRegistrationCodes> {
             // const AppBar(),
             Body(),
           ],
+        ),
+        bottomSheet: BottomSheet(
+          onClosing: () {},
+          backgroundColor: Colors.white,
+          enableDrag: false,
+          builder: (context) {
+            return SizedBox(
+              height: 80,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: CustomIconButton(
+                        onTap: () {
+                          print("back!");
+
+                          Navigator.pop(context);
+                        },
+                        // color: kPrimaryColor,
+                        // color: Colors.white,
+                        height: 45,
+                        width: 150,
+                        child: const Text(
+                          "Back to Home ",
+                          style: TextStyle(
+                            // color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -265,6 +306,7 @@ class Body extends StatelessWidget {
           //     ))
         ],
       ),
+      
     );
   }
 }

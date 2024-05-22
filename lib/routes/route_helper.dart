@@ -21,6 +21,7 @@ import '../screens/addmaterialnotice_screen.dart';
 import '../screens/adminbase_screen.dart';
 import '../screens/generateregistrationcode_screen.dart';
 import '../screens/login_screen.dart';
+import '../screens/parentbase_screen.dart';
 import '../screens/register_screen.dart';
 import '../screens/roleregistrationcodes_screen.dart';
 import '../screens/studentdetails_screen.dart';
@@ -57,6 +58,7 @@ class RouteHelper {
   static const String adminContext = "/Admin";
   static const String teacherContext = "/Teacher";
   static const String studentContext = "/Student";
+  static const String parentContext = "/Parent";
   static const String teacheraddcoursework = "/Teacher/AddCoursework";
   static const String teachermaterialnotice = "/Teacher/AddMaterialNotice";
   static const String teacheraddfeedback = "/Teacher/AddFeedback";
@@ -80,11 +82,12 @@ class RouteHelper {
     GetPage(name: teacherContext, page: () => const TeacherBaseScreen()),
     GetPage(name: adminContext, page: () => const AdminBaseScreen()),
     GetPage(name: studentContext, page: () => const StudentBaseScreen()),
+    GetPage(name: parentContext, page: () => const ParentBaseScreen()),
     GetPage(name: teacheraddcoursework, page: () => const AddCoursework()),
     GetPage(name: uploadstudentdata, page: () => const UploadStudent()),
     GetPage(name: uploadteacherdata, page: () => const UploadTeacher()),
     GetPage(name: uploaduserdata, page: () => const UploadUser()),
-    GetPage(name: generateregistrationcode,page: () => const GenerateRegistrationCode()),
+    GetPage(name: generateregistrationcode, page: () => const GenerateRegistrationCode()),
     // GetPage(name: generatestudentregistrationcode,page: () => const GenerateRegistrationCode()),
     // GetPage(name: generateparentsregistrationcode,page: () => const GenerateRegistrationCode()),
     // GetPage(name: generateadminregistrationcode,page: () => const GenerateRegistrationCode()),

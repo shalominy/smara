@@ -87,7 +87,7 @@ class _UploadUser extends State<UploadUser> {
                   child: TextFormField(
                     controller: username,
                     decoration: const InputDecoration(
-                      hintText: 'Enter User Name',
+                      hintText: 'Enter Full Name',
                       hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       // labelText: "Student Transcript",
@@ -291,7 +291,9 @@ class _UploadUser extends State<UploadUser> {
         matric: matric,
         emel: useremail,
         role: userrole,
-        password: digest.toString());
+        password: digest.toString(),
+        children: []
+        );
     await MongoDatabase.insertusertemporary(data);
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

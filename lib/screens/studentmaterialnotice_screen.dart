@@ -844,11 +844,15 @@ class _MaterialNoticeListDetails extends State<MaterialNoticeListDetails> {
   Widget build(BuildContext context) {
   print("coursework assigneeslist" + widget.materialnotice.toString());
   print("coursework assigneeslist" + widget.materialnotice.content.toString());
-  print("coursework assigneeslist" + jsonDecode(widget.materialnotice.assigneeslist[5]).map((studentt) {
+  // print("coursework assigneeslist" + jsonDecode(widget.materialnotice.assigneeslist[5]).map((studentt) {
+  print("coursework assigneeslist" + widget.materialnotice.assigneeslist.map((studentt) {
         // var filteredAssignees = studentt["assigneeslist"].where((student) {
-        var studentModel = AssignStudentModel.fromJson(studentt);
-        if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
-        {return AssignStudentModel.fromJson(studentt).feedback; } 
+        // var studentModel = AssignStudentModel.fromJson(studentt);
+        var studentModel = AssignStudentModel.fromJson(jsonDecode(studentt));
+        // if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
+        if(context.watch<UserProvider>().children.contains(studentModel.student.studentid))
+        // {return AssignStudentModel.fromJson(studentt).feedback; } 
+        {return AssignStudentModel.fromJson(jsonDecode(studentt)).feedback; } 
         
       // }); 
       
@@ -874,10 +878,13 @@ class _MaterialNoticeListDetails extends State<MaterialNoticeListDetails> {
   //   return null;
   // }).where((student) => student != null).cast<AssignStudentModel>().toList();
 
-      String feedback = jsonDecode(widget.materialnotice.assigneeslist[5]).map((studentt) {
+      // String feedback = jsonDecode(widget.materialnotice.assigneeslist[5]).map((studentt) {
+      String feedback = widget.materialnotice.assigneeslist.map((studentt) {
         // var filteredAssignees = studentt["assigneeslist"].where((student) {
-        var studentModel = AssignStudentModel.fromJson(studentt);
-        if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
+        // var studentModel = AssignStudentModel.fromJson(studentt);
+        var studentModel = AssignStudentModel.fromJson(jsonDecode(studentt));
+        // if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
+        if(context.watch<UserProvider>().children.contains(studentModel.student.studentid))
         // {return AssignStudentModel.fromJson(studentt).feedback; } 
         {return studentModel.feedback; } 
         
