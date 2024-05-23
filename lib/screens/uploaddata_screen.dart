@@ -109,7 +109,7 @@ class Body extends StatelessWidget {
           ),
           GestureDetector(
               onTap: () {
-                Get.toNamed(RouteHelper.goto(role, "GenerateRegCode"));
+                Get.toNamed(RouteHelper.goto(role, "RoleRegCode"));
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 40, right: 40),

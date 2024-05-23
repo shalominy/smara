@@ -2,43 +2,37 @@ import 'dart:convert';
 
 import 'package:mongo_dart/mongo_dart.dart';
 
-CourseworkModel courseworkModelFromJson(String str) =>
-    CourseworkModel.fromJson(json.decode(str));
+MaterialNoticeModel courseworkModelFromJson(String str) =>
+    MaterialNoticeModel.fromJson(json.decode(str));
 
-String courseworkModelToJson(CourseworkModel data) =>
+String courseworkModelToJson(MaterialNoticeModel data) =>
     json.encode(data.toJson());
 
-class CourseworkModel {
+class MaterialNoticeModel {
   ObjectId id;
   ObjectId teacherid;
-  String type;
-  String name;
+  String title;
   DateTime assigndate;
-  DateTime duedate;
   String assigneestype;
   List<String> assigneeslist;
   String content;
 
-  CourseworkModel({
+  MaterialNoticeModel({
     required this.id,
     required this.teacherid,
-    required this.type,
-    required this.name,
+    required this.title,
     required this.assigndate,
-    required this.duedate,
     required this.assigneestype,
     required this.assigneeslist,
     required this.content,
   });
 
-  factory CourseworkModel.fromJson(Map<String, dynamic> json) =>
-      CourseworkModel(
+  factory MaterialNoticeModel.fromJson(Map<String, dynamic> json) =>
+      MaterialNoticeModel(
         id: json["_id"],
         teacherid: json["teacherid"],
-        type: json["type"],
-        name: json["name"],
+        title: json["type"],
         assigndate: json["assigndate"],
-        duedate: json["duedate"],
         assigneestype: json["assigneestype"],
         // assigneeslist: json["assigneeslist"],
         // assigneeslist: json.values.map((value) => value.toString()).toList(),
@@ -49,10 +43,8 @@ class CourseworkModel {
   Map<String, dynamic> toJson() => {
         "_id": id,
         "teacherid": teacherid,
-        "type": type,
-        "name": name,
+        "type": title,
         "assigndate": assigndate,
-        "duedate": duedate,
         "assigneestype": assigneestype,
         "assigneeslist": assigneeslist,
         "content": content,

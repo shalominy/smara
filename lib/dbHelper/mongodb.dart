@@ -18,6 +18,7 @@ import 'package:smart_hub/models/teacher_model.dart';
 
 import '../models/assignstudent_model.dart';
 import '../models/coursework_model.dart';
+import '../models/materialnotice_model.dart';
 import '../models/student_model.dart';
 import '../models/users_modeltemporary.dart';
 import '../routes/route_helper.dart';
@@ -57,7 +58,9 @@ class MongoDatabase {
               matric: arrData["matric"],
               emel: arrData["emel"],
               role: arrData["role"],
-              password: arrData["password"]);
+              password: arrData["password"],
+              children: arrData["children"]
+              );
 
           context.read<UserProvider>().setuser(users);
           Get.toNamed(RouteHelper.gotocontext(users.role));
@@ -83,52 +86,294 @@ class MongoDatabase {
     // return arrData;
   }
 
-  static Future<String> getregistrationcode(BuildContext context) async {
+  // static Future<String> getregistrationcode(BuildContext context) async {
+  //   userCollection = db.collection("secret");
+
+  //   var arrData = await userCollection.findOne(where.eq('type', 'secret code'));
+  //   print(arrData["genratedcode"]);
+
+  //   return arrData["generatedcode"];
+  // }
+
+  // static Future<void> insertnewregistrationcode(
+  //     String newcode, BuildContext context) async {
+  //   userCollection = db.collection("secret");
+
+  //   // try{
+  //   // var arrData = await userCollection.findOne(where.eq('type', 'secret code'));
+  //   userCollection.updateOne(
+  //       where.eq('type', 'secret code'), modify.set('generatedcode', newcode));
+  //   // print(arrData["genratedcode"]);
+
+  //   // return arrData["generatedcode"];
+  // }
+
+  static Future<String> getstudentregistrationcode(BuildContext context) async {
     userCollection = db.collection("secret");
 
-    var arrData = await userCollection.findOne(where.eq('type', 'secret code'));
+    var arrData = await userCollection.findOne(where.eq('type', 'student secret code'));
     print(arrData["genratedcode"]);
 
     return arrData["generatedcode"];
   }
 
-  static Future<void> insertnewregistrationcode(
+  static Future<String> getteacherregistrationcode(BuildContext context) async {
+    userCollection = db.collection("secret");
+
+    var arrData = await userCollection.findOne(where.eq('type', 'teacher secret code'));
+    print(arrData["genratedcode"]);
+
+    return arrData["generatedcode"];
+  }
+
+  static Future<String> getparentsregistrationcode(BuildContext context) async {
+    userCollection = db.collection("secret");
+
+    var arrData = await userCollection.findOne(where.eq('type', 'parents secret code'));
+    print(arrData["genratedcode"]);
+
+    return arrData["generatedcode"];
+  }
+
+  static Future<String> getadminregistrationcode(BuildContext context) async {
+    userCollection = db.collection("secret");
+
+    var arrData = await userCollection.findOne(where.eq('type', 'admin secret code'));
+    print(arrData["genratedcode"]);
+
+    return arrData["generatedcode"];
+  }
+
+  static Future<void> insertnewstudentregistrationcode(
       String newcode, BuildContext context) async {
     userCollection = db.collection("secret");
 
     // try{
     // var arrData = await userCollection.findOne(where.eq('type', 'secret code'));
     userCollection.updateOne(
-        where.eq('type', 'secret code'), modify.set('generatedcode', newcode));
+        where.eq('type', 'student secret code'), modify.set('generatedcode', newcode));
     // print(arrData["genratedcode"]);
 
     // return arrData["generatedcode"];
   }
 
-  static Future<void> userregister(String code, UserModelTemporary data) async {
+  static Future<void> insertnewteacherregistrationcode(
+      String newcode, BuildContext context) async {
+    userCollection = db.collection("secret");
+
+    // try{
+    // var arrData = await userCollection.findOne(where.eq('type', 'secret code'));
+    userCollection.updateOne(
+        where.eq('type', 'teacher secret code'), modify.set('generatedcode', newcode));
+    // print(arrData["genratedcode"]);
+
+    // return arrData["generatedcode"];
+  }
+
+  static Future<void> insertnewparentsregistrationcode(
+      String newcode, BuildContext context) async {
+    userCollection = db.collection("secret");
+
+    // try{
+    // var arrData = await userCollection.findOne(where.eq('type', 'secret code'));
+    userCollection.updateOne(
+        where.eq('type', 'parents secret code'), modify.set('generatedcode', newcode));
+    // print(arrData["genratedcode"]);
+
+    // return arrData["generatedcode"];
+  }
+
+  static Future<void> insertnewadminregistrationcode(
+      String newcode, BuildContext context) async {
+    userCollection = db.collection("secret");
+
+    // try{
+    // var arrData = await userCollection.findOne(where.eq('type', 'secret code'));
+    userCollection.updateOne(
+        where.eq('type', 'admin secret code'), modify.set('generatedcode', newcode));
+    // print(arrData["genratedcode"]);
+
+    // return arrData["generatedcode"];
+  }
+
+  static Future<void> userregister(String code, UserModelTemporary data, BuildContext context) async {
     userCollection = db.collection(USERS_COLLECTION);
     secret = db.collection("secret");
-    var secretcode = await secret.findOne(where.eq('type', 'secret code'));
+    // var secretcode = await secret.findOne(where.eq('type', 'secret code'));
+    var studentsecretcode = await secret.findOne(where.eq('type', 'student secret code'));
+    var teachersecretcode = await secret.findOne(where.eq('type', 'teacher secret code'));
+    var parentssecretcode = await secret.findOne(where.eq('type', 'parents secret code'));
+    var adminsecretcode = await secret.findOne(where.eq('type', 'admin secret code'));
 
     try {
-      if (code == secretcode["generatedcode"]) {
+
+      // if (code == secretcode["generatedcode"]) {
+      //   var result = await userCollection.insertOne(data.toJson());
+      //   if (result.isSuccess) {
+
+      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      //     content: Text(" User Registered "),
+      //   ));
+
+      //   Get.toNamed(RouteHelper.loginscreen());
+
+
+      //     print("User Registered" + data.toJson().toString());
+
+          
+
+      //     // return "User Registered" + data.toJson().toString();
+      //   } else {
+
+      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      //     content: Text("Something went wrong while registering"),
+      //   ));
+
+      //   Get.toNamed(RouteHelper.loginscreen());
+
+        
+      //     print("Something went wrong while registering");
+      //     // return "Something went wrong while registering";
+      //   }
+      // } else 
+      if (code == studentsecretcode["generatedcode"]) {
+        data.role = "Student";
         var result = await userCollection.insertOne(data.toJson());
         if (result.isSuccess) {
-          print("User Registered" + data.toJson().toString());
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(" Student Registered "),
+        ));
+
+        Get.toNamed(RouteHelper.loginscreen());
+
+
+          print("Student Registered" + data.toJson().toString());
+
+          
 
           // return "User Registered" + data.toJson().toString();
         } else {
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Something went wrong while registering"),
+        ));
+
+        Get.toNamed(RouteHelper.loginscreen());
+
+        
+          print("Something went wrong while registering");
+          // return "Something went wrong while registering";
+        }
+      }else if (code == teachersecretcode["generatedcode"]) {
+      data.role = "Teacher";
+
+        var result = await userCollection.insertOne(data.toJson());
+        if (result.isSuccess) {
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(" Teacher Registered "),
+        ));
+
+        Get.toNamed(RouteHelper.loginscreen());
+
+
+          print("Teacher Registered" + data.toJson().toString());
+
+          
+
+          // return "User Registered" + data.toJson().toString();
+        } else {
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Something went wrong while registering"),
+        ));
+
+        Get.toNamed(RouteHelper.loginscreen());
+
+        
+          print("Something went wrong while registering");
+          // return "Something went wrong while registering";
+        }
+      }else if (code == parentssecretcode["generatedcode"]) {
+        data.role = "Parent";
+        // data.children = data.matric.split(' ');
+        data.children = data.matric.split(RegExp(r'[ ,/]'));
+        data.matric = "";
+
+        var result = await userCollection.insertOne(data.toJson());
+        if (result.isSuccess) {
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(" Parents Registered "),
+        ));
+
+        Get.toNamed(RouteHelper.loginscreen());
+
+
+          print("Parents Registered" + data.toJson().toString());
+
+          
+
+          // return "User Registered" + data.toJson().toString();
+        } else {
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Something went wrong while registering"),
+        ));
+
+        Get.toNamed(RouteHelper.loginscreen());
+
+        
+          print("Something went wrong while registering");
+          // return "Something went wrong while registering";
+        }
+      } else if (code == adminsecretcode["generatedcode"]) {
+        data.role = "Admin";
+
+        var result = await userCollection.insertOne(data.toJson());
+        if (result.isSuccess) {
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(" Admin Registered "),
+        ));
+
+        Get.toNamed(RouteHelper.loginscreen());
+
+
+          print("Admin Registered" + data.toJson().toString());
+
+          
+
+          // return "User Registered" + data.toJson().toString();
+        } else {
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Something went wrong while registering"),
+        ));
+
+        Get.toNamed(RouteHelper.loginscreen());
+
+        
           print("Something went wrong while registering");
           // return "Something went wrong while registering";
         }
       } else {
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Secret Code is not valid"),
+        ));
+
         print("code is not correct");
         // return "code is not correct";
       }
+
     } catch (e) {
       print(e.toString());
       // return e.toString();
-    }
+    }throw{
+      print("eeeee")
+    };
   }
 
   static Future<void> updatecourseworkfeedback(
@@ -193,6 +438,22 @@ class MongoDatabase {
       // var val = await userCollection.find(where.eq("_id", courseworkid).fields(['assigneeslist'])).toList();
       //     var val = await userCollection.find(where.eq("_id", courseworkid).fields(['assigneeslist'])).toList();
       // print(val[0]);
+
+      return arrData;
+    } catch (e) {
+      print('An error occurred: $e');
+      return [];
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> getstudentbymaterialnotice(
+      ObjectId materialnoticeid) async {
+
+    userCollection = db.collection(MATERIALNOTICE_COLLECTION);
+
+    try {
+      final arrData =
+          await userCollection.find(where.eq('_id', materialnoticeid)).toList();
 
       return arrData;
     } catch (e) {
@@ -277,21 +538,20 @@ class MongoDatabase {
 
       List<CourseworkModel> courseworks = arrData0
     .map((assigneeslist) {
-      // Filter the assigneeslist to find the student with the given id
+
       var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
         var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
         return studentModel.student.studentid == studentid;
       }).toList();
 
-      // If the filtered list is not empty, return the assigneeslist
       if (filteredAssignees.isNotEmpty) {
         return CourseworkModel.fromJson(assigneeslist);
       } else {
         return null;
       }
     })
-    .where((assigneeslist) => assigneeslist != null) // Filter out the null values
-    .cast<CourseworkModel>() // Ensure the list is of type List<CourseworkModel>
+    .where((assigneeslist) => assigneeslist != null) 
+    .cast<CourseworkModel>() 
     .toList();
 
       // return arrData0;
@@ -301,6 +561,109 @@ class MongoDatabase {
     //   print('An error occurred: $e');
     //   return [];
     // }
+  }
+
+  static Future<List<CourseworkModel>> getcourseworkbychildren(
+      List<String> studentids) async {
+    // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
+
+    userCollection = db.collection(COURSEWORK_COLLECTION);
+
+    // try {
+      final arrData0 =
+          await userCollection.find().toList();
+
+      List<CourseworkModel> courseworks = arrData0
+    .map((assigneeslist) {
+
+      var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
+        var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
+
+        return studentids.contains(studentModel.student.studentid);
+      }).toList();
+
+      if (filteredAssignees.isNotEmpty) {
+        return CourseworkModel.fromJson(assigneeslist);
+      } else {
+        return null;
+      }
+    })
+    .where((assigneeslist) => assigneeslist != null) 
+    .cast<CourseworkModel>() 
+    .toList();
+
+      // return arrData0;
+      return courseworks;
+      
+    // } catch (e) {
+    //   print('An error occurred: $e');
+    //   return [];
+    // }
+  }
+
+  static Future<List<MaterialNoticeModel>> getmaterialnoticebystudent(
+      String studentid) async {
+    // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
+
+    userCollection = db.collection(MATERIALNOTICE_COLLECTION);
+
+    // try {
+      final arrData0 =
+          await userCollection.find().toList();
+
+      List<MaterialNoticeModel> courseworks = arrData0
+    .map((assigneeslist) {
+
+      var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
+        var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
+        return studentModel.student.studentid == studentid;
+      }).toList();
+
+      if (filteredAssignees.isNotEmpty) {
+        return MaterialNoticeModel.fromJson(assigneeslist);
+      } else {
+        return null;
+      }
+    })
+    .where((assigneeslist) => assigneeslist != null) 
+    .cast<MaterialNoticeModel>() 
+    .toList();
+
+      return courseworks;
+      
+  }
+
+  static Future<List<MaterialNoticeModel>> getmaterialnoticebychildren(
+      List<String> studentids) async {
+    // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
+
+    userCollection = db.collection(MATERIALNOTICE_COLLECTION);
+
+    // try {
+      final arrData0 =
+          await userCollection.find().toList();
+
+      List<MaterialNoticeModel> courseworks = arrData0
+    .map((assigneeslist) {
+
+      var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
+        var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
+        // return studentModel.student.studentid == studentids;
+      return studentids.contains(studentModel.student.studentid);
+      }).toList();
+
+      if (filteredAssignees.isNotEmpty) {
+        return MaterialNoticeModel.fromJson(assigneeslist);
+      } else {
+        return null;
+      }
+    })
+    .where((assigneeslist) => assigneeslist != null) 
+    .cast<MaterialNoticeModel>() 
+    .toList();
+
+      return courseworks;
+      
   }
 
   static Future<List<Map<String, dynamic>>> getstudents() async {
@@ -358,6 +721,19 @@ class MongoDatabase {
     // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
 
     userCollection = db.collection(COURSEWORK_COLLECTION);
+    final arrData = await userCollection
+        .find(where.eq('teacherid', teacherid).sortBy('_id', descending: true))
+        .toList();
+    // final arrData = await userCollection.find().toList();
+    return arrData;
+    // return arrData.map((doc) => doc['name'] as String);
+  }
+
+  static Future<List<Map<String, dynamic>>> getmaterialnoticebyteacherid(
+      ObjectId teacherid) async {
+    // static Future<List<Map<String, dynamic>>> getstudentsbyid()  async{
+
+    userCollection = db.collection(MATERIALNOTICE_COLLECTION);
     final arrData = await userCollection
         .find(where.eq('teacherid', teacherid).sortBy('_id', descending: true))
         .toList();
@@ -425,6 +801,21 @@ class MongoDatabase {
 
   static Future<String> insertcoursework(CourseworkModel data) async {
     userCollection = db.collection(COURSEWORK_COLLECTION);
+    try {
+      var result = await userCollection.insertOne(data.toJson());
+      if (result.isSuccess) {
+        return "Data inserted";
+      } else {
+        return "Something went wrong while inserting student data";
+      }
+    } catch (e) {
+      // print(e.toString());
+      return e.toString();
+    }
+  }
+
+  static Future<String> insertmaterialnotice(MaterialNoticeModel data) async {
+    userCollection = db.collection(MATERIALNOTICE_COLLECTION);
     try {
       var result = await userCollection.insertOne(data.toJson());
       if (result.isSuccess) {

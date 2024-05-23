@@ -808,7 +808,9 @@ class CourseworkContainer extends StatelessWidget {
                 // child: Text(coursework.name, style: TextStyle(color: color),),
                 child: Column(children: [
                   Text(coursework.name),
-                  Text(coursework.content)
+                  Text(coursework.content),
+                  // Text( DateFormat('dd-MM-yyy').format(coursework.assigndate)),
+
                 ]),
               ),
               // Text(

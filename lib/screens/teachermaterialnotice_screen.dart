@@ -21,6 +21,7 @@ import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart' as m;
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_hub/models/materialnotice_model.dart';
 import 'package:smart_hub/screens/addfeedback_screen.dart';
 //import 'package:video_player/video_player.dart';
 
@@ -41,18 +42,18 @@ import 'featuerd_screen.dart';
 import 'logout_screen.dart';
 import 'uploaddata_screen.dart';
 
-class StudentCoursework extends StatefulWidget {
+class TeacherMaterial extends StatefulWidget {
   // final String title;
-  const StudentCoursework({
+  const TeacherMaterial({
     Key? key,
     // required this.title,
   }) : super(key: key);
 
   @override
-  _StudentCoursework createState() => _StudentCoursework();
+  _TeacherMaterial createState() => _TeacherMaterial();
 }
 
-class _StudentCoursework extends State<StudentCoursework> {
+class _TeacherMaterial extends State<TeacherMaterial> {
   // ignore: unused_field
   int _selectedTag = 0;
 
@@ -369,7 +370,7 @@ class _CourseworkList extends State<CourseworkList> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Active Courseworks",
+                "Material Notice",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               // TextButton(
@@ -408,9 +409,8 @@ class _CourseworkList extends State<CourseworkList> {
         // Padding(padding: const EdgeInsets.all(10), child:
         Expanded(
             child: FutureBuilder(
-                // future: MongoDatabase.getcourseworkbyteacherid(m.ObjectId.parse(
-                //     '${context.watch<UserProvider>().id}'.substring(10, 34))),
-                future: MongoDatabase.getcourseworkbystudent('${context.watch<UserProvider>().matric}'),
+                future: MongoDatabase.getmaterialnoticebyteacherid(m.ObjectId.parse(
+                    '${context.watch<UserProvider>().id}'.substring(10, 34))),
                 builder: (context, AsyncSnapshot snapshot) {
                   // print('${context.read<UserProvider>().id}'.substring(10, 34));
                   // print(m.ObjectId.parse('${context.watch<UserProvider>().id}'.substring(10, 34)));
@@ -422,13 +422,11 @@ class _CourseworkList extends State<CourseworkList> {
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
-                          return CourseworkContainer(
+                          return MaterialNoticeContainer(
                               function: widget.function,
-                              coursework: 
-                              // CourseworkModel.fromJson(
+                              materialnotice: MaterialNoticeModel.fromJson(
                                   // snapshot.data[index]), color: _color.elementAt(int.parse(index.toString()[0])));
-                                  // snapshot.data[index]),
-                                  snapshot.data[index],
+                                  snapshot.data[index]),
                               color: Colors.black);
                         });
                   } else {
@@ -437,10 +435,10 @@ class _CourseworkList extends State<CourseworkList> {
                     );
                   }
                 })),
-        // const SizedBox(
-        //   height: 80,
-        //   child: AddNewCoursework(),
-        // ),
+        const SizedBox(
+          height: 80,
+          child: AddNewCoursework(),
+        ),
       ],
     ));
     // );
@@ -729,14 +727,14 @@ class _AddNewCoursework extends State<AddNewCoursework> {
               onTap: () {
                 Get.toNamed(RouteHelper.goto(
                     context.read<UserProvider>().role.toString(),
-                    "AddCoursework"));
+                    "AddMaterialNotice"));
               },
               // color: kPrimaryColor,
               color: Colors.green,
               height: 45,
               width: 45,
               child: const Text(
-                "+ New Coursework",
+                "+ New Material Notice",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
@@ -750,13 +748,13 @@ class _AddNewCoursework extends State<AddNewCoursework> {
   }
 }
 
-class CourseworkContainer extends StatelessWidget {
+class MaterialNoticeContainer extends StatelessWidget {
   final Function function;
-  final CourseworkModel coursework;
+  final MaterialNoticeModel materialnotice;
   final Color color;
-  const CourseworkContainer(
+  const MaterialNoticeContainer(
       {Key? key,
-      required this.coursework,
+      required this.materialnotice,
       required this.color,
       required this.function})
       : super(key: key);
@@ -769,9 +767,8 @@ class CourseworkContainer extends StatelessWidget {
       //     MaterialPageRoute(
       //         builder: (context) => const BaseScreen())),
       onTap: () {
-      print("heree" + coursework.assigneeslist.toString());
         function(
-            CourseworkListDetails(changetab: function, coursework: coursework));
+            MaterialNoticeListDetails(changetab: function, materialnotice: materialnotice));
         // print(coursework.id);
         // context.read<UserProvider>().setuser(users);
 
@@ -811,8 +808,10 @@ class CourseworkContainer extends StatelessWidget {
               Align(
                 // child: Text(coursework.name, style: TextStyle(color: color),),
                 child: Column(children: [
-                  Text(coursework.name),
-                  Text(coursework.content)
+                  Text(materialnotice.title),
+                  Text(materialnotice.content),
+                  // Text( DateFormat('dd-MM-yyy').format(coursework.assigndate)),
+
                 ]),
               ),
               // Text(
@@ -827,100 +826,20 @@ class CourseworkContainer extends StatelessWidget {
   }
 }
 
-class CourseworkListDetails extends StatefulWidget {
+class MaterialNoticeListDetails extends StatefulWidget {
   final Function changetab;
-  final CourseworkModel coursework;
-  const CourseworkListDetails(
-      {Key? key, required this.coursework, required this.changetab})
+  final MaterialNoticeModel materialnotice;
+  const MaterialNoticeListDetails(
+      {Key? key, required this.materialnotice, required this.changetab})
       : super(key: key);
 
   @override
   _CourseworkListDetails createState() => _CourseworkListDetails();
 }
 
-class _CourseworkListDetails extends State<CourseworkListDetails> {
+class _CourseworkListDetails extends State<MaterialNoticeListDetails> {
   @override
   Widget build(BuildContext context) {
-  print("coursework assigneeslist" + widget.coursework.toString());
-  print("coursework assigneeslist" + widget.coursework.content.toString());
-  // print("coursework assigneeslist" + jsonDecode(widget.coursework.assigneeslist[7]).map((studentt) {
-  print("coursework assigneeslist" + widget.coursework.assigneeslist.map((studentt) {
-        // var filteredAssignees = studentt["assigneeslist"].where((student) {
-        // var studentModel = AssignStudentModel.fromJson(studentt);
-        var studentModel = AssignStudentModel.fromJson(jsonDecode(studentt));
-        // if(studentModel.student.studentid == 'UK0192')
-        if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
-        // {return AssignStudentModel.fromJson(studentt).feedback; } 
-        {return AssignStudentModel.fromJson(jsonDecode(studentt)).feedback; } 
-        
-      // }); 
-      
-      // if (filteredAssignees.isNotEmpty) {
-      //   return CourseworkModel.fromJson(studentt);
-      // } else {
-      //   return null;
-      // }
-
-      
-      })
-      .where((studentt) => studentt != null)
-      // .cast<AssignStudentModel>()
-      .toString());
-
-    
-
-  //     List<AssignStudentModel> feedback = jsonDecode(widget.coursework.assigneeslist[7]).map((studentJson) {
-  //   var studentModel = AssignStudentModel.fromJson(studentJson);
-  //   if (studentModel.student.studentid == 'UK0192') {
-  //     return studentModel;
-  //   }
-  //   return null;
-  // }).where((student) => student != null).cast<AssignStudentModel>().toList();
-
-      // String feedback = jsonDecode(widget.coursework.assigneeslist[7]).map((studentt) {
-      String feedback = widget.coursework.assigneeslist.map((studentt) {
-        // var filteredAssignees = studentt["assigneeslist"].where((student) {
-        // var studentModel = AssignStudentModel.fromJson(studentt);
-        var studentModel = AssignStudentModel.fromJson(jsonDecode(studentt));
-        // if(studentModel.student.studentid == 'UK0192')
-        if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
-        // {return AssignStudentModel.fromJson(studentt).feedback; } 
-        {return studentModel.feedback; } 
-        
-      // }); 
-      
-      // if (filteredAssignees.isNotEmpty) {
-      //   return CourseworkModel.fromJson(studentt);
-      // } else {
-      //   return null;
-      // }
-
-      
-      })
-      .where((studentt) => studentt != null)
-      .toString();
-
-  
-
-  // CourseworkModel courseworkfeedback = arrData0
-  //   .map((assigneeslist) {
-  //     // Filter the assigneeslist to find the student with the given id
-  //     var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
-  //       var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
-  //       return studentModel.student.studentid == studentid;
-  //     }).toList();
-
-  //     // If the filtered list is not empty, return the assigneeslist
-  //     if (filteredAssignees.isNotEmpty) {
-  //       return CourseworkModel.fromJson(assigneeslist);
-  //     } else {
-  //       return null;
-  //     }
-  //   })
-  //   .where((assigneeslist) => assigneeslist != null) // Filter out the null values
-  //   .cast<CourseworkModel>() // Ensure the list is of type List<CourseworkModel>
-  //   .toList();
-
     return
         // Column(children: [
         Expanded(
@@ -932,7 +851,7 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
             children: [
               const Align(
                 child: Text(
-                  'Coursework Details',
+                  'Material Notice Details',
                   // style: Theme.of(context).textTheme.displayMedium,
                 ),
               ),
@@ -967,92 +886,79 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
 
         Align(
             child: Text(
-          widget.coursework.name,
+          widget.materialnotice.title,
           style: TextStyle(fontSize: 30),
         )),
         SizedBox(
           height: 5,
         ),
         Text("Assign Date" +
-            DateFormat('dd-MM-yyy').format(widget.coursework.assigndate)),
+            DateFormat('dd-MM-yyy').format(widget.materialnotice.assigndate)),
         Text("Due Date" +
-            DateFormat('dd-MM-yyy').format(widget.coursework.duedate)),
-        Text("Due Date" +
-            DateFormat('dd-MM-yyy').format(widget.coursework.duedate)),
-        Text("Assignees Type" + widget.coursework.assigneestype),
-        const SizedBox(height: 15,),
-        const Text("coursework feedback " ),
-        (feedback == "()") ? const Text("Feedback is yet to be received",  style: TextStyle(fontSize: 20)) : Text( feedback.substring(1, feedback.length - 1), style: const TextStyle(fontSize: 20)),
-        // Text( feedback.substring(1, feedback.length - 1), style: const TextStyle(fontSize: 20)),
-        // Text("coursework feedback" + feedback.map((e) => e.feedback.toString()).toString()),
-        // const CourseworkDetailsTableHeader(),
-        // Expanded(
-        //   child: SizedBox(
-        //       height: 100,
-        //       child: SizedBox(
-        //           child: FutureBuilder(
-        //               future: MongoDatabase.getstudentbycoursework(
-        //                   widget.coursework.id),
-        //               builder: (context, AsyncSnapshot snapshot) {
-        //                 if (snapshot.hasData) {
-        //                   var totalData = snapshot.data.length;
-        //                   print("Total Data" + totalData.toString());
+            DateFormat('dd-MM-yyy').format(widget.materialnotice.assigndate)),
+        // Text("Due Date" +
+        //     DateFormat('dd-MM-yyy').format(widget.materialnotice.duedate)),
+        Text("Assignees Type" + widget.materialnotice.assigneestype),
+        const CourseworkDetailsTableHeader(),
+        Expanded(
+          child: SizedBox(
+              height: 100,
+              child: SizedBox(
+                  child: FutureBuilder(
+                      future: MongoDatabase.getstudentbymaterialnotice(
+                          widget.materialnotice.id),
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          var totalData = snapshot.data.length;
+                          print("Total Data" + totalData.toString());
 
-        //                   final List<Map<String, dynamic>> items =
-        //                       snapshot.data!;
+                          final List<Map<String, dynamic>> items =
+                              snapshot.data!;
 
-        //                   final List<List<String>> studentsList =
-        //                       items.map((map) {
-        //                     return map.values
-        //                         .map((value) => value.toString())
-        //                         .toList();
-        //                   }).toList();
+                          final List<List<String>> studentsList =
+                              items.map((map) {
+                            return map.values
+                                .map((value) => value.toString())
+                                .toList();
+                          }).toList();
 
-        //                   // final List<String> itemNames = items
-        //                   //     .map((map) => map['assigneeslist'][1] as String)
-        //                   //     .toList();
+                          String studentt = studentsList[0][5].toString();
 
-        //                   // print(items);
-        //                   // print(jsonDecode(studentsList[0][7])[1]);
+                          var josndecosdedtest = jsonDecode(studentt);
 
-        //                   String studentt = studentsList[0][7].toString();
+                          final List<AssignStudentModel> assigneeslist =
+                              (josndecosdedtest as List).map((userData) {
+                            print("inside test" + userData.toString());
 
-        //                   var josndecosdedtest = jsonDecode(studentt);
+                            var encodedstssring = jsonEncode(userData);
+                            Map<String, dynamic> assigneeslistsss =
+                                jsonDecode(encodedstssring);
 
-        //                   final List<AssignStudentModel> assigneeslist =
-        //                       (josndecosdedtest as List).map((userData) {
-        //                     print("inside test" + userData.toString());
+                            print("inside test 32" + userData.toString());
 
-        //                     var encodedstssring = jsonEncode(userData);
-        //                     Map<String, dynamic> assigneeslistsss =
-        //                         jsonDecode(encodedstssring);
+                            return AssignStudentModel.fromJson(
+                                assigneeslistsss);
+                          }).toList();
 
-        //                     print("inside test 32" + userData.toString());
-
-        //                     // m.ObjectId id = m.ObjectId.parse("6644659a162faa9b21000000");
-
-        //                     return AssignStudentModel.fromJson(
-        //                         assigneeslistsss);
-        //                   }).toList();
-
-        //                   return ListView.builder(
-        //                       itemCount: assigneeslist.length,
-        //                       itemBuilder: (context, index) {
-        //                         return CourseworkDetailsStudentContainer(
-        //                             assignees: assigneeslist[index]);
-        //                         // coursework: AssignStudentModel.fromJson(
-        //                       });
-        //                 } else {
-        //                   return Center(
-        //                     child: Text("No Data Available"),
-        //                   );
-        //                 }
-        //               }))),
-        // ),
+                          return ListView.builder(
+                              itemCount: assigneeslist.length,
+                              itemBuilder: (context, index) {
+                                return MaterialNoticeDetailsStudentContainer(
+                                    assignees: assigneeslist[index]);
+                                // coursework: AssignStudentModel.fromJson(
+                              });
+                        } else {
+                          return Center(
+                            child: Text("No Data Available"),
+                          );
+                        }
+                      }))),
+        ),
         // SizedBox(
         //   height: 80,
-        //   child: AddFeedbackButton(
-        //     coursework: widget.coursework,
+        //   child: 
+        //   AddFeedbackButton(
+        //     coursework: widget.materialnotice,
         //   ),
         // )
         // Text("Assignees Type" + widget.coursework.assigneestype),
@@ -1115,9 +1021,9 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
   }
 }
 
-class CourseworkDetailsStudentContainer extends StatelessWidget {
+class MaterialNoticeDetailsStudentContainer extends StatelessWidget {
   final AssignStudentModel assignees;
-  const CourseworkDetailsStudentContainer({Key? key, required this.assignees})
+  const MaterialNoticeDetailsStudentContainer({Key? key, required this.assignees})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

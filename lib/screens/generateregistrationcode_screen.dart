@@ -31,7 +31,9 @@ class _GenerateRegistrationCode extends State<GenerateRegistrationCode> {
 
   @override
   Widget build(BuildContext context) {
-    // getregistrationcode();
+    // getregistrationcode();    
+    final String roletype = Get.arguments as String;
+
 
     return //Scaffold(body: SafeArea(child: FutureBuilder(future: MongoDatabase.getstudents(), builder: (, Asyncsnapshot snapshot) )))
         AnnotatedRegion<SystemUiOverlayStyle>(
@@ -94,14 +96,14 @@ class _GenerateRegistrationCode extends State<GenerateRegistrationCode> {
                                 setState(() {
                                   // getregistrationcode();
 
-                                  insertnewregistrationcode(randomString);
+                                  insertnewregistrationcode(roletype ,randomString);
 
                                   _isButtonEnabled = false;
                                 }),
 
                                 Future.delayed(Duration(seconds: 5), () {
                                   setState(() {
-                                    getregistrationcode();
+                                    getregistrationcode(roletype);
                                     _isButtonEnabled = true;
                                   });
                                 }),
@@ -232,17 +234,47 @@ class _GenerateRegistrationCode extends State<GenerateRegistrationCode> {
 //     );
 //   }
 
-  Future<String> getregistrationcode() async {
-    String registrationcode = await MongoDatabase.getregistrationcode(context);
+  Future<String> getregistrationcode(String roletype) async {
+    if(roletype == 'Students'){
+    String registrationcode = await MongoDatabase.getstudentregistrationcode(context);
     print(registrationcode);
     setState(() {
       randomString = registrationcode;
     });
     return registrationcode;
+    } else
+    if(roletype == 'Teachers'){
+    String registrationcode = await MongoDatabase.getteacherregistrationcode(context);
+    print(registrationcode);
+    setState(() {
+      randomString = registrationcode;
+    });
+    return registrationcode;
+    }else 
+    if(roletype == 'Parents'){
+    String registrationcode = await MongoDatabase.getparentsregistrationcode(context);
+    print(registrationcode);
+    setState(() {
+      randomString = registrationcode;
+    });
+    return registrationcode;
+    }else 
+    if(roletype == 'Admin'){
+    String registrationcode = await MongoDatabase.getadminregistrationcode(context);
+    print(registrationcode);
+    setState(() {
+      randomString = registrationcode;
+    });
+    return registrationcode;
+    } else {return 'ROLETYPE ERROR';}
   }
 
-  Future<void> insertnewregistrationcode(String newcode) async {
-    await MongoDatabase.insertnewregistrationcode(newcode, context);
+  Future<void> insertnewregistrationcode(String roletype,String newcode) async {
+    if     (roletype == 'Teachers') { await MongoDatabase.insertnewteacherregistrationcode(newcode, context);}
+    else if(roletype == 'Students') { await MongoDatabase.insertnewstudentregistrationcode(newcode, context);}
+    else if(roletype == 'Parents') { await MongoDatabase.insertnewparentsregistrationcode(newcode, context);}
+    else if(roletype == 'Admin') { await MongoDatabase.insertnewadminregistrationcode(newcode, context);}
+    else {print("roletype is invalid");}
     // print(registrationcode);
     // setState(() {
     // randomString = registrationcode;
