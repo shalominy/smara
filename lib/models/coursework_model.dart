@@ -39,7 +39,7 @@ class CourseworkModel {
         name: json["name"],
         assigndate: json["assigndate"],
         duedate: json["duedate"],
-        assigneestype: json["assigneestype"],
+        assigneestype: json["assigneestype"] ?? " ",
         // assigneeslist: json["assigneeslist"],
         // assigneeslist: json.values.map((value) => value.toString()).toList(),
         assigneeslist: (json["assigneeslist"] as List?)?.map((value) => value.toString()).toList() ?? [],
