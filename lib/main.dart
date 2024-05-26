@@ -12,13 +12,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_hub/screens/testdb_screen.dart';
 
 import 'dbHelper/mongodb.dart';
 import 'dbHelper/userprovider.dart';
 import 'routes/route_helper.dart';
 import 'screens/login_screen.dart';
-import 'screens/teacherdetails_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
