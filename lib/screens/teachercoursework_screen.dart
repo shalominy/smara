@@ -118,10 +118,12 @@ class _TeacherCoursework extends State<TeacherCoursework> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      stops: [0.1, 0.5],
+                      stops: [0.1, 0.7],
                       colors: [
-                        Color(0xff886ff2),
-                        Color(0xff6849ef),
+                        // Color(0xff886ff2),
+                        Color.fromARGB(187, 42, 219, 78),
+                        Color.fromARGB(255, 37, 211, 230),
+                        // Color(0xff6849ef),
                       ],
                     ),
                   ),

@@ -1,9 +1,4 @@
-// import 'package:education_app/constants/color.dart';
-// import 'package:education_app/dbHelper/mongodb.dart';
-// import 'package:education_app/dbHelper/userprovider.dart';
-// import 'package:education_app/models/users_modeltemporary.dart';
-// import 'package:education_app/routes/route_helper.dart';
-// import 'package:education_app/widgets/custom_icon_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -28,16 +23,14 @@ class _LoginScreen extends State<LoginScreen> {
   var password = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return //Scaffold(body: SafeArea(child: FutureBuilder(future: MongoDatabase.getstudents(), builder: (, Asyncsnapshot snapshot) )))
+    return
         AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
         body: SafeArea(
           bottom: false,
           child:
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 10),
-              //   child:
+
 
               Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,9 +50,23 @@ class _LoginScreen extends State<LoginScreen> {
                   ],
                 ),
               )),
-              SizedBox(
-                height: 200,
-              ),
+
+                  SizedBox(height: 30,),
+
+                  Center(child:
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    child: Image.asset(
+                      'assets/images/program_photo.jpg',
+                      width: 200.0,
+                      height: 200.0,
+                      ),
+                    ),
+                    ),
+
+                  SizedBox(height: 20,),
 
               Padding(
                 padding: const EdgeInsets.all(10),
@@ -139,8 +146,6 @@ class _LoginScreen extends State<LoginScreen> {
                       onTap: () {
                         MongoDatabase.login(
                             matric.text, password.text, context);
-                        // _insertData(studentname.text, studentid.text,
-                        //     studentclass.text, studentgender!, context);
                       },
                       color: kPrimaryColor,
                       height: 45,
@@ -157,34 +162,14 @@ class _LoginScreen extends State<LoginScreen> {
                 ),
               ),
 
-              // const AppBar(),
+
               const SizedBox(
                 height: 15,
               ),
               const SizedBox(
                 height: 10,
               ),
-              // const TableHeader(),
 
-              // Expanded(
-              //   child: ListView.separated(
-              //     padding: const EdgeInsets.symmetric(
-              //       vertical: 3,
-              //     ),
-              //     separatorBuilder: (_, __) {
-              //       return const SizedBox(
-              //         height: 2,
-              //       );
-              //     },
-              //     // shrinkWrap: true,
-              //     itemBuilder: (_, int index) {
-              //       return StudentContainer(
-              //         students: students[index],
-              //       );
-              //     },
-              //     itemCount: students.length,
-              //   ),
-              // ),
               Expanded(
                   child: FutureBuilder(
                       future: MongoDatabase.getusers(),
@@ -207,25 +192,7 @@ class _LoginScreen extends State<LoginScreen> {
                         }
                       })),
 
-              // Expanded(
-              //   child: ListView.separated(
-              //     padding: const EdgeInsets.symmetric(
-              //       vertical: 3,
-              //     ),
-              //     separatorBuilder: (_, __) {
-              //       return const SizedBox(
-              //         height: 2,
-              //       );
-              //     },
-              //     // shrinkWrap: true,
-              //     itemBuilder: (_, int index) {
-              //       return StudentContainer(
-              //         students: students[index],
-              //       );
-              //     },
-              //     itemCount: students.length,
-              //   ),
-              // ),
+
               const SizedBox(
                 height: 10,
               )
@@ -237,16 +204,7 @@ class _LoginScreen extends State<LoginScreen> {
     );
   }
 
-//   Widget StudentCard(StudentModel data) {
-//     return Card(
-//       child: Column(
-//         children: [
-//           Text(data.name),
-//           Text("${data.id}"),
-//         ],
-//       ),
-//     );
-//   }
+
 }
 
 class UsersContainer extends StatelessWidget {
@@ -256,12 +214,8 @@ class UsersContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const BaseScreen())),
+
       onTap: () {
-        // MongoDatabase.getstudents(context);
         context.read<UserProvider>().setuser(users);
 
         Get.toNamed(RouteHelper.gotocontext(users.role));
@@ -279,29 +233,16 @@ class UsersContainer extends StatelessWidget {
                 color: Colors.black.withOpacity(.1),
                 blurRadius: 4.0,
                 spreadRadius: .05,
-              ), //BoxShadow
+              ),
             ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Align(
-              //   alignment: Alignment.topRight,
-              //   child: Image.asset(
-              //     category.thumbnail,
-              //     height: kCategoryCardImageSize,
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
+
               Align(
                 child: Text(users.name + " (" + users.role + ")"),
               ),
-              // Text(
-              //   "${category.noOfCourses.toString()} courses",
-              //   style: Theme.of(context).textTheme.bodySmall,
-              // ),
             ],
           ),
         ),

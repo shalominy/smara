@@ -1,20 +1,6 @@
-// import 'package:education_app/constants/color.dart';
-//import 'package:education_app/constants/size.dart';
-// import 'package:education_app/dbHelper/mongodb.dart';
-// import 'package:education_app/dbHelper/userprovider.dart';
-// // import 'package:education_app/main.dart';
-// import 'package:education_app/models/category.dart';
-// // import 'package:education_app/models/users_modeltemporary.dart';
-// import 'package:education_app/routes/route_helper.dart';
-// //import 'package:education_app/screens/course_screen.dart';
-// // import 'package:education_app/screens/studentlist_screen.dart';
-// // import 'package:education_app/screens/teacherlist_screen.dart';
-// //import 'package:education_app/screens/details_screen.dart';
-// import 'package:education_app/widgets/circle_button.dart';
-// import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import '../widgets/search_testfield.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -65,16 +51,7 @@ class Body extends StatelessWidget {
                 "Categories",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              // TextButton(
-              //   onPressed: () {},
-              //   child: Text(
-              //     "See All",
-              //     style: Theme.of(context)
-              //         .textTheme
-              //         .bodyMedium
-              //         ?.copyWith(color: kPrimaryColor),
-              //   ),
-              // )
+
             ],
           ),
         ),
@@ -84,13 +61,7 @@ class Body extends StatelessWidget {
             horizontal: 20,
             vertical: 8,
           ),
-          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //   crossAxisCount: 1,
-          //   childAspectRatio: 0.8,
-          //   crossAxisSpacing: 20,
-          //   mainAxisSpacing: 24,
-          //   mainAxisExtent: 50,
-          // ),
+
           itemBuilder: (context, index) {
             return CategoryCard(
               role: userrole,
@@ -113,23 +84,12 @@ class CategoryCard extends StatelessWidget {
     required this.role,
   }) : super(key: key);
 
-  // int _selectedIndex = 0;
 
-  // static const List<Widget> _widgetOptions = <Widget>[
-  //   StudentListScreen(),
-  //   TeacherListScreen(),
-  // ];
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        // onTap: () => Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     // builder: (context) => const CourseScreen(),
-        //     //builder: (context) => const StudentListScreen(category.kategori),
-        //   ),
-        // ),
+
         onTap: () {
           Get.toNamed(RouteHelper.getlist(role, category.list));
         },
@@ -151,23 +111,11 @@ class CategoryCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Align(
-                //   alignment: Alignment.topRight,
-                //   child: Image.asset(
-                //     category.thumbnail,
-                //     height: kCategoryCardImageSize,
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 10,
-                // ),
+
                 Align(
                   child: Text(category.name),
                 ),
-                // Text(
-                //   "${category.noOfCourses.toString()} courses",
-                //   style: Theme.of(context).textTheme.bodySmall,
-                // ),
+
               ],
             ),
           ),
@@ -182,12 +130,13 @@ class AppBar extends StatelessWidget {
     // required this.name,
   }) : super(key: key);
 
-  // final Future<UserModelTemporary> bb = MongoDatabase.getuserdetails(MongoDatabase.getuserid());
-  // final Future<String> bb = MongoDatabase.getuserdetailstesting(MongoDatabase.getuserid());
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Stack(
+      children:[
+    Container(
       padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
       height: 200,
       width: double.infinity,
@@ -196,14 +145,16 @@ class AppBar extends StatelessWidget {
           bottomLeft: Radius.circular(20),
           bottomRight: Radius.circular(20),
         ),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          stops: [0.1, 0.5],
-          colors: [
-            Color(0xff886ff2),
-            Color(0xff6849ef),
-          ],
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      stops: [0.1, 0.7],
+                      colors: [
+                        // Color(0xff886ff2),
+                        Color.fromARGB(187, 42, 219, 78),
+                        Color.fromARGB(255, 37, 211, 230),
+                        // Color(0xff6849ef),
+                      ],
         ),
       ),
       child: Column(
@@ -213,7 +164,7 @@ class AppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hello,\nGood Morning",
+                "Hello,\nWelcome!",
                 textScaler: const TextScaler.linear(0.8),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
@@ -226,39 +177,37 @@ class AppBar extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          //     const Center(
-          //   child: Column(
-          //     mainAxisSize: MainAxisSize.min,
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: <Widget>[
-          //       Text('You have pushed the button this many times:'),
 
-          //       /// Extracted as a separate widget for performance optimization.
-          //       /// As a separate widget, it will rebuild independently from [MyHomePage].
-          //       ///
-          //       /// This is totally optional (and rarely needed).
-          //       /// Similarly, we could also use [Consumer] or [Selector].
-          //       Name(),
-          //     ],
-          //   ),
-          // ),
           Center(
             child: Text(
-              // "Aly Zanaty",
-              // "{$context.watch<UserProvider>().name}",
               '${context.watch<UserProvider>().nickname}',
               key: const Key('counterState'),
               textScaler: const TextScaler.linear(3.5),
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
-
-          // const SearchTextField()
         ],
       ),
+    ),
+  
+          Positioned(
+          top: 10,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Image.asset(
+              'assets/images/lg1.png',
+              width: 70,
+              height: 70,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
+
 
 class Name extends StatelessWidget {
   const Name({Key? key}) : super(key: key);
