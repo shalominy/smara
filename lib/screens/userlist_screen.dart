@@ -197,7 +197,7 @@ class UserContainer extends StatelessWidget {
                         
                         Text(
                           // "students.name",
-                          users.nickname,
+                          users.username,
                           textScaler: const TextScaler.linear(0.8),
                         ),
                         

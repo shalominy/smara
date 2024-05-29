@@ -22,8 +22,8 @@ class UploadUser extends StatefulWidget {
 }
 
 class _UploadUser extends State<UploadUser> {
+  var fullname = TextEditingController();
   var username = TextEditingController();
-  var nickname = TextEditingController();
   var matric = TextEditingController();
   var password = TextEditingController();
   var useremail = TextEditingController();
@@ -104,9 +104,9 @@ class _UploadUser extends State<UploadUser> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
-                    controller: nickname,
+                    controller: username,
                     decoration: const InputDecoration(
-                      hintText: 'Enter User Nickname',
+                      hintText: 'Enter User Username',
                       hintStyle: TextStyle(fontSize: 20, color: Colors.grey),
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       // labelText: "Student Transcript",
@@ -234,7 +234,7 @@ class _UploadUser extends State<UploadUser> {
                     ),
                     CustomIconButton(
                       onTap: () {
-                        _insertDataUser(username.text, nickname.text,matric.text,useremail.text,
+                        _insertDataUser(username.text, username.text,matric.text,useremail.text,
                             userrole.text, context, password.text);
                         // // _insertDataUser(
                         // //     username.text, useremail.text, userrole.text);
@@ -273,8 +273,8 @@ class _UploadUser extends State<UploadUser> {
   }
 
   Future<void> _insertDataUser(
+    String fullname,
     String username,
-    String nickname,
     String matric,
     String useremail,
     String userrole,
@@ -287,7 +287,7 @@ class _UploadUser extends State<UploadUser> {
     final data = UserModelTemporary(
         id: _id,
         name: username,
-        nickname: nickname,
+        username: username,
         matric: matric,
         emel: useremail,
         role: userrole,

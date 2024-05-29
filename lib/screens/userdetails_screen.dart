@@ -80,8 +80,8 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                   height: 200,
                   child: Center(
                     child: Text(
-                    // "NICKNAME",
-                    user.nickname,
+                    // "USERNAME",
+                    user.username,
                      style: TextStyle(fontSize: 40)),
                   ),
                 ),

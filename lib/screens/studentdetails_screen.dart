@@ -79,7 +79,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                   height: 200,
                   child: Center(
                     child: Text(
-                    // "NICKNAME",
+                    // "USERNAME",
                     student["studentid"],
                      style: TextStyle(fontSize: 40)),
                   ),

@@ -14,7 +14,7 @@ class UserProvider with ChangeNotifier, DiagnosticableTreeMixin {
   String _id = "User ObjectID";
   // int _count = 222;
   String _name = "User Name";
-  String _nickname = "User Nickname";
+  String _username = "User Username";
   String _matric = "User Matric";
   String _role = "User Role";
   String _emel = "User Email";
@@ -24,7 +24,7 @@ class UserProvider with ChangeNotifier, DiagnosticableTreeMixin {
   String get id => _id;
   // int get count => _count;
   String get name => _name;
-  String get nickname => _nickname;
+  String get username => _username;
   String get matric => _matric;
   String get role => _role;
   String get emel => _emel;
@@ -46,7 +46,7 @@ class UserProvider with ChangeNotifier, DiagnosticableTreeMixin {
     print("setuser executed");
     _id = user.id.toString();
     _name = user.name.toString();
-    _nickname = user.nickname.toString();
+    _username = user.username.toString();
     _matric = user.matric.toString();
     _role = user.role.toString();
     _emel = user.emel.toString();
@@ -62,7 +62,7 @@ class UserProvider with ChangeNotifier, DiagnosticableTreeMixin {
     // properties.add(IntProperty('count', count));
     properties.add(StringProperty('id', id));
     properties.add(StringProperty('name', name));
-    properties.add(StringProperty('nickname', nickname));
+    properties.add(StringProperty('username', username));
     properties.add(StringProperty('matric', matric));
     properties.add(StringProperty('role', role));
     properties.add(StringProperty('emel', emel));

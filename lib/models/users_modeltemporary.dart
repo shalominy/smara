@@ -15,7 +15,7 @@ String userModelTemporaryToJson(UserModelTemporary data) =>
 class UserModelTemporary {
   ObjectId id;
   String name;
-  String nickname;
+  String username;
   String matric;
   String emel;
   String role;
@@ -25,10 +25,10 @@ class UserModelTemporary {
   UserModelTemporary({
     required this.id,
     required this.name,
-    required this.nickname,
+    required this.username,
     required this.matric,
     required this.emel,
-    required this.role,
+    required this.role, 
     required this.children,
     required this.password,
   });
@@ -38,7 +38,7 @@ class UserModelTemporary {
       //soon to be updated that users are compulsory to have all field
         id: json["_id"] ?? " ",
         name: json["name"],
-        nickname: json["nickname"] ?? " ",
+        username: json["username"] ?? " ",
         matric: json["matric"] ?? " ",
         emel: json["emel"] ?? " ",
         role: json["role"] ?? " ",
@@ -49,7 +49,7 @@ class UserModelTemporary {
   Map<String, dynamic> toJson() => {
         "_id": id,
         "name": name,
-        "nickname": nickname,
+        "username": username,
         "matric": matric,
         "emel": emel,
         "role": role,

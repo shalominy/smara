@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_hub/models/teacher_model.dart';
+
 // import 'package:mongo_dart/mongo_dart.dart' as m;
 
 import '../models/assignstudent_model.dart';
@@ -22,7 +23,6 @@ import '../models/materialnotice_model.dart';
 import '../models/student_model.dart';
 import '../models/users_modeltemporary.dart';
 import '../routes/route_helper.dart';
-import 'package:intl/intl.dart';
 import 'constant.dart';
 import 'userprovider.dart';
 
@@ -54,7 +54,7 @@ class MongoDatabase {
           UserModelTemporary users = UserModelTemporary(
               id: arrData["_id"],
               name: arrData["name"],
-              nickname: arrData["nickname"],
+              username: arrData["username"],
               matric: arrData["matric"],
               emel: arrData["emel"],
               role: arrData["role"],
@@ -105,7 +105,7 @@ class MongoDatabase {
   //       where.eq('type', 'secret code'), modify.set('generatedcode', newcode));
   //   // print(arrData["genratedcode"]);
 
-  //   // return arrData["generatedcode"];
+  //   // return arrData["generatedcode"];, BuildContext context
   // }
 
   static Future<String> getstudentregistrationcode(BuildContext context) async {

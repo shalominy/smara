@@ -259,7 +259,7 @@ class TeacherContainer extends StatelessWidget {
                         
                         Text(
                           // students.name,
-                          teachers["nickname"],
+                          teachers["username"],
                           textScaler: const TextScaler.linear(0.8),
                         ),
                         
@@ -332,7 +332,7 @@ class TableHeader extends StatelessWidget {
                   child: 
                   
                   Text(
-                    'Nickname',
+                    'Username',
                     textScaler: TextScaler.linear(0.8),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),

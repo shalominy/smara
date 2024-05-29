@@ -79,8 +79,8 @@ class _TeacherDetailsScreenState extends State<TeacherDetailsScreen> {
                   height: 200,
                   child: Center(
                     child: Text(
-                    // "NICKNAME",
-                    teacher["nickname"],
+                    // "USERNAME",
+                    teacher["username"],
                      style: TextStyle(fontSize: 40)),
                   ),
                 ),

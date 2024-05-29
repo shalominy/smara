@@ -246,7 +246,7 @@ class AppBar extends StatelessWidget {
             child: Text(
               // "Aly Zanaty",
               // "{$context.watch<UserProvider>().name}",
-              '${context.watch<UserProvider>().nickname}',
+              '${context.watch<UserProvider>().username}',
               key: const Key('counterState'),
               textScaler: const TextScaler.linear(3.5),
               style: Theme.of(context).textTheme.titleLarge,

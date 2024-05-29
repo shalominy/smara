@@ -26,7 +26,7 @@ class UploadTeacher extends StatefulWidget {
 
 class _UploadTeacher extends State<UploadTeacher> {
   var teachername = TextEditingController();
-  var teachernickname = TextEditingController();
+  var teacherusername = TextEditingController();
   var teacherid = TextEditingController();
   // var studentclass = TextEditingController();
   // var studentgrade = TextEditingController();
@@ -113,7 +113,7 @@ class _UploadTeacher extends State<UploadTeacher> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: teachernickname,
+                    controller: teacherusername,
                     decoration: InputDecoration(
                       labelStyle: TextStyle(
                         fontSize: 20,
@@ -122,7 +122,7 @@ class _UploadTeacher extends State<UploadTeacher> {
                             FontWeight.w500, FontWeight.w400, 0.5),
                         overflow: TextOverflow.visible,
                       ),
-                      labelText: 'Enter Teacher Nickname',
+                      labelText: 'Enter Teacher Username',
                       border: const OutlineInputBorder(),
                       floatingLabelStyle: TextStyle(
                         fontSize: 20,
@@ -249,7 +249,7 @@ class _UploadTeacher extends State<UploadTeacher> {
                     ),
                     CustomIconButton(
                       onTap: () {
-                        _insertData(teachername.text, teachernickname.text,
+                        _insertData(teachername.text, teacherusername.text,
                             teacherid.text, context);
                       },
                       color: kPrimaryColor,
@@ -273,13 +273,13 @@ class _UploadTeacher extends State<UploadTeacher> {
     );
   }
 
-  Future<void> _insertData(String teachername, String teachernickname,
+  Future<void> _insertData(String teachername, String teacherusername,
       String teacherid, BuildContext context) async {
     var _id = m.ObjectId();
     final data = TeacherModel(
         id: _id,
         name: teachername,
-        nickname: teachernickname,
+        username: teacherusername,
         teacherid: teacherid,
         );
     await MongoDatabase.insertteacher(data);
