@@ -1,8 +1,3 @@
-// import 'package:education_app/constants/color.dart';
-// import 'package:education_app/constants/icons.dart';
-// import 'package:education_app/constants/size.dart';
-// import 'package:education_app/screens/featuerd_screen.dart';
-// import 'package:education_app/screens/uploaddata_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/color.dart';

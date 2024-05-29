@@ -31,7 +31,7 @@ class MaterialNoticeModel {
       MaterialNoticeModel(
         id: json["_id"],
         teacherid: json["teacherid"],
-        title: json["type"],
+        title: json["title"],
         assigndate: json["assigndate"],
         assigneestype: json["assigneestype"],
         // assigneeslist: json["assigneeslist"],
@@ -43,7 +43,7 @@ class MaterialNoticeModel {
   Map<String, dynamic> toJson() => {
         "_id": id,
         "teacherid": teacherid,
-        "type": title,
+        "title": title,
         "assigndate": assigndate,
         "assigneestype": assigneestype,
         "assigneeslist": assigneeslist,

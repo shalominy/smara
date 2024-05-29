@@ -118,10 +118,12 @@ class _ParentCoursework extends State<ParentCoursework> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      stops: [0.1, 0.5],
+                      stops: [0.1, 0.7],
                       colors: [
-                        Color(0xff886ff2),
-                        Color(0xff6849ef),
+                        // Color(0xff886ff2),
+                        Color.fromARGB(187, 42, 219, 78),
+                        Color.fromARGB(255, 37, 211, 230),
+                        // Color(0xff6849ef),
                       ],
                     ),
                   ),
@@ -150,198 +152,14 @@ class _ParentCoursework extends State<ParentCoursework> {
                     ],
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Text(
-                //         "Active Courseworks",
-                //         style: Theme.of(context).textTheme.bodyLarge,
-                //       ),
-                //       // TextButton(
-                //       //   onPressed: () {},
-                //       //   child: Text(
-                //       //     "See All",
-                //       //     style: Theme.of(context)
-                //       //         .textTheme
-                //       //         .bodyMedium
-                //       //         ?.copyWith(color: kPrimaryColor),
-                //       //   ),
-                //       // )
-                //     ],
-                //   ),
-                // ),
+
                 Container(child: currentwidget),
 
-                // ListView.builder(
-                //   shrinkWrap: true,
-                //   padding: const EdgeInsets.symmetric(
-                //     horizontal: 20,
-                //     vertical: 8,
-                //   ),
-                //   // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //   //   crossAxisCount: 1,
-                //   //   childAspectRatio: 0.8,
-                //   //   crossAxisSpacing: 20,
-                //   //   mainAxisSpacing: 24,
-                //   //   mainAxisExtent: 50,
-                //   // ),
-                //   itemBuilder: (context, index) {
-                //     return CourseCard(
-                //       coursework: courseworkList[index],
-                //     );
-                //   },
-                //   itemCount: courseworkList.length,
-                // ),
-
-                // Expanded(
-                //   child:
-
-                //   FutureBuilder(
-                //       future: MongoDatabase.getcourseworkbyteacherid(m.ObjectId.parse('${context.watch<UserProvider>().id}'.substring(10, 34))),
-                //       builder: (context, AsyncSnapshot snapshot) {
-                //         // print('${context.read<UserProvider>().id}'.substring(10, 34));
-                //         // print(m.ObjectId.parse('${context.watch<UserProvider>().id}'.substring(10, 34)));
-                //         if (snapshot.hasData) {
-                //           var totalData = snapshot.data.length;
-                //           print("Total Data" + totalData.toString());
-                //           // print("All Data" + snapshot.data.toString());
-                //           return ListView.builder(
-                //               itemCount: snapshot.data.length,
-                //               itemBuilder: (context, index) {
-                //                 return
-
-                //                 CourseworkContainer(
-                //                     coursework: CourseworkModel.fromJson(
-                //                         // snapshot.data[index]), color: _color.elementAt(int.parse(index.toString()[0])));
-                //                         snapshot.data[index]), color: Colors.black);
-                //               });
-
-                //         } else {
-                //           return const Center(
-                //             child: Text("No Data Available"),
-                //           );
-                //         }
-                //       })),
-
-                // const SizedBox(
-                //   height: 80,
-                // ),
-
-                // IntrinsicHeight(
-                //   child: Stack(
-                //     children: [
-                //       Align(
-                //         child: Text(
-                //           "Coursework",
-                //           style: Theme.of(context).textTheme.displayMedium,
-                //         ),
-                //       ),
-                //       // Positioned(
-                //       //   left: 0,
-                //       //   child: CustomIconButton(
-                //       //     child: const Icon(Icons.arrow_back),
-                //       //     height: 35,
-                //       //     width: 35,
-                //       //     onTap: () => Navigator.pop(context),
-                //       //   ),
-                //       // ),
-                //     ],
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 25,
-                // ),
-                // const CustomVideoPlayer(),
-                // const SizedBox(
-                //   height: 15,
-                // ),
-                // const Text(
-                //   "Futter Novice to Ninja",
-                //   style: TextStyle(
-                //     fontWeight: FontWeight.w700,
-                //     fontSize: 18,
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 3,
-                // ),
-                // const Text(
-                //   "Created by DevWheels",
-                //   style: TextStyle(
-                //     fontWeight: FontWeight.w500,
-                //     fontSize: 16,
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 3,
-                // ),
-                // Row(
-                //   children: [
-                //     Image.asset(
-                //       icFeaturedOutlined,
-                //       height: 20,
-                //     ),
-                //     const Text(
-                //       " 4.8",
-                //       style: TextStyle(
-                //         color: Colors.grey,
-                //         fontWeight: FontWeight.w500,
-                //         fontSize: 16,
-                //       ),
-                //     ),
-                //     const SizedBox(
-                //       width: 15,
-                //     ),
-                //     const Icon(
-                //       Icons.timer,
-                //       color: Colors.grey,
-                //     ),
-                //     const Text(
-                //       " 72 Hours",
-                //       style: TextStyle(
-                //         color: Colors.grey,
-                //         fontWeight: FontWeight.w500,
-                //         fontSize: 16,
-                //       ),
-                //     ),
-                //     const Spacer(),
-                //     const Text(
-                //       " \$40",
-                //       style: TextStyle(
-                //         color: kPrimaryColor,
-                //         fontWeight: FontWeight.w700,
-                //         fontSize: 20,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // const SizedBox(
-                //   height: 15,
-                // ),
-                // CustomTabView(
-                //   index: _selectedTag,
-                //   changeTab: changeTab,
-                // ),
-                // _selectedTag == 0 ? const PlayList() : const Description(),
               ],
             ),
           ),
         ),
-        // bottomSheet:
-        // BottomSheet(
-        //   onClosing: () {},
-        //   backgroundColor: Colors.white,
-        //   enableDrag: false,
-        //   builder: (context) {
-        //     return
-        //     const SizedBox(
-        //       height: 80,
-        //       child: AddNewCoursework(),
-        //     );
-        //   },
-        // ),
+
       ),
     );
   }
@@ -372,62 +190,28 @@ class _CourseworkList extends State<CourseworkList> {
                 "Active Courseworks",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              // TextButton(
-              //   onPressed: () {},
-              //   child: Text(
-              //     "See All",
-              //     style: Theme.of(context)
-              //         .textTheme
-              //         .bodyMedium
-              //         ?.copyWith(color: kPrimaryColor),
-              //   ),
-              // )
             ],
           ),
         ),
-        // ListView.builder(
-        //   shrinkWrap: true,
-        //   padding: const EdgeInsets.symmetric(
-        //     horizontal: 20,
-        //     vertical: 8,
-        //   ),
-        //   // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //   //   crossAxisCount: 1,
-        //   //   childAspectRatio: 0.8,
-        //   //   crossAxisSpacing: 20,
-        //   //   mainAxisSpacing: 24,
-        //   //   mainAxisExtent: 50,
-        //   // ),
-        //   itemBuilder: (context, index) {
-        //     return CourseCard(
-        //       coursework: courseworkList[index],
-        //     );
-        //   },
-        //   itemCount: courseworkList.length,
-        // ),
-        // Padding(padding: const EdgeInsets.all(10), child:
+
         Expanded(
             child: FutureBuilder(
-                // future: MongoDatabase.getcourseworkbyteacherid(m.ObjectId.parse(
-                //     '${context.watch<UserProvider>().id}'.substring(10, 34))),
+
                 future: MongoDatabase.getcourseworkbychildren(context.watch<UserProvider>().children),
                 builder: (context, AsyncSnapshot snapshot) {
-                  // print('${context.read<UserProvider>().id}'.substring(10, 34));
-                  // print(m.ObjectId.parse('${context.watch<UserProvider>().id}'.substring(10, 34)));
+
                   if (snapshot.hasData) {
                     var totalData = snapshot.data.length;
-                    // print("Total Data" + totalData.toString());
+
                     print("snapshot data " + snapshot.data.toString());
-                    // print("All Data" + snapshot.data.toString());
+
                     return ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
                           return CourseworkContainer(
                               function: widget.function,
-                              coursework: 
-                              // CourseworkModel.fromJson(
-                                  // snapshot.data[index]), color: _color.elementAt(int.parse(index.toString()[0])));
-                                  // snapshot.data[index]),
+                              coursework:
+
                                   snapshot.data[index],
                               color: Colors.black);
                         });
@@ -437,14 +221,9 @@ class _CourseworkList extends State<CourseworkList> {
                     );
                   }
                 })),
-        // const SizedBox(
-        //   height: 80,
-        //   child: AddNewCoursework(),
-        // ),
+
       ],
     ));
-    // );
-    // ],);
   }
 }
 
@@ -457,9 +236,7 @@ class CourseworkDetailsTableHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child:
-          // Padding(
-          // padding: const EdgeInsets.all(15.0),
-          // child:
+
           Table(
         border: TableBorder.all(color: Colors.white30),
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
@@ -502,32 +279,10 @@ class CourseworkDetailsTableHeader extends StatelessWidget {
                   ),
                 ),
               ),
-              // TableCell(
-              //   verticalAlignment: TableCellVerticalAlignment.middle,
-              //   child: Padding(
-              //     padding: EdgeInsets.all(8.0),
-              //     child: Text(
-              //       'Grade',
-              //       textScaler: TextScaler.linear(0.8),
-              //       style: TextStyle(fontWeight: FontWeight.bold),
-              //     ),
-              //   ),
-              // ),
-              // TableCell(
-              //   verticalAlignment: TableCellVerticalAlignment.middle,
-              //   child: Padding(
-              //     padding: EdgeInsets.all(0),
-              //     child: Text(
-              //       'Transcript',
-              //       textScaler: TextScaler.linear(0.8),
-              //       style: TextStyle(fontWeight: FontWeight.bold),
-              //     ),
-              //   ),
-              // ),
+
             ],
           ),
         ],
-        // )
       ),
     );
   }
@@ -540,25 +295,13 @@ class CourseCard extends StatelessWidget {
     required this.coursework,
   }) : super(key: key);
 
-  // int _selectedIndex = 0;
-
-  // static const List<Widget> _widgetOptions = <Widget>[
-  //   StudentListScreen(),
-  //   TeacherListScreen(),
-  // ];
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     // builder: (context) => const CourseScreen(),
-      //     //builder: (context) => const StudentListScreen(category.kategori),
-      //   ),
-      // ),
+
       onTap: () {
-        // Get.toNamed(RouteHelper.getlist("coursework.id"));
+
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
@@ -578,23 +321,10 @@ class CourseCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Align(
-              //   alignment: Alignment.topRight,
-              //   child: Image.asset(
-              //     category.thumbnail,
-              //     height: kCategoryCardImageSize,
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
+
               Align(
                 child: Text(coursework.name),
               ),
-              // Text(
-              //   "${category.noOfCourses.toString()} courses",
-              //   style: Theme.of(context).textTheme.bodySmall,
-              // ),
             ],
           ),
         ),
@@ -708,20 +438,12 @@ class CourseworkContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const BaseScreen())),
+
       onTap: () {
       print("heree" + coursework.assigneeslist.toString());
         function(
             CourseworkListDetails(changetab: function, coursework: coursework));
-        // print(coursework.id);
-        // context.read<UserProvider>().setuser(users);
 
-        // Get.toNamed(RouteHelper.getlist(users.role));
-        // MongoDatabase.setuserid(users.id.toString());
-        // MongoDatabase.setuserid("users.id.toString()");
       },
       child: Padding(
         padding:
@@ -742,27 +464,13 @@ class CourseworkContainer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Align(
-              //   alignment: Alignment.topRight,
-              //   child: Image.asset(
-              //     category.thumbnail,
-              //     height: kCategoryCardImageSize,
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
+
               Align(
-                // child: Text(coursework.name, style: TextStyle(color: color),),
                 child: Column(children: [
                   Text(coursework.name),
                   Text(coursework.content)
                 ]),
               ),
-              // Text(
-              //   "${category.noOfCourses.toString()} courses",
-              //   style: Theme.of(context).textTheme.bodySmall,
-              // ),
             ],
           ),
         ),
@@ -787,24 +495,11 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
   Widget build(BuildContext context) {
   print("coursework assigneeslist" + widget.coursework.toString());
   print("coursework assigneeslist" + widget.coursework.content.toString());
-  // print("coursework assigneeslist" + jsonDecode(widget.coursework.assigneeslist[7]).map((studentt) {
   print("coursework assigneeslist" + widget.coursework.assigneeslist.map((studentt) {
-        // var filteredAssignees = studentt["assigneeslist"].where((student) {
-        // var studentModel = AssignStudentModel.fromJson(studentt);
         var studentModel = AssignStudentModel.fromJson(jsonDecode(studentt));
-        // if(studentModel.student.studentid == 'UK0192')
-        // if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
         if(context.watch<UserProvider>().children.contains(studentModel.student.studentid))
-        // {return AssignStudentModel.fromJson(studentt).feedback; } 
-        {return AssignStudentModel.fromJson(jsonDecode(studentt)).feedback; } 
-        
-      // }); 
-      
-      // if (filteredAssignees.isNotEmpty) {
-      //   return CourseworkModel.fromJson(studentt);
-      // } else {
-      //   return null;
-      // }
+        {return AssignStudentModel.fromJson(jsonDecode(studentt)).feedback; }
+
 
       
       })
@@ -814,61 +509,20 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
 
     
 
-  //     List<AssignStudentModel> feedback = jsonDecode(widget.coursework.assigneeslist[7]).map((studentJson) {
-  //   var studentModel = AssignStudentModel.fromJson(studentJson);
-  //   if (studentModel.student.studentid == 'UK0192') {
-  //     return studentModel;
-  //   }
-  //   return null;
-  // }).where((student) => student != null).cast<AssignStudentModel>().toList();
-
-      // String feedback = jsonDecode(widget.coursework.assigneeslist[7]).map((studentt) {
       String feedback = widget.coursework.assigneeslist.map((studentt) {
-        // var filteredAssignees = studentt["assigneeslist"].where((student) {
-        // var studentModel = AssignStudentModel.fromJson(studentt);
+
         var studentModel = AssignStudentModel.fromJson(jsonDecode(studentt));
-        // if(studentModel.student.studentid == 'UK0192')
-        // if(studentModel.student.studentid == '${context.watch<UserProvider>().matric}')
+
         if(context.watch<UserProvider>().children.contains(studentModel.student.studentid))
-        // {return AssignStudentModel.fromJson(studentt).feedback; } 
-        {return studentModel.feedback; } 
-        
-      // }); 
-      
-      // if (filteredAssignees.isNotEmpty) {
-      //   return CourseworkModel.fromJson(studentt);
-      // } else {
-      //   return null;
-      // }
+        {return studentModel.feedback; }
 
       
       })
       .where((studentt) => studentt != null)
       .toString();
 
-  
-
-  // CourseworkModel courseworkfeedback = arrData0
-  //   .map((assigneeslist) {
-  //     // Filter the assigneeslist to find the student with the given id
-  //     var filteredAssignees = assigneeslist["assigneeslist"].where((student) {
-  //       var studentModel = AssignStudentModel.fromJson(jsonDecode(student));
-  //       return studentModel.student.studentid == studentid;
-  //     }).toList();
-
-  //     // If the filtered list is not empty, return the assigneeslist
-  //     if (filteredAssignees.isNotEmpty) {
-  //       return CourseworkModel.fromJson(assigneeslist);
-  //     } else {
-  //       return null;
-  //     }
-  //   })
-  //   .where((assigneeslist) => assigneeslist != null) // Filter out the null values
-  //   .cast<CourseworkModel>() // Ensure the list is of type List<CourseworkModel>
-  //   .toList();
 
     return
-        // Column(children: [
         Expanded(
             child: Column(
       children: [
@@ -879,7 +533,6 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
               const Align(
                 child: Text(
                   'Coursework Details',
-                  // style: Theme.of(context).textTheme.displayMedium,
                 ),
               ),
               Positioned(
@@ -895,18 +548,7 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
             ],
           ),
         ),
-        // Padding(
-        //               padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-        //               child: Row(
-        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //                 children: [
-        //                   Text(
-        //                     "Coursework Details",
-        //                     style: Theme.of(context).textTheme.bodyLarge,
-        //                   ),
-        //                 ],
-        //               ),
-        //             ),
+
         SizedBox(
           height: 20,
         ),
@@ -929,135 +571,9 @@ class _CourseworkListDetails extends State<CourseworkListDetails> {
         const SizedBox(height: 15,),
         const Text("coursework feedback " ),
         (feedback == "()") ? const Text("Feedback is yet to be received",  style: TextStyle(fontSize: 20)) : Text( feedback.substring(1, feedback.length - 1), style: const TextStyle(fontSize: 20)),
-        // Text( feedback.substring(1, feedback.length - 1), style: const TextStyle(fontSize: 20)),
-        // Text("coursework feedback" + feedback.map((e) => e.feedback.toString()).toString()),
-        // const CourseworkDetailsTableHeader(),
-        // Expanded(
-        //   child: SizedBox(
-        //       height: 100,
-        //       child: SizedBox(
-        //           child: FutureBuilder(
-        //               future: MongoDatabase.getstudentbycoursework(
-        //                   widget.coursework.id),
-        //               builder: (context, AsyncSnapshot snapshot) {
-        //                 if (snapshot.hasData) {
-        //                   var totalData = snapshot.data.length;
-        //                   print("Total Data" + totalData.toString());
 
-        //                   final List<Map<String, dynamic>> items =
-        //                       snapshot.data!;
-
-        //                   final List<List<String>> studentsList =
-        //                       items.map((map) {
-        //                     return map.values
-        //                         .map((value) => value.toString())
-        //                         .toList();
-        //                   }).toList();
-
-        //                   // final List<String> itemNames = items
-        //                   //     .map((map) => map['assigneeslist'][1] as String)
-        //                   //     .toList();
-
-        //                   // print(items);
-        //                   // print(jsonDecode(studentsList[0][7])[1]);
-
-        //                   String studentt = studentsList[0][7].toString();
-
-        //                   var josndecosdedtest = jsonDecode(studentt);
-
-        //                   final List<AssignStudentModel> assigneeslist =
-        //                       (josndecosdedtest as List).map((userData) {
-        //                     print("inside test" + userData.toString());
-
-        //                     var encodedstssring = jsonEncode(userData);
-        //                     Map<String, dynamic> assigneeslistsss =
-        //                         jsonDecode(encodedstssring);
-
-        //                     print("inside test 32" + userData.toString());
-
-        //                     // m.ObjectId id = m.ObjectId.parse("6644659a162faa9b21000000");
-
-        //                     return AssignStudentModel.fromJson(
-        //                         assigneeslistsss);
-        //                   }).toList();
-
-        //                   return ListView.builder(
-        //                       itemCount: assigneeslist.length,
-        //                       itemBuilder: (context, index) {
-        //                         return CourseworkDetailsStudentContainer(
-        //                             assignees: assigneeslist[index]);
-        //                         // coursework: AssignStudentModel.fromJson(
-        //                       });
-        //                 } else {
-        //                   return Center(
-        //                     child: Text("No Data Available"),
-        //                   );
-        //                 }
-        //               }))),
-        // ),
-        // SizedBox(
-        //   height: 80,
-        //   child: AddFeedbackButton(
-        //     coursework: widget.coursework,
-        //   ),
-        // )
-        // Text("Assignees Type" + widget.coursework.assigneestype),
-
-        // ListView.builder(
-        //   shrinkWrap: true,
-        //   padding: const EdgeInsets.symmetric(
-        //     horizontal: 20,
-        //     vertical: 8,
-        //   ),
-        //   // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //   //   crossAxisCount: 1,
-        //   //   childAspectRatio: 0.8,
-        //   //   crossAxisSpacing: 20,
-        //   //   mainAxisSpacing: 24,
-        //   //   mainAxisExtent: 50,
-        //   // ),
-        //   itemBuilder: (context, index) {
-        //     return CourseCard(
-        //       coursework: courseworkList[index],
-        //     );
-        //   },
-        //   itemCount: courseworkList.length,
-        // ),
-        // Padding(padding: const EdgeInsets.all(10), child:
-        // Expanded(
-        //   child:
-
-        //   FutureBuilder(
-        //       future: MongoDatabase.getcourseworkbyteacherid(m.ObjectId.parse('${context.watch<UserProvider>().id}'.substring(10, 34))),
-        //       builder: (context, AsyncSnapshot snapshot) {
-        //         // print('${context.read<UserProvider>().id}'.substring(10, 34));
-        //         // print(m.ObjectId.parse('${context.watch<UserProvider>().id}'.substring(10, 34)));
-        //         if (snapshot.hasData) {
-        //           var totalData = snapshot.data.length;
-        //           print("Total Data" + totalData.toString());
-        //           // print("All Data" + snapshot.data.toString());
-        //           return ListView.builder(
-        //               itemCount: snapshot.data.length,
-        //               itemBuilder: (context, index) {
-        //                 return
-
-        //                 CourseworkContainer( function: widget.function,
-        //                     coursework: CourseworkModel.fromJson(
-        //                         // snapshot.data[index]), color: _color.elementAt(int.parse(index.toString()[0])));
-        //                         snapshot.data[index]), color: Colors.black);
-        //               });
-
-        //         } else {
-        //           return const Center(
-        //             child: Text("No Data Available"),
-        //           );
-        //         }
-        //       })
-        //       )
       ],
     ));
-    // );
-    // ],);
   }
 }
 
@@ -1070,31 +586,15 @@ class CourseworkDetailsStudentContainer extends StatelessWidget {
     print("ini assignees" + assignees.student.name);
 
     return GestureDetector(
-      // onTap: () => Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const DetailsScreen(
-      //               title: "course.name",
-      //             ))),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
         ),
-        // padding: const EdgeInsets.all(10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ClipRRect(
-            //   borderRadius: BorderRadius.circular(10),
-            //   child: Image.asset(
-            //     course.thumbnail,
-            //     height: 60,
-            //   ),
-            // ),
-            // const SizedBox(
-            //   width: 10,
-            // ),
+
 
             Expanded(
               child: Table(
@@ -1104,7 +604,7 @@ class CourseworkDetailsStudentContainer extends StatelessWidget {
                   2: FlexColumnWidth(15),
                   3: FlexColumnWidth(15),
                 },
-                // crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: [
                   TableRow(
                     decoration: const BoxDecoration(
@@ -1113,7 +613,7 @@ class CourseworkDetailsStudentContainer extends StatelessWidget {
                     children: [
                       TableCell(
                         child: Text(
-                          // "coursework.student.toString()",
+
                           assignees.student.name,
                           textScaler: const TextScaler.linear(0.8),
                         ),
@@ -1121,29 +621,12 @@ class CourseworkDetailsStudentContainer extends StatelessWidget {
                       TableCell(
                           child: Center(
                         child: Text(
-                          // "coursework.submission",
+
                           assignees.submission,
                           textScaler: const TextScaler.linear(0.8),
                         ),
                       )),
-                      // TableCell(
-                      //   child:
-                      //    Center(child:
-                      //   Text(
-                      //     students.studentclass,
-                      //     textScaler: const TextScaler.linear(0.8),
-                      //   ),
-                      //   )
-                      // ),
-                      // TableCell(
-                      //   child:
-                      //    Center(child:
-                      //   Text(
-                      //     students.gender,
-                      //     textScaler: const TextScaler.linear(0.8),
-                      //   ),
-                      //   )
-                      // ),
+
                     ],
                   ),
                 ],
